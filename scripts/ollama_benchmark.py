@@ -70,11 +70,19 @@ def run_inference_with_timing(
     client: ollama.Client,
     model: str,
     prompt: str,
-    verbose: bool = False
+    verbose: bool = False,
+    token_log_file=None
 ) -> InferenceMetrics:
     """
     Run inference and collect detailed timing metrics.
     Uses streaming to capture per-token timing.
+
+    Args:
+        client: Ollama client
+        model: Model name
+        prompt: Input prompt
+        verbose: Print per-token timing to terminal
+        token_log_file: File handle to write token timing log
     """
     metrics = InferenceMetrics(prompt=prompt, model=model)
 
@@ -112,8 +120,14 @@ def run_inference_with_timing(
             last_token_time = current_time
             token_index += 1
 
+            # Format token output line
+            token_line = f"Token {token_index}: '{token}' | Latency: {latency*1000:.2f}ms"
+
             if verbose:
-                print(f"Token {token_index}: '{token}' | Latency: {latency*1000:.2f}ms")
+                print(token_line)
+
+            if token_log_file:
+                token_log_file.write(token_line + "\n")
 
     metrics.last_token_time = last_token_time
     metrics.request_end = time.perf_counter()
@@ -188,30 +202,69 @@ def run_benchmark(
     model: str,
     prompts: List[str],
     output_file: Optional[str] = None,
+    token_log: Optional[str] = None,
     verbose: bool = False
 ) -> List[InferenceMetrics]:
     """
     Run benchmark with multiple prompts and collect metrics.
+
+    Args:
+        host: Ollama server URL
+        model: Model name
+        prompts: List of prompts to test
+        output_file: JSON file for results
+        token_log: Text file for per-token timing log
+        verbose: Print per-token timing to terminal
     """
     client = ollama.Client(host=host)
 
     print(f"Connecting to Ollama server at {host}")
     print(f"Model: {model}")
     print(f"Running {len(prompts)} inference requests...")
+    if token_log:
+        print(f"Token log: {token_log}")
     print()
 
     all_metrics = []
 
-    for i, prompt in enumerate(prompts):
-        print(f"Request {i+1}/{len(prompts)}: {prompt[:50]}...")
+    # Open token log file if specified
+    token_log_file = open(token_log, 'w') if token_log else None
 
-        try:
-            metrics = run_inference_with_timing(client, model, prompt, verbose)
-            all_metrics.append(metrics)
-            print_metrics_summary(metrics)
-        except Exception as e:
-            print(f"Error: {e}")
-            continue
+    try:
+        for i, prompt in enumerate(prompts):
+            print(f"Request {i+1}/{len(prompts)}: {prompt[:50]}...")
+
+            # Write request header to token log
+            if token_log_file:
+                token_log_file.write(f"\n{'='*60}\n")
+                token_log_file.write(f"Request {i+1}/{len(prompts)}\n")
+                token_log_file.write(f"Prompt: {prompt[:100]}{'...' if len(prompt) > 100 else ''}\n")
+                token_log_file.write(f"{'='*60}\n")
+
+            try:
+                metrics = run_inference_with_timing(
+                    client, model, prompt, verbose, token_log_file
+                )
+                all_metrics.append(metrics)
+                print_metrics_summary(metrics)
+
+                # Write summary to token log
+                if token_log_file:
+                    token_log_file.write(f"\n--- Summary ---\n")
+                    token_log_file.write(f"Total tokens: {metrics.total_tokens}\n")
+                    token_log_file.write(f"TTFT: {metrics.ttft*1000:.2f}ms\n")
+                    token_log_file.write(f"TPOT: {metrics.tpot*1000:.2f}ms\n")
+                    token_log_file.write(f"ITL Mean: {metrics.itl_mean*1000:.2f}ms\n")
+                    token_log_file.write(f"Throughput: {metrics.tokens_per_second:.2f} tok/s\n")
+
+            except Exception as e:
+                print(f"Error: {e}")
+                if token_log_file:
+                    token_log_file.write(f"ERROR: {e}\n")
+                continue
+    finally:
+        if token_log_file:
+            token_log_file.close()
 
     # Aggregate summary
     if len(all_metrics) > 1:
@@ -249,6 +302,9 @@ def run_benchmark(
             json.dump(results, f, indent=2)
         print(f"\nResults saved to: {output_file}")
 
+    if token_log:
+        print(f"Token log saved to: {token_log}")
+
     return all_metrics
 
 
@@ -274,8 +330,10 @@ def main():
                         help='JSON file with list of prompts')
     parser.add_argument('--output', '-o', type=str,
                         help='Output JSON file for results')
+    parser.add_argument('--token-log', '-t', type=str,
+                        help='Output text file for per-token timing log')
     parser.add_argument('--verbose', '-v', action='store_true',
-                        help='Print per-token timing')
+                        help='Print per-token timing to terminal')
     parser.add_argument('--num-runs', type=int, default=1,
                         help='Number of times to run each prompt')
 
@@ -297,6 +355,7 @@ def main():
         model=args.model,
         prompts=prompts,
         output_file=args.output,
+        token_log=args.token_log,
         verbose=args.verbose
     )
 
