@@ -26,11 +26,11 @@ sys.path.insert(0, str(ETALON_PATH))
 # Mapping from Ollama model names to HuggingFace model identifiers
 OLLAMA_TO_HF_MODEL = {
     "tinyllama": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
-    "llama2": "meta-llama/Llama-2-7b-chat-hf",
-    "llama2:7b": "meta-llama/Llama-2-7b-chat-hf",
-    "llama2:13b": "meta-llama/Llama-2-13b-chat-hf",
-    "llama3": "meta-llama/Meta-Llama-3-8B-Instruct",
-    "llama3:8b": "meta-llama/Meta-Llama-3-8B-Instruct",
+    "llama2": "NousResearch/Llama-2-7b-chat-hf",
+    "llama2:7b": "NousResearch/Llama-2-7b-chat-hf",
+    "llama2:13b": "NousResearch/Llama-2-13b-chat-hf",
+    "llama3": "NousResearch/Meta-Llama-3-8B-Instruct",
+    "llama3:8b": "NousResearch/Meta-Llama-3-8B-Instruct",
     "mistral": "mistralai/Mistral-7B-Instruct-v0.2",
     "mixtral": "mistralai/Mixtral-8x7B-Instruct-v0.1",
     "codellama": "codellama/CodeLlama-7b-Instruct-hf",

@@ -1,0 +1,289 @@
+{
+  "metadata": {
+    "description": "Complex reasoning tasks for LLM inference benchmarking - HPC/PInsight domain",
+    "version": "1.0",
+    "categories": ["mpi_analysis", "openmp_analysis", "cuda_optimization", "cross_layer", "anomaly_detection", "general_reasoning"]
+  },
+  "tasks": [
+    {
+      "id": "mpi_001",
+      "category": "mpi_analysis",
+      "difficulty": "hard",
+      "prompt": "You are analyzing an MPI trace from a distributed scientific simulation running on 128 ranks across 8 nodes (16 ranks per node). The trace shows the following pattern:\n\n- Ranks 0-15 (Node 0) spend 45% of wall time in MPI_Allreduce\n- Ranks 16-31 (Node 1) spend 12% of wall time in MPI_Allreduce\n- Ranks 32-127 (Nodes 2-7) spend 8-10% of wall time in MPI_Allreduce\n- The MPI_Allreduce calls use a sum operation on a 64KB buffer\n- Inter-node bandwidth measured at 12.5 GB/s (InfiniBand HDR)\n- Intra-node bandwidth measured at 25 GB/s (shared memory)\n- Node 0 shows 3x higher variance in MPI_Allreduce completion times\n\nAnalyze this trace data. What is the root cause of the communication bottleneck on Node 0? Propose three specific optimizations with expected performance improvements, considering the network topology and collective algorithm choices.",
+      "expected_keywords": ["load imbalance", "synchronization", "straggler", "tree-based", "ring allreduce", "process binding", "NUMA", "topology-aware"],
+      "scoring_rubric": {
+        "identifies_root_cause": 3,
+        "proposes_valid_optimizations": 3,
+        "quantitative_reasoning": 2,
+        "considers_topology": 2
+      },
+      "max_score": 10
+    },
+    {
+      "id": "mpi_002",
+      "category": "mpi_analysis",
+      "difficulty": "medium",
+      "prompt": "An LTTng trace of an MPI application shows the following communication pattern over 1000 iterations:\n\n- MPI_Isend/MPI_Irecv pairs between neighboring ranks (point-to-point)\n- Average message size: 4MB\n- Send latency: 0.8ms (ranks 0-63), 2.4ms (ranks 64-127)\n- MPI_Waitall blocking time increases linearly from 0.1ms at iteration 1 to 45ms at iteration 1000\n- Memory usage on ranks 64-127 grows from 2GB to 7.8GB over the run\n- No memory growth on ranks 0-63\n\nWhat is happening? Explain the correlation between memory growth and increasing MPI_Waitall times. What specific MPI usage pattern is causing this?",
+      "expected_keywords": ["message queue", "unexpected messages", "early arrival", "buffer management", "MPI_Irecv", "posting order", "wildcard receive", "memory leak"],
+      "scoring_rubric": {
+        "identifies_message_queue_issue": 3,
+        "explains_memory_correlation": 3,
+        "suggests_fix": 2,
+        "technical_accuracy": 2
+      },
+      "max_score": 10
+    },
+    {
+      "id": "omp_001",
+      "category": "openmp_analysis",
+      "difficulty": "hard",
+      "prompt": "An OpenMP task-parallel application running on a 64-core AMD EPYC processor (2 sockets, 32 cores each, SMT disabled) shows the following profiling data:\n\n- Total tasks created: 50,000\n- Average task granularity: 0.2ms\n- Thread idle time: Socket 0 threads average 15% idle, Socket 1 threads average 42% idle\n- Task steal count: 180,000 steals across all threads\n- L3 cache miss rate: Socket 0 at 8%, Socket 1 at 34%\n- NUMA remote memory access: Socket 1 threads make 5x more remote accesses\n- The task dependency graph has a critical path of depth 200\n\nDiagnose the performance issue. Why is Socket 1 significantly underperforming? Provide a detailed analysis considering NUMA topology, task scheduling, and data locality. Suggest specific OpenMP environment variables and code modifications to fix this.",
+      "expected_keywords": ["NUMA", "first-touch", "data placement", "OMP_PLACES", "OMP_PROC_BIND", "task affinity", "close", "spread", "memory allocation"],
+      "scoring_rubric": {
+        "numa_analysis": 3,
+        "task_scheduling_insight": 3,
+        "actionable_fix": 2,
+        "env_var_knowledge": 2
+      },
+      "max_score": 10
+    },
+    {
+      "id": "omp_002",
+      "category": "openmp_analysis",
+      "difficulty": "medium",
+      "prompt": "A hybrid MPI+OpenMP climate simulation shows the following behavior:\n\n- 16 MPI ranks, each with 8 OpenMP threads (OMP_NUM_THREADS=8)\n- Parallel region efficiency: 62%\n- #pragma omp parallel for schedule(static) is used for the main computation loop\n- Loop iteration count varies from 100 to 50,000 across different timesteps\n- Threads 0-3 consistently finish 2.3x faster than threads 4-7 in each rank\n- The computation involves irregular mesh operations\n\nWhat scheduling strategy would you recommend and why? Provide the specific OpenMP directive changes and explain the expected performance improvement with quantitative reasoning.",
+      "expected_keywords": ["dynamic", "guided", "chunk size", "load balancing", "irregular", "schedule(dynamic", "schedule(guided", "work stealing"],
+      "scoring_rubric": {
+        "correct_schedule_choice": 3,
+        "explains_why": 3,
+        "quantitative_estimate": 2,
+        "considers_overhead": 2
+      },
+      "max_score": 10
+    },
+    {
+      "id": "cuda_001",
+      "category": "cuda_optimization",
+      "difficulty": "hard",
+      "prompt": "NVIDIA Nsight Compute profiling of a CUDA kernel for sparse matrix-vector multiplication (SpMV) shows:\n\n- Kernel launch: grid(2048), block(256)\n- Achieved occupancy: 25% (theoretical max: 75%)\n- Registers per thread: 64\n- Shared memory: 0 bytes\n- Global memory throughput: 45 GB/s (device peak: 900 GB/s)\n- L2 cache hit rate: 12%\n- Warp execution efficiency: 35%\n- Memory instruction stalls: 68% of total stalls\n- The sparse matrix is in CSR format, dimensions 1M x 1M, 50M non-zeros\n\nProvide a detailed optimization strategy. Address register pressure, memory access patterns, and warp divergence. What data structure change would you recommend for the sparse matrix, and what occupancy improvement would you expect?",
+      "expected_keywords": ["register spilling", "ELL", "ELLPACK", "coalescing", "warp divergence", "segmented reduction", "shared memory", "occupancy", "launch bounds"],
+      "scoring_rubric": {
+        "register_analysis": 2,
+        "memory_optimization": 3,
+        "format_recommendation": 3,
+        "occupancy_improvement": 2
+      },
+      "max_score": 10
+    },
+    {
+      "id": "cuda_002",
+      "category": "cuda_optimization",
+      "difficulty": "medium",
+      "prompt": "A deep learning training pipeline uses custom CUDA kernels for attention computation. Nsight Systems timeline shows:\n\n- GPU utilization: 34%\n- CPU-GPU transfer: 200ms per batch (PCIe 4.0 x16)\n- Kernel execution: 150ms per batch\n- cudaMemcpyAsync calls are NOT overlapping with kernel execution\n- cudaDeviceSynchronize is called after each kernel launch\n- Batch size: 32, sequence length: 2048, hidden dim: 4096\n- 3 separate kernel launches per attention layer (Q*K^T, softmax, attn*V)\n\nIdentify all performance issues and provide an optimized pipeline. Include specific CUDA API changes, stream management strategy, and expected speedup.",
+      "expected_keywords": ["streams", "async", "pipeline", "cudaDeviceSynchronize", "kernel fusion", "overlap", "double buffering", "cudaStreamSynchronize", "graph"],
+      "scoring_rubric": {
+        "identifies_sync_issue": 3,
+        "stream_solution": 3,
+        "kernel_fusion": 2,
+        "speedup_estimate": 2
+      },
+      "max_score": 10
+    },
+    {
+      "id": "cross_001",
+      "category": "cross_layer",
+      "difficulty": "hard",
+      "prompt": "You have correlated traces from three layers of an LLM inference server:\n\n1. **Application layer** (Python/LTTng): Request queue depth fluctuates between 0 and 50, average response latency 2.3s\n2. **Runtime layer** (CUDA traces): GPU kernel occupancy drops from 80% to 20% every 30 seconds for ~5 seconds\n3. **System layer** (perf/LTTng): Major page faults spike to 10,000/sec coinciding with GPU occupancy drops, CPU soft IRQ time increases to 15%\n\nThe inference server uses vLLM with PagedAttention on an A100 80GB GPU. The model is Llama-2-70B with tensor parallelism across 2 GPUs.\n\nCorrelate these three trace layers to identify the root cause. What system-level mechanism is causing the periodic GPU occupancy drops? How would you fix it without reducing model quality?",
+      "expected_keywords": ["KV cache", "paging", "swap", "memory pressure", "PagedAttention", "preemption", "batch scheduling", "memory fragmentation", "pinned memory"],
+      "scoring_rubric": {
+        "correct_correlation": 3,
+        "identifies_kv_cache_issue": 3,
+        "system_level_understanding": 2,
+        "practical_fix": 2
+      },
+      "max_score": 10
+    },
+    {
+      "id": "cross_002",
+      "category": "cross_layer",
+      "difficulty": "hard",
+      "prompt": "PInsight traces from a multi-node LLM inference deployment (4 nodes, 8 GPUs total) show:\n\n- **Node 0-1**: Tensor parallel group, handling layers 0-39\n- **Node 2-3**: Tensor parallel group, handling layers 40-79\n- **Pipeline parallel communication**: NCCL AllReduce between node pairs\n- **Observed**: Nodes 2-3 have 35% higher TTFT than nodes 0-1\n- **NCCL traces**: AllReduce on nodes 2-3 takes 4.2ms vs 1.1ms on nodes 0-1\n- **Network counters**: Nodes 2-3 share a switch with a storage cluster generating 40Gbps background traffic\n- **GPU Memory**: All GPUs at 72GB / 80GB utilization\n\nExplain the TTFT discrepancy. Design a monitoring solution using PInsight/LTTng that would detect this issue in real-time and suggest a dynamic mitigation strategy.",
+      "expected_keywords": ["network contention", "NCCL", "pipeline bubble", "congestion", "QoS", "traffic shaping", "monitoring", "real-time", "adaptive routing"],
+      "scoring_rubric": {
+        "identifies_network_contention": 3,
+        "monitoring_design": 3,
+        "mitigation_strategy": 2,
+        "pinsight_integration": 2
+      },
+      "max_score": 10
+    },
+    {
+      "id": "anomaly_001",
+      "category": "anomaly_detection",
+      "difficulty": "medium",
+      "prompt": "An LLM inference benchmark running against Ollama shows the following anomaly in the inter-token latency (ITL) distribution:\n\n- Tokens 1-50: ITL mean 12ms, std 1.5ms (normal)\n- Tokens 51-52: ITL jumps to 450ms (single spike)\n- Tokens 53-100: ITL mean 12ms, std 1.5ms (normal)\n- Tokens 101-102: ITL jumps to 430ms\n- Pattern repeats every ~50 tokens\n- GPU utilization stays at 95% throughout\n- CPU utilization shows brief 100% spikes coinciding with ITL jumps\n- Model: Llama-2-7B, context length growing throughout generation\n\nWhat is causing the periodic ITL spikes? The GPU stays busy, so it's not a GPU scheduling issue. Explain the mechanism and propose a measurement strategy to confirm your hypothesis.",
+      "expected_keywords": ["garbage collection", "Python GC", "KV cache reallocation", "memory copy", "context window", "attention recomputation", "CPU bottleneck", "gc.disable"],
+      "scoring_rubric": {
+        "correct_diagnosis": 3,
+        "mechanism_explanation": 3,
+        "measurement_strategy": 2,
+        "fix_proposal": 2
+      },
+      "max_score": 10
+    },
+    {
+      "id": "anomaly_002",
+      "category": "anomaly_detection",
+      "difficulty": "hard",
+      "prompt": "A benchmark comparison between Etalon and Ollama custom benchmarks shows contradictory results for the same model (Mistral-7B) on the same hardware:\n\n- **Ollama benchmark**: TTFT = 180ms, TPOT = 22ms, tokens/s = 45.5\n- **Etalon benchmark**: TTFT = 340ms, TBT = 35ms, fluidity_index = 0.72\n\nBoth benchmarks used the same prompt: 'Explain quantum computing in 3 sentences.'\nBoth connected to the same Ollama server at localhost:11434.\n\nExplain why the metrics differ so significantly. Is one benchmark wrong? Analyze the measurement methodology differences between direct Ollama API streaming and OpenAI-compatible API (used by Etalon). What are the specific sources of additional latency in the Etalon path?",
+      "expected_keywords": ["API translation", "OpenAI compatibility layer", "streaming", "SSE", "chunked transfer", "HTTP overhead", "token batching", "measurement point", "client-side"],
+      "scoring_rubric": {
+        "identifies_api_difference": 3,
+        "explains_latency_sources": 3,
+        "measurement_methodology_analysis": 2,
+        "reconciliation_approach": 2
+      },
+      "max_score": 10
+    },
+    {
+      "id": "reason_001",
+      "category": "general_reasoning",
+      "difficulty": "hard",
+      "prompt": "You are designing a benchmark suite to evaluate LLM inference performance for a research paper. The paper's thesis is that HPC tracing techniques (LTTng, Score-P, Nsight) can provide deeper insights into LLM inference bottlenecks than application-level metrics alone.\n\nDesign an experiment protocol that:\n1. Runs the same workload on 3 different inference frameworks (Ollama, vLLM, TGI)\n2. Captures both application-level metrics (TTFT, TPOT, ITL, fluidity-index) and system-level traces (GPU kernels, memory transfers, CPU scheduling)\n3. Demonstrates a specific case where application metrics FAIL to identify a bottleneck that system traces reveal\n4. Uses statistical methods to validate the correlation between trace-level and application-level metrics\n\nProvide the complete experimental methodology including: hardware setup, software versions, workload specification, number of runs for statistical significance, specific trace collection commands, and analysis pipeline.",
+      "expected_keywords": ["controlled experiment", "confidence interval", "correlation coefficient", "Pearson", "kernel profiling", "nsys", "lttng-enable-event", "warmup", "cold start"],
+      "scoring_rubric": {
+        "experimental_design": 3,
+        "bottleneck_case": 3,
+        "statistical_rigor": 2,
+        "practical_feasibility": 2
+      },
+      "max_score": 10
+    },
+    {
+      "id": "reason_002",
+      "category": "general_reasoning",
+      "difficulty": "medium",
+      "prompt": "Compare and contrast the following LLM inference metrics, explaining when each is the most appropriate primary metric to optimize:\n\n1. Time to First Token (TTFT)\n2. Time Per Output Token (TPOT)\n3. Inter-Token Latency (ITL) at P99\n4. Fluidity Index (Etalon)\n5. Tokens Per Second (throughput)\n6. Model Bandwidth Utilization (MBU)\n\nFor each metric, provide:\n- A precise mathematical definition\n- The user experience or system behavior it captures\n- When it should be the PRIMARY optimization target\n- Its blind spots (what it fails to capture)\n- How PInsight/LTTng traces could validate or complement the metric\n\nFinally, propose a single composite metric that combines the strengths of all six, with a mathematical formula and justification.",
+      "expected_keywords": ["latency vs throughput", "SLO", "streaming", "user perception", "Pareto", "weighted", "harmonic mean", "deadline"],
+      "scoring_rubric": {
+        "metric_definitions": 2,
+        "use_case_analysis": 3,
+        "blind_spot_identification": 2,
+        "composite_metric": 3
+      },
+      "max_score": 10
+    },
+    {
+      "id": "multimodal_001",
+      "category": "general_reasoning",
+      "difficulty": "hard",
+      "prompt": "A multimodal LLM (LLaVA-1.5-13B) is being benchmarked for image understanding tasks. The benchmark sends 100 images with text prompts asking the model to describe the image.\n\nResults show:\n- Average TTFT for text-only prompts: 95ms\n- Average TTFT for image+text prompts: 2,340ms (24.6x slower)\n- Average TPOT: 28ms for both text-only and image+text (similar)\n- Image encoding time (measured separately): 1,800ms\n- GPU memory usage jumps from 12GB to 19GB when processing images\n- The image encoder (CLIP ViT-L/14) runs as a separate forward pass before the LLM\n\nAnalyze the performance profile. Why is TTFT dramatically higher for multimodal inputs while TPOT remains similar? Design a set of benchmarks that would properly capture multimodal inference performance, including metrics that TTFT and TPOT alone miss. How would you use GPU profiling (Nsight) to identify optimization opportunities in the image encoding pipeline?",
+      "expected_keywords": ["visual encoder", "prefill", "image tokens", "projection layer", "pipeline parallel", "async encoding", "batch processing", "KV cache", "image resolution"],
+      "scoring_rubric": {
+        "ttft_analysis": 3,
+        "benchmark_design": 3,
+        "profiling_strategy": 2,
+        "optimization_suggestions": 2
+      },
+      "max_score": 10
+    },
+    {
+      "id": "multimodal_002",
+      "category": "general_reasoning",
+      "difficulty": "medium",
+      "prompt": "You need to benchmark video understanding capabilities of a multimodal LLM. The model accepts video frames as input and generates text descriptions.\n\nDesign a comprehensive benchmarking methodology that captures:\n1. How performance scales with video length (1s, 5s, 30s, 60s, 5min)\n2. Frame sampling strategy impact on quality vs latency\n3. Memory consumption patterns as video length grows\n4. The tradeoff between temporal resolution (more frames) and response quality\n\nFor each dimension, specify the exact metrics to collect, expected behavior patterns, and how to visualize the results. Include at least one metric inspired by the Etalon fluidity-index concept adapted for video input processing.",
+      "expected_keywords": ["frame sampling", "temporal resolution", "memory scaling", "context length", "keyframe", "uniform sampling", "FPS", "quality-latency tradeoff"],
+      "scoring_rubric": {
+        "scaling_analysis": 3,
+        "metric_design": 3,
+        "methodology_completeness": 2,
+        "novel_metric": 2
+      },
+      "max_score": 10
+    },
+    {
+      "id": "perf_001",
+      "category": "general_reasoning",
+      "difficulty": "medium",
+      "prompt": "An inference server reports the following metrics under increasing load:\n\n| Concurrent Users | TTFT (P50) | TTFT (P99) | TPOT | Throughput (tok/s) | GPU Util |\n|-----------------|------------|------------|------|-------------------|----------|\n| 1               | 45ms       | 52ms       | 15ms | 66.7              | 35%      |\n| 4               | 48ms       | 89ms       | 16ms | 250.0             | 78%      |\n| 8               | 95ms       | 340ms      | 17ms | 470.6             | 92%      |\n| 16              | 280ms      | 1,200ms    | 22ms | 727.3             | 98%      |\n| 32              | 890ms      | 4,500ms    | 35ms | 914.3             | 99%      |\n| 64              | 2,100ms    | 12,000ms   | 58ms | 1,103.4           | 99%      |\n\nAnalyze this data. At what concurrency level does the server become latency-constrained vs throughput-constrained? What specific queuing theory model explains the P99 TTFT behavior? Recommend the optimal operating point for a production deployment with SLO targets of TTFT P99 < 500ms and TPOT < 30ms.",
+      "expected_keywords": ["queuing theory", "Little's law", "M/M/1", "knee point", "SLO", "saturation", "batching", "continuous batching", "preemption"],
+      "scoring_rubric": {
+        "data_analysis": 3,
+        "queuing_theory": 3,
+        "optimal_point": 2,
+        "slo_reasoning": 2
+      },
+      "max_score": 10
+    },
+    {
+      "id": "trace_001",
+      "category": "cross_layer",
+      "difficulty": "medium",
+      "prompt": "You are using PInsight to instrument an Ollama inference server for performance analysis. You need to capture:\n\n1. Python-level function traces (model loading, tokenization, generation loop)\n2. CUDA kernel execution times (attention, MLP, embedding)\n3. System-level events (context switches, page faults, network I/O via LTTng)\n\nWrite the complete instrumentation plan including:\n- Specific LTTng commands to enable the required tracepoints\n- Python instrumentation approach (cProfile, sys.settrace, or custom)\n- CUDA profiling setup (CUPTI, Nsight integration)\n- How to synchronize timestamps across all three layers\n- Expected overhead for each instrumentation level\n- How to analyze the correlated traces using Eclipse Trace Compass\n\nProvide the actual commands and configuration needed.",
+      "expected_keywords": ["lttng create", "lttng enable-event", "CUPTI", "clock_gettime", "CLOCK_MONOTONIC", "timestamp alignment", "overhead", "Trace Compass", "CTF"],
+      "scoring_rubric": {
+        "lttng_commands": 3,
+        "cuda_profiling": 2,
+        "timestamp_sync": 3,
+        "overhead_analysis": 2
+      },
+      "max_score": 10
+    },
+    {
+      "id": "reason_003",
+      "category": "general_reasoning",
+      "difficulty": "hard",
+      "prompt": "Claude (Anthropic) uses extended thinking / chain-of-thought reasoning that is transparent to users. When extended thinking is enabled:\n\n- TTFT increases significantly (often 5-30 seconds for complex prompts)\n- The thinking tokens are generated but not counted in output tokens\n- GPU compute is consumed during the thinking phase\n- The quality of the final answer typically improves\n\nDesign an experiment to measure the ROI (Return on Investment) of extended thinking in terms of:\n1. Latency cost (additional TTFT)\n2. Compute cost (GPU-seconds consumed by thinking tokens)\n3. Quality improvement (accuracy on reasoning benchmarks)\n4. The breakeven point where extended thinking is no longer worth the cost\n\nPropose specific metrics, benchmarks, and statistical tests. How would you use PInsight traces to understand what the GPU is actually doing during the 'thinking' phase vs the 'answering' phase?",
+      "expected_keywords": ["cost-benefit", "accuracy vs latency", "Pareto optimal", "thinking budget", "token economics", "attention patterns", "prefill vs decode", "ablation study"],
+      "scoring_rubric": {
+        "experiment_design": 3,
+        "metric_definitions": 2,
+        "statistical_approach": 3,
+        "pinsight_usage": 2
+      },
+      "max_score": 10
+    },
+    {
+      "id": "bench_001",
+      "category": "general_reasoning",
+      "difficulty": "medium",
+      "prompt": "The Etalon paper (arxiv 2407.07000) introduces the fluidity-index metric defined as the fraction of tokens generated within a TBT (Time Between Tokens) deadline. The paper argues that traditional metrics like average TPOT miss important streaming quality information.\n\nCritically evaluate the fluidity-index metric:\n1. What specific user experience aspect does it capture that TPOT average and TPOT P99 miss?\n2. Under what conditions could a system have excellent fluidity-index but poor user experience?\n3. How sensitive is fluidity-index to the choice of TBT deadline threshold?\n4. Design an improved version of fluidity-index that accounts for the position of deadline misses within the token stream (e.g., early misses vs late misses).\n5. How would you empirically validate that your improved metric better correlates with human perception of streaming quality?",
+      "expected_keywords": ["deadline", "jitter", "burst", "smoothness", "position-weighted", "perceptual", "user study", "streaming", "playback buffer"],
+      "scoring_rubric": {
+        "critical_analysis": 3,
+        "failure_cases": 2,
+        "improved_metric": 3,
+        "validation_approach": 2
+      },
+      "max_score": 10
+    },
+    {
+      "id": "agent_001",
+      "category": "general_reasoning",
+      "difficulty": "hard",
+      "prompt": "AgentBench evaluates LLMs across 8 interactive environments including OS tasks, databases, and web browsing. However, it does not measure the inference-level performance characteristics of the agent interactions.\n\nDesign an 'AgentPerf' benchmark that combines AgentBench-style task evaluation with PInsight-style performance tracing to answer:\n\n1. How does multi-turn agent interaction affect inference performance over time? (Does TTFT degrade as context grows?)\n2. What is the performance cost of tool-calling vs pure text generation?\n3. How does the agent's reasoning overhead scale with task complexity?\n4. What is the correlation between agent success rate and inference latency?\n\nSpecify the benchmark tasks, metrics to collect, instrumentation approach, and how to present results. Include both a leaderboard-style ranking and a detailed performance profile for each model.",
+      "expected_keywords": ["multi-turn", "context growth", "tool calling overhead", "function calling", "KV cache", "degradation", "success rate", "correlation", "profile"],
+      "scoring_rubric": {
+        "benchmark_design": 3,
+        "metrics_specification": 3,
+        "instrumentation_plan": 2,
+        "presentation_approach": 2
+      },
+      "max_score": 10
+    },
+    {
+      "id": "scale_001",
+      "category": "general_reasoning",
+      "difficulty": "hard",
+      "prompt": "You are scaling an LLM inference deployment from 1 GPU to 8 GPUs using a combination of tensor parallelism (TP=4) and pipeline parallelism (PP=2). PInsight traces show:\n\n- 1 GPU: TTFT=50ms, TPOT=20ms, throughput=50 tok/s\n- 8 GPU (TP=4, PP=2): TTFT=85ms, TPOT=8ms, throughput=380 tok/s\n- NCCL AllReduce for TP: 0.5ms per layer per step\n- Pipeline bubble: 12% of compute time wasted\n- Total NCCL communication: 35% of wall time\n\nThe throughput scaling is 7.6x (efficiency: 95%) but TTFT increased by 70%. Explain why TTFT gets worse with more GPUs despite faster per-token generation. Derive the theoretical optimal TP/PP configuration for minimum TTFT vs maximum throughput. Under what workload conditions should you choose TP=8,PP=1 instead?",
+      "expected_keywords": ["pipeline bubble", "all-reduce latency", "tensor parallel overhead", "first token latency", "pipeline flush", "micro-batch", "throughput vs latency", "Amdahl"],
+      "scoring_rubric": {
+        "ttft_explanation": 3,
+        "theoretical_analysis": 3,
+        "configuration_recommendation": 2,
+        "workload_conditions": 2
+      },
+      "max_score": 10
+    }
+  ]
+}

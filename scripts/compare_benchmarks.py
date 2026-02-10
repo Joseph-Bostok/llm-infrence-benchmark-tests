@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Benchmark Comparison Script
-Compares Ollama custom benchmark results with Etalon results.
+Compares Ollama, Etalon, and GuideLLM benchmark results.
 
 Metrics compared:
 - Time to First Token (TTFT)
@@ -9,6 +9,7 @@ Metrics compared:
 - Inter-Token Latency (ITL) statistics
 - Tokens per second throughput
 - Fluidity metrics (Etalon-specific)
+- GuideLLM sweep profiles and multimodal results
 """
 
 import json
@@ -46,6 +47,79 @@ def load_etalon_results(output_dir: str) -> Dict:
             results[results_file.stem] = json.load(f)
 
     return results
+
+
+def load_guidellm_results(output_dir: str) -> Dict:
+    """Load results from GuideLLM output directory."""
+    output_path = Path(output_dir)
+
+    # Try normalized results first
+    normalized = output_path / "normalized_results.json"
+    if normalized.exists():
+        with open(normalized) as f:
+            return json.load(f)
+
+    # Fall back to benchmarks.json
+    benchmarks = output_path / "benchmarks.json"
+    if benchmarks.exists():
+        with open(benchmarks) as f:
+            return json.load(f)
+
+    # Try any JSON file
+    for results_file in output_path.glob("*.json"):
+        with open(results_file) as f:
+            return json.load(f)
+
+    return {}
+
+
+def extract_guidellm_metrics(data: Dict) -> Dict:
+    """Extract key metrics from GuideLLM results."""
+    metrics = {
+        "source": "guidellm",
+        "ttft": {},
+        "itl": {},
+        "tpot": {},
+        "throughput": {},
+    }
+
+    # Handle normalized format from our wrapper
+    if "metrics" in data:
+        m = data["metrics"]
+        metrics["ttft"] = m.get("ttft", {})
+        metrics["itl"] = m.get("itl", {})
+        metrics["tpot"] = m.get("tpot", {})
+        metrics["throughput"] = m.get("throughput", {})
+    # Handle raw GuideLLM format
+    elif "benchmarks" in data:
+        benchmarks = data["benchmarks"]
+        if benchmarks:
+            bench = benchmarks[-1]  # Last benchmark in sweep
+            stats = bench.get("stats", bench.get("statistics", {}))
+            ttft = stats.get("ttft", stats.get("time_to_first_token", {}))
+            if isinstance(ttft, dict):
+                metrics["ttft"] = {
+                    "mean": ttft.get("mean", ttft.get("avg")),
+                    "p50": ttft.get("p50", ttft.get("median")),
+                    "p90": ttft.get("p90"),
+                    "p99": ttft.get("p99"),
+                }
+            itl = stats.get("itl", stats.get("inter_token_latency", {}))
+            if isinstance(itl, dict):
+                metrics["itl"] = {
+                    "mean": itl.get("mean", itl.get("avg")),
+                    "p50": itl.get("p50"),
+                    "p90": itl.get("p90"),
+                    "p99": itl.get("p99"),
+                }
+            tp = stats.get("throughput", {})
+            if isinstance(tp, dict):
+                metrics["throughput"] = {
+                    "tokens_per_second": tp.get("output_tokens_per_second",
+                                                tp.get("tokens_per_second")),
+                }
+
+    return metrics
 
 
 def extract_ollama_metrics(data: Dict) -> Dict:
@@ -118,70 +192,105 @@ def extract_etalon_metrics(data: Dict) -> Dict:
     return metrics
 
 
-def compare_metrics(ollama_metrics: Dict, etalon_metrics: Dict) -> Dict:
-    """Compare metrics between Ollama and Etalon benchmarks."""
+def compare_metrics(ollama_metrics: Dict, etalon_metrics: Dict, guidellm_metrics: Optional[Dict] = None) -> Dict:
+    """Compare metrics between Ollama, Etalon, and GuideLLM benchmarks."""
     comparison = {
         "timestamp": datetime.now().isoformat(),
         "ollama": ollama_metrics,
         "etalon": etalon_metrics,
+        "guidellm": guidellm_metrics or {},
         "comparison": {}
     }
 
-    # Compare TTFT
-    if ollama_metrics.get("ttft") and etalon_metrics.get("ttft"):
-        ollama_ttft = ollama_metrics["ttft"].get("mean", 0)
-        etalon_ttft_data = etalon_metrics["ttft"]
+    # --- TTFT Comparison ---
+    ttft_comp = {}
 
-        # Find mean TTFT in Etalon data
+    # Ollama TTFT
+    if ollama_metrics.get("ttft"):
+        ollama_ttft = ollama_metrics["ttft"].get("mean", 0)
+        if ollama_ttft:
+            ttft_comp["ollama_ms"] = ollama_ttft * 1000
+
+    # Etalon TTFT
+    if etalon_metrics.get("ttft"):
+        etalon_ttft_data = etalon_metrics["ttft"]
         etalon_ttft = 0
         for key, value in etalon_ttft_data.items():
             if "mean" in key.lower() and isinstance(value, (int, float)):
                 etalon_ttft = value
                 break
+        if etalon_ttft:
+            ttft_comp["etalon_ms"] = etalon_ttft * 1000
 
-        if ollama_ttft and etalon_ttft:
-            diff = ollama_ttft - etalon_ttft
-            diff_pct = (diff / etalon_ttft) * 100 if etalon_ttft else 0
-            comparison["comparison"]["ttft"] = {
-                "ollama_ms": ollama_ttft * 1000,
-                "etalon_ms": etalon_ttft * 1000,
-                "difference_ms": diff * 1000,
-                "difference_pct": diff_pct,
-            }
+    # GuideLLM TTFT
+    if guidellm_metrics and guidellm_metrics.get("ttft"):
+        guidellm_ttft = guidellm_metrics["ttft"].get("mean")
+        if guidellm_ttft:
+            # GuideLLM may report in seconds or ms depending on version
+            ttft_comp["guidellm_ms"] = guidellm_ttft * 1000 if guidellm_ttft < 10 else guidellm_ttft
 
-    # Compare TPOT/TBT
-    if ollama_metrics.get("tpot") and etalon_metrics.get("tbt"):
+    if len(ttft_comp) >= 2:
+        comparison["comparison"]["ttft"] = ttft_comp
+
+    # --- TPOT / TBT / ITL Comparison ---
+    tpot_comp = {}
+
+    if ollama_metrics.get("tpot"):
         ollama_tpot = ollama_metrics["tpot"].get("mean", 0)
-        etalon_tbt_data = etalon_metrics["tbt"]
+        if ollama_tpot:
+            tpot_comp["ollama_tpot_ms"] = ollama_tpot * 1000
 
+    if etalon_metrics.get("tbt"):
+        etalon_tbt_data = etalon_metrics["tbt"]
         etalon_tbt = 0
         for key, value in etalon_tbt_data.items():
             if "mean" in key.lower() and isinstance(value, (int, float)):
                 etalon_tbt = value
                 break
+        if etalon_tbt:
+            tpot_comp["etalon_tbt_ms"] = etalon_tbt * 1000
 
-        if ollama_tpot and etalon_tbt:
-            diff = ollama_tpot - etalon_tbt
-            diff_pct = (diff / etalon_tbt) * 100 if etalon_tbt else 0
-            comparison["comparison"]["tpot_tbt"] = {
-                "ollama_tpot_ms": ollama_tpot * 1000,
-                "etalon_tbt_ms": etalon_tbt * 1000,
-                "difference_ms": diff * 1000,
-                "difference_pct": diff_pct,
-                "note": "TPOT (Ollama) vs TBT (Etalon) - similar but may differ in calculation"
-            }
+    if guidellm_metrics and guidellm_metrics.get("itl"):
+        guidellm_itl = guidellm_metrics["itl"].get("mean")
+        if guidellm_itl:
+            tpot_comp["guidellm_itl_ms"] = guidellm_itl * 1000 if guidellm_itl < 10 else guidellm_itl
+
+    if len(tpot_comp) >= 2:
+        tpot_comp["note"] = "TPOT (Ollama) vs TBT (Etalon) vs ITL (GuideLLM) - similar but differ in measurement methodology"
+        comparison["comparison"]["tpot_tbt_itl"] = tpot_comp
+
+    # --- Throughput Comparison ---
+    tp_comp = {}
+    if ollama_metrics.get("throughput"):
+        tp = ollama_metrics["throughput"].get("tokens_per_second_mean", 0)
+        if tp:
+            tp_comp["ollama_tok_s"] = tp
+
+    if guidellm_metrics and guidellm_metrics.get("throughput"):
+        tp = guidellm_metrics["throughput"].get("tokens_per_second")
+        if tp:
+            tp_comp["guidellm_tok_s"] = tp
+
+    if tp_comp:
+        comparison["comparison"]["throughput"] = tp_comp
 
     return comparison
 
 
 def print_comparison(comparison: Dict) -> None:
     """Print formatted comparison results."""
+    tools_present = []
+    if comparison.get("ollama"): tools_present.append("Ollama")
+    if comparison.get("etalon"): tools_present.append("Etalon")
+    if comparison.get("guidellm"): tools_present.append("GuideLLM")
+
     print("\n" + "="*70)
-    print("BENCHMARK COMPARISON: Ollama vs Etalon")
+    print(f"BENCHMARK COMPARISON: {' vs '.join(tools_present)}")
     print("="*70)
 
     ollama = comparison.get("ollama", {})
     etalon = comparison.get("etalon", {})
+    guidellm = comparison.get("guidellm", {})
     comp = comparison.get("comparison", {})
 
     # Ollama Summary
@@ -220,23 +329,59 @@ def print_comparison(comparison: Dict) -> None:
     else:
         print("No Etalon data available")
 
+    # GuideLLM Summary
+    print("\n--- GUIDELLM BENCHMARK ---")
+    if guidellm:
+        if "ttft" in guidellm and guidellm["ttft"]:
+            ttft = guidellm["ttft"]
+            mean_val = ttft.get('mean')
+            if mean_val is not None:
+                ms = mean_val * 1000 if mean_val < 10 else mean_val
+                print(f"TTFT:  Mean={ms:.2f}ms")
+                if ttft.get('p99'):
+                    p99 = ttft['p99'] * 1000 if ttft['p99'] < 10 else ttft['p99']
+                    print(f"       P99={p99:.2f}ms")
+        if "itl" in guidellm and guidellm["itl"]:
+            itl = guidellm["itl"]
+            mean_val = itl.get('mean')
+            if mean_val is not None:
+                ms = mean_val * 1000 if mean_val < 10 else mean_val
+                print(f"ITL:   Mean={ms:.2f}ms")
+        if "throughput" in guidellm and guidellm["throughput"]:
+            tp = guidellm["throughput"]
+            if tp.get('tokens_per_second'):
+                print(f"Throughput: {tp['tokens_per_second']:.2f} tok/s")
+    else:
+        print("No GuideLLM data available")
+
     # Direct Comparison
     print("\n--- DIRECT COMPARISON ---")
     if comp:
         if "ttft" in comp:
             c = comp["ttft"]
             print(f"\nTTFT (Time to First Token):")
-            print(f"  Ollama: {c['ollama_ms']:.2f} ms")
-            print(f"  Etalon: {c['etalon_ms']:.2f} ms")
-            print(f"  Difference: {c['difference_ms']:.2f} ms ({c['difference_pct']:+.1f}%)")
+            for key, val in c.items():
+                if key.endswith('_ms') and isinstance(val, (int, float)):
+                    label = key.replace('_ms', '').replace('_', ' ').title()
+                    print(f"  {label}: {val:.2f} ms")
 
-        if "tpot_tbt" in comp:
-            c = comp["tpot_tbt"]
-            print(f"\nTPOT/TBT (Token Generation Time):")
-            print(f"  Ollama (TPOT): {c['ollama_tpot_ms']:.2f} ms")
-            print(f"  Etalon (TBT):  {c['etalon_tbt_ms']:.2f} ms")
-            print(f"  Difference: {c['difference_ms']:.2f} ms ({c['difference_pct']:+.1f}%)")
-            print(f"  Note: {c.get('note', '')}")
+        if "tpot_tbt_itl" in comp:
+            c = comp["tpot_tbt_itl"]
+            print(f"\nTPOT/TBT/ITL (Token Generation Time):")
+            for key, val in c.items():
+                if key.endswith('_ms') and isinstance(val, (int, float)):
+                    label = key.replace('_ms', '').replace('_', ' ').title()
+                    print(f"  {label}: {val:.2f} ms")
+            if c.get('note'):
+                print(f"  Note: {c['note']}")
+
+        if "throughput" in comp:
+            c = comp["throughput"]
+            print(f"\nThroughput (Tokens/s):")
+            for key, val in c.items():
+                if isinstance(val, (int, float)):
+                    label = key.replace('_tok_s', '').replace('_', ' ').title()
+                    print(f"  {label}: {val:.2f} tok/s")
     else:
         print("Insufficient data for direct comparison")
 
@@ -294,33 +439,46 @@ def create_visualization(comparison: Dict, output_path: str) -> None:
     ax3.set_title("ITL Across Requests")
     ax3.legend()
 
-    # Summary bar chart
+    # Summary bar chart (three-way comparison)
     ax4 = axes[1, 1]
     comp = comparison.get("comparison", {})
     if comp:
-        metrics = []
-        ollama_vals = []
-        etalon_vals = []
+        metrics_labels = []
+        tool_data = {}  # tool_name -> [values]
+        colors = {"Ollama": "#2196F3", "Etalon": "#FF9800", "GuideLLM": "#4CAF50"}
 
         if "ttft" in comp:
-            metrics.append("TTFT")
-            ollama_vals.append(comp["ttft"]["ollama_ms"])
-            etalon_vals.append(comp["ttft"]["etalon_ms"])
+            metrics_labels.append("TTFT")
+            c = comp["ttft"]
+            for key, val in c.items():
+                if key.endswith('_ms') and isinstance(val, (int, float)):
+                    tool = key.replace('_ms', '').replace('_', ' ').title()
+                    tool_data.setdefault(tool, []).append(val)
 
-        if "tpot_tbt" in comp:
-            metrics.append("TPOT/TBT")
-            ollama_vals.append(comp["tpot_tbt"]["ollama_tpot_ms"])
-            etalon_vals.append(comp["tpot_tbt"]["etalon_tbt_ms"])
+        tpot_key = "tpot_tbt_itl" if "tpot_tbt_itl" in comp else "tpot_tbt"
+        if tpot_key in comp:
+            metrics_labels.append("TPOT/TBT/ITL")
+            c = comp[tpot_key]
+            for key, val in c.items():
+                if key.endswith('_ms') and isinstance(val, (int, float)):
+                    tool = key.split('_')[0].title()
+                    tool_data.setdefault(tool, []).append(val)
 
-        if metrics:
-            x = range(len(metrics))
-            width = 0.35
-            ax4.bar([i - width/2 for i in x], ollama_vals, width, label="Ollama", color="blue")
-            ax4.bar([i + width/2 for i in x], etalon_vals, width, label="Etalon", color="orange")
-            ax4.set_xticks(x)
-            ax4.set_xticklabels(metrics)
+        if metrics_labels and tool_data:
+            x = range(len(metrics_labels))
+            n_tools = len(tool_data)
+            width = 0.8 / max(n_tools, 1)
+
+            for i, (tool, vals) in enumerate(tool_data.items()):
+                offset = (i - n_tools/2 + 0.5) * width
+                color = colors.get(tool, f"C{i}")
+                ax4.bar([xi + offset for xi in x], vals[:len(metrics_labels)],
+                        width, label=tool, color=color, alpha=0.85)
+
+            ax4.set_xticks(list(x))
+            ax4.set_xticklabels(metrics_labels)
             ax4.set_ylabel("Time (ms)")
-            ax4.set_title("Ollama vs Etalon Comparison")
+            ax4.set_title("Three-Way Comparison")
             ax4.legend()
     else:
         ax4.text(0.5, 0.5, "No comparison data\navailable", ha="center", va="center")
@@ -333,11 +491,13 @@ def create_visualization(comparison: Dict, output_path: str) -> None:
 
 
 def main():
-    parser = argparse.ArgumentParser(description='Compare Ollama and Etalon benchmark results')
+    parser = argparse.ArgumentParser(description='Compare Ollama, Etalon, and GuideLLM benchmark results')
     parser.add_argument('--ollama-results', '-o', required=True,
                         help='Path to Ollama benchmark JSON results')
     parser.add_argument('--etalon-results', '-e',
                         help='Path to Etalon results directory')
+    parser.add_argument('--guidellm-results', '-g',
+                        help='Path to GuideLLM results directory')
     parser.add_argument('--output', type=str, default='./results/comparison.json',
                         help='Output path for comparison JSON')
     parser.add_argument('--visualize', '-v', action='store_true',
@@ -360,8 +520,13 @@ def main():
             etalon_metrics = extract_etalon_metrics(data)
             break  # Use first results file
 
+    guidellm_metrics = {}
+    if args.guidellm_results and Path(args.guidellm_results).exists():
+        guidellm_data = load_guidellm_results(args.guidellm_results)
+        guidellm_metrics = extract_guidellm_metrics(guidellm_data)
+
     # Compare
-    comparison = compare_metrics(ollama_metrics, etalon_metrics)
+    comparison = compare_metrics(ollama_metrics, etalon_metrics, guidellm_metrics)
 
     # Print results
     print_comparison(comparison)
