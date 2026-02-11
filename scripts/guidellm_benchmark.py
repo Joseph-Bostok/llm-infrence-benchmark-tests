@@ -46,6 +46,30 @@ def install_guidellm():
     print("GuideLLM installed successfully.")
 
 
+def _save_error_state(output_dir: str, error_info: Dict) -> None:
+    """Save a minimal normalized_results.json on failure so downstream scripts can detect it."""
+    os.makedirs(output_dir, exist_ok=True)
+    error_state = {
+        "tool": "guidellm",
+        "metrics": {
+            "ttft": {},
+            "itl": {},
+            "tpot": {},
+            "throughput": {},
+            "latency": {},
+        },
+        "error": error_info,
+        "benchmark_metadata": {
+            "tool": "guidellm",
+            "timestamp": datetime.now().isoformat(),
+        },
+    }
+    path = os.path.join(output_dir, "normalized_results.json")
+    with open(path, "w") as f:
+        json.dump(error_state, f, indent=2)
+    print(f"Error state saved to: {path}")
+
+
 def run_guidellm_benchmark(
     target: str,
     model: str,
@@ -102,6 +126,7 @@ def run_guidellm_benchmark(
 
     # Build command with new CLI arguments
     # Note: --profile is now --rate-type, --output-dir is --output-path
+    # GuideLLM v0.3.1 does not support --request-type; it auto-detects from the data format
     cmd = [
         "guidellm", "benchmark", "run",
         "--target", target,
@@ -152,11 +177,15 @@ def run_guidellm_benchmark(
             print(f"GuideLLM benchmark failed (exit code {process.returncode})")
             if not verbose and process.stderr:
                 print(f"stderr: {process.stderr[:1000]}")
-            return {"error": "benchmark_failed", "exit_code": process.returncode}
+            error_result = {"error": "benchmark_failed", "exit_code": process.returncode}
+            _save_error_state(output_dir, error_result)
+            return error_result
 
     except subprocess.TimeoutExpired:
         print("GuideLLM benchmark timed out")
-        return {"error": "timeout"}
+        error_result = {"error": "timeout"}
+        _save_error_state(output_dir, error_result)
+        return error_result
 
     results = load_guidellm_results(output_dir)
     results["benchmark_metadata"] = {
@@ -252,21 +281,37 @@ def normalize_results(results: Dict) -> Dict:
             bench = benchmarks[-1] if len(benchmarks) > 1 else benchmarks[0]
 
             stats = bench.get("stats", bench.get("statistics", {}))
+            
+            # GuideLLM v.latest uses "metrics" instead of "stats"
+            metrics = bench.get("metrics", {})
 
             # TTFT
             ttft_data = stats.get("ttft", stats.get("time_to_first_token", {}))
+            if not ttft_data and metrics:
+                 ttft_data = metrics.get("time_to_first_token_ms", {}).get("successful", {})
+
             if isinstance(ttft_data, dict):
                 normalized["metrics"]["ttft"] = {
                     "mean": ttft_data.get("mean", ttft_data.get("avg")),
                     "p50": ttft_data.get("p50", ttft_data.get("median")),
-                    "p90": ttft_data.get("p90"),
+                    "p90": ttft_data.get("p90"), # Metrics format has percentiles dict
                     "p99": ttft_data.get("p99"),
                     "min": ttft_data.get("min"),
                     "max": ttft_data.get("max"),
                 }
+                
+                # Handle nested percentiles in new metrics format
+                if "percentiles" in ttft_data:
+                    p = ttft_data["percentiles"]
+                    normalized["metrics"]["ttft"]["p50"] = p.get("p50")
+                    normalized["metrics"]["ttft"]["p90"] = p.get("p90")
+                    normalized["metrics"]["ttft"]["p99"] = p.get("p99")
 
             # ITL
             itl_data = stats.get("itl", stats.get("inter_token_latency", {}))
+            if not itl_data and metrics:
+                 itl_data = metrics.get("inter_token_latency_ms", {}).get("successful", {})
+
             if isinstance(itl_data, dict):
                 normalized["metrics"]["itl"] = {
                     "mean": itl_data.get("mean", itl_data.get("avg")),
@@ -276,10 +321,26 @@ def normalize_results(results: Dict) -> Dict:
                     "min": itl_data.get("min"),
                     "max": itl_data.get("max"),
                 }
+                
+                # Handle nested percentiles in new metrics format
+                if "percentiles" in itl_data:
+                    p = itl_data["percentiles"]
+                    normalized["metrics"]["itl"]["p50"] = p.get("p50")
+                    normalized["metrics"]["itl"]["p90"] = p.get("p90")
+                    normalized["metrics"]["itl"]["p99"] = p.get("p99")
 
             # Throughput
             throughput_data = stats.get("throughput", {})
-            if isinstance(throughput_data, dict):
+            if not throughput_data and metrics:
+                # In metrics, throughput is split. We'll use tokens_per_second and requests_per_second
+                tps = metrics.get("output_tokens_per_second", {}).get("successful", {})
+                rps = metrics.get("requests_per_second", {}).get("successful", {})
+                
+                normalized["metrics"]["throughput"] = {
+                    "tokens_per_second": tps.get("mean"),
+                    "requests_per_second": rps.get("mean")
+                }
+            elif isinstance(throughput_data, dict):
                 normalized["metrics"]["throughput"] = {
                     "tokens_per_second": throughput_data.get(
                         "output_tokens_per_second",
@@ -293,6 +354,9 @@ def normalize_results(results: Dict) -> Dict:
 
             # End-to-end latency
             latency_data = stats.get("request_latency", stats.get("latency", {}))
+            if not latency_data and metrics:
+                 latency_data = metrics.get("request_latency", {}).get("successful", {})
+
             if isinstance(latency_data, dict):
                 normalized["metrics"]["latency"] = {
                     "mean": latency_data.get("mean", latency_data.get("avg")),
@@ -300,6 +364,13 @@ def normalize_results(results: Dict) -> Dict:
                     "p90": latency_data.get("p90"),
                     "p99": latency_data.get("p99"),
                 }
+                
+                # Handle nested percentiles in new metrics format
+                if "percentiles" in latency_data:
+                    p = latency_data["percentiles"]
+                    normalized["metrics"]["latency"]["p50"] = p.get("p50")
+                    normalized["metrics"]["latency"]["p90"] = p.get("p90")
+                    normalized["metrics"]["latency"]["p99"] = p.get("p99")
 
     # Keep raw data for detailed analysis
     normalized["raw"] = raw

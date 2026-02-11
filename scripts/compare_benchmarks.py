@@ -96,7 +96,12 @@ def extract_guidellm_metrics(data: Dict) -> Dict:
         if benchmarks:
             bench = benchmarks[-1]  # Last benchmark in sweep
             stats = bench.get("stats", bench.get("statistics", {}))
+            raw_metrics = bench.get("metrics", {})
+
             ttft = stats.get("ttft", stats.get("time_to_first_token", {}))
+            if not ttft and raw_metrics:
+                ttft = raw_metrics.get("time_to_first_token_ms", {}).get("successful", {})
+            
             if isinstance(ttft, dict):
                 metrics["ttft"] = {
                     "mean": ttft.get("mean", ttft.get("avg")),
@@ -104,7 +109,16 @@ def extract_guidellm_metrics(data: Dict) -> Dict:
                     "p90": ttft.get("p90"),
                     "p99": ttft.get("p99"),
                 }
+                # Handle nested percentiles
+                if "percentiles" in ttft:
+                    metrics["ttft"]["p50"] = ttft["percentiles"].get("p50")
+                    metrics["ttft"]["p90"] = ttft["percentiles"].get("p90")
+                    metrics["ttft"]["p99"] = ttft["percentiles"].get("p99")
+
             itl = stats.get("itl", stats.get("inter_token_latency", {}))
+            if not itl and raw_metrics:
+                itl = raw_metrics.get("inter_token_latency_ms", {}).get("successful", {})
+
             if isinstance(itl, dict):
                 metrics["itl"] = {
                     "mean": itl.get("mean", itl.get("avg")),
@@ -112,8 +126,21 @@ def extract_guidellm_metrics(data: Dict) -> Dict:
                     "p90": itl.get("p90"),
                     "p99": itl.get("p99"),
                 }
+                # Handle nested percentiles
+                if "percentiles" in itl:
+                    metrics["itl"]["p50"] = itl["percentiles"].get("p50")
+                    metrics["itl"]["p90"] = itl["percentiles"].get("p90")
+                    metrics["itl"]["p99"] = itl["percentiles"].get("p99")
+
             tp = stats.get("throughput", {})
-            if isinstance(tp, dict):
+            if not tp and raw_metrics:
+                tps = raw_metrics.get("output_tokens_per_second", {}).get("successful", {})
+                if tps:
+                    metrics["throughput"] = {
+                        "tokens_per_second": tps.get("mean")
+                    }
+
+            if tp and isinstance(tp, dict):
                 metrics["throughput"] = {
                     "tokens_per_second": tp.get("output_tokens_per_second",
                                                 tp.get("tokens_per_second")),

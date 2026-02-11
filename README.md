@@ -166,7 +166,7 @@ INTER-TOKEN LATENCY (ITL):
 | `--num-runs` | 1 | Repetitions per prompt |
 | `--verbose` | false | Per-token timing output |
 
-### Etalon Benchmark
+### Etalon Benchmark (DOES NOT WORK YET)
 
 | Option | Default | Description |
 |--------|---------|-------------|

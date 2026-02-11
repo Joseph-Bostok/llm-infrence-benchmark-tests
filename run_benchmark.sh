@@ -15,7 +15,7 @@ OUTPUT_DIR="./results/$(date +%Y%m%d_%H%M%S)"
 NUM_REQUESTS="${NUM_REQUESTS:-5}"
 ENABLE_GUIDELLM="${ENABLE_GUIDELLM:-true}"
 ENABLE_REASONING="${ENABLE_REASONING:-true}"
-ENABLE_ETALON="${ENABLE_ETALON:-true}"
+ENABLE_ETALON="${ENABLE_ETALON:-false}"
 ENABLE_PINSIGHT="${ENABLE_PINSIGHT:-false}"
 LTTNG_TRACE_DIR="${LTTNG_TRACE_DIR:-}"
 NSIGHT_TRACE="${NSIGHT_TRACE:-}"
@@ -174,6 +174,7 @@ if [ -f "$OUTPUT_DIR/ollama/results.json" ]; then
     python3 scripts/compare_benchmarks.py \
         --ollama-results "$OUTPUT_DIR/ollama/results.json" \
         --etalon-results "$OUTPUT_DIR/etalon" \
+        --guidellm-results "$OUTPUT_DIR/guidellm" \
         --output "$OUTPUT_DIR/comparison.json" \
         --visualize \
         --viz-output "./visualizations/comparison_$(date +%Y%m%d_%H%M%S).png" \

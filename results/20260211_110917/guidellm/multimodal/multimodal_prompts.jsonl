@@ -1,0 +1,5 @@
+{"messages": [{"role": "user", "content": [{"type": "text", "text": "Describe a complex architectural blueprint in detail, including dimensions and materials."}]}]}
+{"messages": [{"role": "user", "content": [{"type": "text", "text": "Analyze a scientific chart showing the relationship between GPU memory bandwidth and LLM inference throughput."}]}]}
+{"messages": [{"role": "user", "content": [{"type": "text", "text": "Describe an MPI communication trace visualization showing point-to-point messages between 64 ranks."}]}]}
+{"messages": [{"role": "user", "content": [{"type": "text", "text": "Explain what a flame graph of a CUDA application shows, identifying the hottest kernel."}]}]}
+{"messages": [{"role": "user", "content": [{"type": "text", "text": "Analyze a timeline view from Nsight Systems showing CPU-GPU overlap in an inference pipeline."}]}]}

@@ -1,0 +1,67 @@
+{
+  "timestamp": "2026-02-11T14:24:26.075508",
+  "ollama": {
+    "source": "ollama_benchmark",
+    "num_requests": 25,
+    "ttft": {
+      "mean": 0.11023860499999975,
+      "std": 0.0029979065331009335,
+      "min": 0.09830750000000066,
+      "max": 0.1127535
+    },
+    "tpot": {
+      "mean": 0.018279844306900283,
+      "std": 0.0002157696747106197,
+      "min": 0.018054035160337576,
+      "max": 0.01878034115
+    },
+    "itl": {
+      "mean": 0.01779649420267444,
+      "std": 0.0002749098614015341
+    },
+    "throughput": {
+      "tokens_per_second_mean": 54.71226918003223,
+      "total_tokens": 10878
+    }
+  },
+  "etalon": {},
+  "guidellm": {
+    "source": "guidellm",
+    "ttft": {
+      "mean": 748.0572700500488,
+      "p50": 747.1239566802979,
+      "p90": 902.8739929199219,
+      "p99": 902.8739929199219,
+      "min": 597.7561473846436,
+      "max": 902.8739929199219
+    },
+    "itl": {
+      "mean": 17.364141884751206,
+      "p50": 17.386070386631282,
+      "p90": 17.39849631241926,
+      "p99": 17.39849631241926,
+      "min": 17.30394551134485,
+      "max": 17.39849631241926
+    },
+    "tpot": {},
+    "throughput": {
+      "tokens_per_second": 46.10424223633352,
+      "requests_per_second": 0.3607530691418898
+    }
+  },
+  "comparison": {
+    "ttft": {
+      "ollama_ms": 110.23860499999975,
+      "guidellm_ms": 748.0572700500488
+    },
+    "tpot_tbt_itl": {
+      "ollama_tpot_ms": 18.279844306900284,
+      "guidellm_itl_ms": 17.364141884751206,
+      "note": "TPOT (Ollama) vs TBT (Etalon) vs ITL (GuideLLM) - similar but differ in measurement methodology"
+    },
+    "throughput": {
+      "ollama_tok_s": 54.71226918003223,
+      "guidellm_tok_s": 46.10424223633352
+    }
+  }
+}
