@@ -1,0 +1,4 @@
+model,params,architecture,model_tag,requests,total_tokens,ttft_cold_ms,ttft_mean_ms,ttft_p50_ms,ttft_p99_ms,tpot_mean_ms,tpot_std_ms,itl_mean_ms,itl_p50_ms,itl_p90_ms,itl_p99_ms,itl_std_ms,itl_all_p50_ms,itl_all_p99_ms,itl_all_min_ms,itl_all_max_ms,throughput_mean,throughput_min,throughput_max,avg_output_tokens
+DeepSeek-R1-14B,14B,Dense-Transformer-CoT,deepseek-r1:14b,5,1306,4220.59,13792.16,15422.44,16040.88,12.86,0.13,12.86,12.87,13.02,13.02,0.13,12.69,14.27,11.74,15.92,77.79,76.81,78.82,261.2
+Phi4-14B,14B,Dense-Transformer,phi4:14b,5,1984,193.29,181.5,181.64,197.6,11.83,0.25,11.83,11.75,12.27,12.27,0.25,11.65,13.5,10.35,19.11,84.58,81.53,85.68,396.8
+Qwen2.5-14B,14B,Dense-Transformer,qwen2.5:14b,5,1761,246.67,241.55,268.54,269.48,12.84,0.27,12.84,12.76,13.31,13.31,0.27,12.64,14.67,11.41,23.11,77.92,75.11,79.09,352.2

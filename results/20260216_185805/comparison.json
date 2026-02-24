@@ -1,0 +1,40 @@
+{
+  "timestamp": "2026-02-16T18:59:53.976160",
+  "ollama": {
+    "source": "ollama_benchmark",
+    "num_requests": 25,
+    "ttft": {
+      "mean": 0.39623336320742963,
+      "std": 0.6580696682853913,
+      "min": 0.2230320239905268,
+      "max": 3.55387276399415
+    },
+    "tpot": {
+      "mean": 0.009343136367032066,
+      "std": 0.008012656159087342,
+      "min": 0.006888660821416735,
+      "max": 0.04753262740185206
+    },
+    "itl": {
+      "mean": 0.006528028812709533,
+      "std": 6.299451845477289e-05
+    },
+    "throughput": {
+      "tokens_per_second_mean": 126.40115708854196,
+      "total_tokens": 8972
+    }
+  },
+  "etalon": {},
+  "guidellm": {
+    "source": "guidellm",
+    "ttft": {},
+    "itl": {},
+    "tpot": {},
+    "throughput": {}
+  },
+  "comparison": {
+    "throughput": {
+      "ollama_tok_s": 126.40115708854196
+    }
+  }
+}

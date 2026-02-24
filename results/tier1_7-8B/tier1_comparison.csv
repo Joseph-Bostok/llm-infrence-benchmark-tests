@@ -1,0 +1,7 @@
+model,params,architecture,model_tag,requests,total_tokens,ttft_cold_ms,ttft_mean_ms,ttft_p50_ms,ttft_p99_ms,tpot_mean_ms,tpot_std_ms,itl_mean_ms,itl_p50_ms,itl_p90_ms,itl_p99_ms,itl_std_ms,itl_all_p50_ms,itl_all_p99_ms,itl_all_min_ms,itl_all_max_ms,throughput_mean,throughput_min,throughput_max,avg_output_tokens
+DeepSeek-R1-7B,7B,Dense-Transformer-CoT,deepseek-r1:latest,5,5024,260.42,228.23,225.29,253.65,7.42,0.04,7.42,7.41,7.48,7.48,0.04,7.23,8.31,6.51,11.46,134.79,133.69,135.63,1004.8
+Gemma2-9B,9B,Dense-Transformer,gemma2:9b,5,1369,245.29,251.67,257.95,270.32,10.39,0.46,10.39,10.19,11.2,11.2,0.46,9.88,13.14,7.81,16.25,96.38,89.28,98.75,273.8
+Llama3-8B,8B,Dense-Transformer,llama3:latest,5,1670,260.66,260.82,258.58,295.15,6.84,0.39,6.84,6.68,7.54,7.54,0.39,6.48,8.76,5.69,11.24,146.64,132.61,151.2,334.0
+Llama3.1-8B,8B,Dense-Transformer,llama3.1:latest,5,1790,239.64,253.99,256.72,289.35,7.6,0.35,7.6,7.46,8.21,8.21,0.35,7.37,11.39,6.32,14.57,131.75,121.76,135.97,358.0
+Mistral-7B,7B,Dense-Transformer-SWA,mistral:7b,5,1737,80.65,66.53,73.72,74.12,6.74,0.09,6.74,6.71,6.89,6.89,0.09,6.64,8.89,5.93,12.08,148.44,145.05,149.77,347.4
+Qwen2.5-7B,7B,Dense-Transformer,qwen2.5:7b,5,1764,263.05,234.93,248.67,251.07,7.52,0.39,7.52,7.43,8.22,8.22,0.39,7.17,9.66,6.19,15.93,133.19,121.72,137.59,352.8

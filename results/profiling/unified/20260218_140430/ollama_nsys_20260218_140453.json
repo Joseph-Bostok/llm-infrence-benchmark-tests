@@ -1,0 +1,7 @@
+{
+  "profiler": "nsys",
+  "backend": "ollama",
+  "model": "qwen2.5:7b",
+  "kernels": [],
+  "memory": []
+}

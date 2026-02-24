@@ -1,0 +1,41 @@
+{
+  "timestamp": "2026-02-17T17:13:04.322708",
+  "model": "Qwen/Qwen2.5-7B-Instruct",
+  "backend": "vllm",
+  "vllm_version": "0.15.1",
+  "tensor_parallel": 1,
+  "max_tokens": 128,
+  "total_requests": 3,
+  "warmup_requests": 1,
+  "model_load_time_s": 31.88,
+  "gpu_memory": {
+    "main_process_allocated_gb": 0.0,
+    "main_process_reserved_gb": 0.0,
+    "main_process_peak_gb": 0.0,
+    "note": "Model weights are in EngineCore subprocess memory"
+  },
+  "metrics": [
+    {
+      "request_index": 1,
+      "prompt": "What are the main differences between TCP and UDP protocols?",
+      "num_output_tokens": 128,
+      "total_time_s": 2.5101,
+      "tokens_per_second": 50.99
+    },
+    {
+      "request_index": 2,
+      "prompt": "Describe the process of photosynthesis in simple terms.",
+      "num_output_tokens": 128,
+      "total_time_s": 2.5172,
+      "tokens_per_second": 50.85
+    }
+  ],
+  "aggregate": {
+    "mean_tokens_per_second": 50.92,
+    "min_tokens_per_second": 50.85,
+    "max_tokens_per_second": 50.99,
+    "mean_total_time_s": 2.514,
+    "mean_output_tokens": 128.0,
+    "total_tokens": 256
+  }
+}

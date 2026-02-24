@@ -1,43 +1,5 @@
-# Ollama binary and models (large files)
-ollama/bin/
-ollama/lib/
-ollama/models/
-ollama/*.tar*
-ollama/*.log
-
-# Etalon repository (cloned separately)
-etalon/
-
-# Python
-__pycache__/
-*.py[cod]
-*$py.class
-*.so
-.Python
-*.egg-info/
-.eggs/
-dist/
-build/
-
-# Results and outputs (optional - uncomment to track)
-# results/
-# visualizations/
-
-# Environment
-.env
-.venv
-venv/
-ENV/
-
-# IDE
-.idea/
-.vscode/
-*.swp
-*.swo
-
-# OS
-.DS_Store
-Thumbs.db
-
-# Logs
-*.log
+# Large binary profiling artifacts
+*.sqlite
+*.nsys-rep
+*.pt.trace.json
+trace_for_perfetto.json

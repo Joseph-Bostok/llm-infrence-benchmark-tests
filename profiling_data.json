@@ -1,0 +1,319 @@
+[
+  {
+    "label": "nsys_vllm_Qwen_Qwen2.5-7B-Instruct",
+    "source": "nsys_vllm_Qwen_Qwen2.5-7B-Instruct.sqlite",
+    "total_gpu_time_ms": 2081.1,
+    "total_kernel_launches": 39002,
+    "unique_kernels": 34,
+    "categories": {
+      "GEMM / MatMul": {
+        "time_ms": 1862.6,
+        "calls": 13599,
+        "pct": 89.5
+      },
+      "Activation": {
+        "time_ms": 48.5,
+        "calls": 3369,
+        "pct": 2.3
+      },
+      "Attention": {
+        "time_ms": 44.1,
+        "calls": 6656,
+        "pct": 2.1
+      },
+      "Normalization": {
+        "time_ms": 38.1,
+        "calls": 6860,
+        "pct": 1.8
+      },
+      "Elementwise": {
+        "time_ms": 23.9,
+        "calls": 1391,
+        "pct": 1.2
+      },
+      "Positional Enc.": {
+        "time_ms": 22.2,
+        "calls": 3370,
+        "pct": 1.1
+      },
+      "Reduction": {
+        "time_ms": 16.0,
+        "calls": 3493,
+        "pct": 0.8
+      },
+      "Sorting": {
+        "time_ms": 12.3,
+        "calls": 12,
+        "pct": 0.6
+      },
+      "Softmax": {
+        "time_ms": 10.0,
+        "calls": 122,
+        "pct": 0.5
+      },
+      "Data Movement": {
+        "time_ms": 2.6,
+        "calls": 9,
+        "pct": 0.1
+      },
+      "Indexing": {
+        "time_ms": 0.5,
+        "calls": 119,
+        "pct": 0.0
+      },
+      "Initialization": {
+        "time_ms": 0.5,
+        "calls": 2,
+        "pct": 0.0
+      }
+    },
+    "prefill_decode": {
+      "prefill_ms": 549.6,
+      "decode_ms": 1475.8,
+      "other_ms": 55.7
+    },
+    "top_kernels": [
+      {
+        "name": "ampere_bf16_s16816gemm_bf16_128x64_ldg8_f2f_stages_32x6_tn",
+        "category": "GEMM / MatMul",
+        "calls": 3258,
+        "total_ms": 665.0,
+        "avg_us": 204.1,
+        "pct": 32.0
+      },
+      {
+        "name": "ampere_bf16_s16816gemm_bf16_64x64_sliced1x2_ldg8_f2f_stages_64x6_tn",
+        "category": "GEMM / MatMul",
+        "calls": 6515,
+        "total_ms": 434.5,
+        "avg_us": 66.7,
+        "pct": 20.9
+      },
+      {
+        "name": "ampere_bf16_s16816gemm_bf16_128x256_ldg8_f2f_stages_64x3_tn",
+        "category": "GEMM / MatMul",
+        "calls": 56,
+        "total_ms": 337.6,
+        "avg_us": 6029.3,
+        "pct": 16.2
+      },
+      {
+        "name": "ampere_bf16_s16816gemm_bf16_256x128_ldg8_f2f_stages_64x3_tn",
+        "category": "GEMM / MatMul",
+        "calls": 86,
+        "total_ms": 172.7,
+        "avg_us": 2008.3,
+        "pct": 8.3
+      },
+      {
+        "name": "ampere_bf16_s16816gemm_bf16_64x64_sliced1x2_ldg8_relu_f2f_stages_64x6_tn",
+        "category": "GEMM / MatMul",
+        "calls": 3258,
+        "total_ms": 100.2,
+        "avg_us": 30.8,
+        "pct": 4.8
+      },
+      {
+        "name": "ampere_bf16_s16816gemm_bf16_64x64_sliced1x2_ldg8_f2f_stages_64x5_tn",
+        "category": "GEMM / MatMul",
+        "calls": 174,
+        "total_ms": 100.1,
+        "avg_us": 575.5,
+        "pct": 4.8
+      },
+      {
+        "name": "act_and_mul_kernel",
+        "category": "Activation",
+        "calls": 3369,
+        "total_ms": 48.5,
+        "avg_us": 14.4,
+        "pct": 2.3
+      },
+      {
+        "name": "ampere_bf16_s16816gemm_bf16_128x256_ldg8_relu_f2f_stages_64x3_tn",
+        "category": "GEMM / MatMul",
+        "calls": 28,
+        "total_ms": 39.2,
+        "avg_us": 1401.2,
+        "pct": 1.9
+      },
+      {
+        "name": "fused_add_rms_norm_kernel",
+        "category": "Normalization",
+        "calls": 6739,
+        "total_ms": 37.6,
+        "avg_us": 5.6,
+        "pct": 1.8
+      },
+      {
+        "name": "flash_fwd_splitkv_kernel",
+        "category": "Attention",
+        "calls": 3314,
+        "total_ms": 31.5,
+        "avg_us": 9.5,
+        "pct": 1.5
+      },
+      {
+        "name": "rotary_embedding_kernel",
+        "category": "Positional Enc.",
+        "calls": 3370,
+        "total_ms": 22.2,
+        "avg_us": 6.6,
+        "pct": 1.1
+      },
+      {
+        "name": "vectorized_elementwise_kernel",
+        "category": "Elementwise",
+        "calls": 421,
+        "total_ms": 18.2,
+        "avg_us": 43.3,
+        "pct": 0.9
+      },
+      {
+        "name": "splitKreduce_kernel",
+        "category": "Reduction",
+        "calls": 3369,
+        "total_ms": 13.0,
+        "avg_us": 3.8,
+        "pct": 0.6
+      },
+      {
+        "name": "reshape_and_cache_flash_kernel",
+        "category": "Attention",
+        "calls": 3342,
+        "total_ms": 12.7,
+        "avg_us": 3.8,
+        "pct": 0.6
+      },
+      {
+        "name": "DeviceSegmentedRadixSortKernel",
+        "category": "Sorting",
+        "calls": 12,
+        "total_ms": 12.3,
+        "avg_us": 1021.2,
+        "pct": 0.6
+      },
+      {
+        "name": "cunn_SoftMaxForward",
+        "category": "Softmax",
+        "calls": 122,
+        "total_ms": 10.0,
+        "avg_us": 82.0,
+        "pct": 0.5
+      },
+      {
+        "name": "ampere_s16816gemm_bf16_128x64_ldg8_stages_32x6_tn",
+        "category": "GEMM / MatMul",
+        "calls": 56,
+        "total_ms": 6.3,
+        "avg_us": 111.6,
+        "pct": 0.3
+      },
+      {
+        "name": "_scatter_gather_elementwise_kernel",
+        "category": "Data Movement",
+        "calls": 4,
+        "total_ms": 2.5,
+        "avg_us": 621.4,
+        "pct": 0.1
+      },
+      {
+        "name": "unrolled_elementwise_kernel",
+        "category": "Elementwise",
+        "calls": 598,
+        "total_ms": 2.3,
+        "avg_us": 3.9,
+        "pct": 0.1
+      },
+      {
+        "name": "ampere_s16816gemm_bf16_64x64_ldg8_stages_64x6_tn",
+        "category": "GEMM / MatMul",
+        "calls": 56,
+        "total_ms": 2.1,
+        "avg_us": 36.7,
+        "pct": 0.1
+      },
+      {
+        "name": "ampere_bf16_s16816gemm_bf16_64x64_ldg8_relu_f2f_stages_64x5_tn",
+        "category": "GEMM / MatMul",
+        "calls": 56,
+        "total_ms": 2.0,
+        "avg_us": 35.8,
+        "pct": 0.1
+      },
+      {
+        "name": "reduce_kernel",
+        "category": "Reduction",
+        "calls": 122,
+        "total_ms": 2.0,
+        "avg_us": 16.1,
+        "pct": 0.1
+      },
+      {
+        "name": "elementwise_kernel",
+        "category": "Elementwise",
+        "calls": 130,
+        "total_ms": 1.7,
+        "avg_us": 13.3,
+        "pct": 0.1
+      },
+      {
+        "name": "ampere_bf16_s16816gemm_bf16_128x128_ldg8_relu_f2f_stages_64x3_tn",
+        "category": "GEMM / MatMul",
+        "calls": 28,
+        "total_ms": 1.5,
+        "avg_us": 52.8,
+        "pct": 0.1
+      },
+      {
+        "name": "ampere_bf16_s16816gemm_bf16_128x128_ldg8_f2f_stages_64x3_tn",
+        "category": "GEMM / MatMul",
+        "calls": 28,
+        "total_ms": 1.4,
+        "avg_us": 49.3,
+        "pct": 0.1
+      },
+      {
+        "name": "tensor_kernel_scan_innermost_dim",
+        "category": "Reduction",
+        "calls": 2,
+        "total_ms": 1.1,
+        "avg_us": 525.7,
+        "pct": 0.1
+      },
+      {
+        "name": "distribution_elementwise_grid_stride_kernel",
+        "category": "Elementwise",
+        "calls": 122,
+        "total_ms": 0.9,
+        "avg_us": 7.4,
+        "pct": 0.0
+      },
+      {
+        "name": "index_elementwise_kernel",
+        "category": "Elementwise",
+        "calls": 118,
+        "total_ms": 0.8,
+        "avg_us": 6.4,
+        "pct": 0.0
+      },
+      {
+        "name": "rms_norm_kernel",
+        "category": "Normalization",
+        "calls": 121,
+        "total_ms": 0.5,
+        "avg_us": 4.2,
+        "pct": 0.0
+      },
+      {
+        "name": "indexSelectSmallIndex",
+        "category": "Indexing",
+        "calls": 119,
+        "total_ms": 0.5,
+        "avg_us": 4.2,
+        "pct": 0.0
+      }
+    ],
+    "memory": []
+  }
+]

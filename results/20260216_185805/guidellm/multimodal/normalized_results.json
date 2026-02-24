@@ -1,0 +1,18 @@
+{
+  "tool": "guidellm",
+  "metrics": {
+    "ttft": {},
+    "itl": {},
+    "tpot": {},
+    "throughput": {},
+    "latency": {}
+  },
+  "error": {
+    "error": "benchmark_failed",
+    "exit_code": 1
+  },
+  "benchmark_metadata": {
+    "tool": "guidellm",
+    "timestamp": "2026-02-16T18:59:37.144360"
+  }
+}

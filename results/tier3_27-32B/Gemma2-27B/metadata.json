@@ -1,0 +1,11 @@
+{
+    "model_tag": "gemma2:27b",
+    "display_name": "Gemma2-27B",
+    "param_count": "27B",
+    "architecture": "Dense-Transformer",
+    "tier": "tier3_27-32B",
+    "requests": 25,
+    "timestamp": "20260217_130024",
+    "elapsed_seconds": 30,
+    "ollama_host": "http://localhost:11434"
+}

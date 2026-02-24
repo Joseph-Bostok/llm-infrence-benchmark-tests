@@ -1,0 +1,63 @@
+{
+  "backend": "ollama",
+  "model": "qwen2.5:7b",
+  "profiler": "python-timing",
+  "config": {
+    "ollama_host": "http://localhost:11434",
+    "max_tokens": 256,
+    "requests": 5,
+    "warmup": 1
+  },
+  "timing": {},
+  "requests": [
+    {
+      "index": 1,
+      "prompt": "What are the main differences between TCP and UDP protocols?...",
+      "tokens": 256,
+      "time_s": 2.1093,
+      "ttft_ms": 258.11,
+      "mean_itl_ms": 7.23,
+      "tpot_ms": 7.23,
+      "tokens_per_s": 121.36
+    },
+    {
+      "index": 2,
+      "prompt": "Describe the process of photosynthesis in simple terms....",
+      "tokens": 210,
+      "time_s": 1.7495,
+      "ttft_ms": 218.0,
+      "mean_itl_ms": 7.27,
+      "tpot_ms": 7.27,
+      "tokens_per_s": 120.04
+    },
+    {
+      "index": 3,
+      "prompt": "Write a brief overview of the French Revolution....",
+      "tokens": 256,
+      "time_s": 2.095,
+      "ttft_ms": 241.35,
+      "mean_itl_ms": 7.24,
+      "tpot_ms": 7.24,
+      "tokens_per_s": 122.2
+    },
+    {
+      "index": 4,
+      "prompt": "Explain how a neural network learns from data....",
+      "tokens": 256,
+      "time_s": 2.0483,
+      "ttft_ms": 209.07,
+      "mean_itl_ms": 7.19,
+      "tpot_ms": 7.19,
+      "tokens_per_s": 124.98
+    }
+  ],
+  "aggregate": {
+    "mean_tok_s": 122.15,
+    "min_tok_s": 120.04,
+    "max_tok_s": 124.98,
+    "mean_ttft_ms": 231.63,
+    "mean_itl_ms": 7.23,
+    "mean_tpot_ms": 7.23,
+    "total_tokens": 978
+  }
+}

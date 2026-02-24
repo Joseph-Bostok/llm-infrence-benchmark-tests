@@ -1,0 +1,11 @@
+{
+    "model_tag": "llama3:latest",
+    "display_name": "Llama3-8B",
+    "param_count": "8B",
+    "architecture": "Dense-Transformer",
+    "tier": "tier1_7-8B",
+    "requests": 25,
+    "timestamp": "20260217_123504",
+    "elapsed_seconds": 13,
+    "ollama_host": "http://localhost:11434"
+}

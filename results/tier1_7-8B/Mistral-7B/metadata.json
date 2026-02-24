@@ -1,0 +1,11 @@
+{
+    "model_tag": "mistral:7b",
+    "display_name": "Mistral-7B",
+    "param_count": "7B",
+    "architecture": "Dense-Transformer-SWA",
+    "tier": "tier1_7-8B",
+    "requests": 25,
+    "timestamp": "20260217_123504",
+    "elapsed_seconds": 13,
+    "ollama_host": "http://localhost:11434"
+}
