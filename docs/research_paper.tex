@@ -1,0 +1,348 @@
+\documentclass[conference]{IEEEtran}
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+
+\begin{document}
+
+\title{Profiling-Guided KV Cache Optimization: Token Eviction and Semantic Chunking for Long-Context LLM Inference}
+
+\author{\IEEEauthorblockN{Joseph Bostok}
+\IEEEauthorblockA{Department of Computer Science\\
+University of North Carolina at Charlotte\\
+Charlotte, NC, USA}}
+
+\maketitle
+
+% ============================================================
+% ABSTRACT
+% ============================================================
+\begin{abstract}
+The key-value (KV) cache is the central scalability bottleneck in long-context large language model (LLM) inference. During autoregressive generation, each decode step reads the entire cached key-value state---a cost that grows linearly with sequence length and, for real-world workloads such as multi-turn dialogue, long-document question answering, and retrieval-augmented generation (RAG), can reach tens of gigabytes of GPU memory. At 32K tokens, the KV cache for a 7-billion-parameter model consumes 1.9\,GB and accounts for over 10\% of total memory bandwidth; at 128K tokens, it approaches parity with the model weights themselves.
+
+Two families of KV cache optimization have emerged to address this problem. \textbf{Token eviction} methods (H2O, SnapKV) score individual tokens by cumulative attention weight and discard the lowest-scoring entries, achieving up to $10\times$ memory compression but fragmenting semantic context. \textbf{Semantic chunking} methods (ChunkKV) group tokens into contiguous segments and evict at the chunk level, preserving linguistic coherence and outperforming per-token eviction by up to 8.7\% on long-context benchmarks, but operating with coarser granularity. Both approaches are evaluated on standard benchmarks---LongBench and Needle-in-a-Haystack (NIAH)---yet the choice between strategies remains largely heuristic, with no empirical tooling to connect cache behavior to downstream quality for a given workload.
+
+We present \textbf{PInsight}, a profiling-guided framework for KV cache optimization that provides per-token, per-layer visibility into cache behavior during inference. PInsight instruments the decode loop to capture three data streams simultaneously: (1) per-step KV cache memory growth and decode latency, (2) per-layer attention weight distributions for token importance scoring, and (3) GPU kernel traces via NVTX-annotated Nsight Systems for bandwidth attribution. Using real attention data from Qwen2.5-7B-Instruct on NVIDIA A100 GPUs, we establish that the first four tokens absorb \textbf{40.8\%} of cumulative attention, only \textbf{0.5\%} of tokens qualify as heavy hitters (compared to H2O's estimate of ${\sim}5\%$), and the bandwidth crossover point occurs at ${\sim}32$K tokens. Our eviction simulation shows that a 50\% cache budget retains 82\% of attention mass, providing empirical guidance for eviction budget selection that existing benchmarks evaluate only post-hoc.
+\end{abstract}
+
+% ============================================================
+% 1. INTRODUCTION
+% ============================================================
+\section{Introduction}
+
+\subsection{The KV Cache Problem}
+
+The deployment of large language models in production systems has exposed a fundamental tension between the autoregressive generation mechanism and the memory-bandwidth constraints of modern GPU hardware. During decode, each new token requires a full forward pass through the model---reading billions of weight parameters from GPU high-bandwidth memory (HBM) to compute a single output. On an NVIDIA A100, single-token decode operates at an arithmetic intensity of approximately 1 FLOP/byte, a factor of $208\times$ below the GPU's compute ridge point~\cite{roofline}. The decode phase is firmly memory-bandwidth limited.
+
+The key-value cache addresses this by caching attention keys and values from previous tokens, converting an $O(n^2)$ recomputation into an $O(n)$ memory read. But this creates a second memory problem: the KV cache grows linearly with sequence length and must be read \textit{in its entirety} at every decode step. For Qwen2.5-7B with grouped-query attention (GQA)~\cite{gqa}, the cache requires approximately 57\,KB per token. Table~\ref{tab:kv_scaling} shows how KV cache size scales with sequence length.
+
+\begin{table}[h]
+\centering
+\caption{KV Cache Scaling for Qwen2.5-7B (BF16, 4 KV heads)}
+\label{tab:kv_scaling}
+\begin{tabular}{@{}rrc@{}}
+\toprule
+\textbf{Sequence Length} & \textbf{KV Cache Size} & \textbf{\% of Weight BW} \\
+\midrule
+64 tokens & 3.7\,MB & 0.02\% \\
+2,048 tokens & 117\,MB & 0.8\% \\
+8,192 tokens & 470\,MB & 3.1\% \\
+32,768 tokens & 1.9\,GB & 12.3\% \\
+131,072 tokens & 7.5\,GB & 49.3\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+At short contexts, the KV cache is negligible. At long contexts---well within the advertised window of production models---it becomes a dominant factor in both latency and memory.
+
+\subsection{Real-World Workloads}
+
+The KV cache scaling problem is not hypothetical. Three classes of production workloads routinely push models into the regime where cache management determines system viability:
+
+\textbf{Multi-turn dialogue and AI agents.} Conversational AI systems and autonomous agents maintain full conversation histories across many turns. A 50-turn conversation with 200 tokens per turn reaches 10K context tokens; an agentic workflow with tool call/response cycles can exceed 50K tokens within a single session. Without cache management, GPU memory fills within minutes, forcing context truncation or request preemption.
+
+\textbf{Long-document question answering and RAG.} Retrieval-augmented generation systems inject retrieved passages---often 5--20 documents of 500--2,000 tokens each---into the prompt before generating. A RAG system with 10 retrieved passages at 1,000 tokens each requires 10K tokens of KV cache before generation begins. Legal document analysis, medical records review, and codebase understanding routinely process 16K--128K token contexts.
+
+\textbf{Code generation.} Generating or completing code requires maintaining deep logical consistency over long sequences. Variable definitions, function signatures, and architectural constraints established hundreds of tokens earlier must remain available in the cache. Repository-level code completion represents one of the most cache-sensitive workloads.
+
+\subsection{Token Eviction vs.\ Semantic Chunking}
+
+Two complementary approaches have emerged to reduce KV cache memory:
+
+\textbf{Token-level eviction} methods assign an importance score to each cached token and discard the lowest-scoring entries. H2O~\cite{h2o} tracks cumulative attention and retains the top-$K$ ``heavy hitters'' plus a sliding window of recent tokens. SnapKV~\cite{snapkv} uses a per-head observation window to identify which cached positions each attention head consistently focuses on. Both achieve significant compression---SnapKV reports $3.6\times$ decode speedup and $8.2\times$ memory reduction at 16K context---with minimal accuracy loss on most LongBench~\cite{longbench} tasks.
+
+However, token-level eviction \textbf{fragments semantic context}. When individual tokens are scattered across the sequence, the model loses the contiguous context around each retained token. This fragmentation is particularly harmful for multi-document QA and code completion tasks.
+
+\textbf{Semantic chunking} (ChunkKV~\cite{chunkkv}) groups tokens into fixed-size contiguous chunks (e.g., 10--16 tokens) and evaluates importance at the chunk level. Entire chunks are kept or discarded, preserving linguistic coherence. ChunkKV additionally exploits \textbf{layer-wise index reuse}---adjacent transformer layers select nearly identical chunks---to amortize importance computation, achieving 26.5\% higher throughput than full-cache baselines.
+
+On LongBench, ChunkKV outperforms H2O and SnapKV by up to 8.7\% at the same compression ratio, with the largest gains on summarization and multi-document QA. However, chunk-level eviction has coarser granularity: an entire chunk may be retained because one token scores highly, even if the rest is irrelevant.
+
+\subsection{The Benchmark Landscape}
+
+Both eviction and chunking methods are evaluated on a common set of benchmarks (Table~\ref{tab:benchmarks}).
+
+\begin{table}[h]
+\centering
+\caption{Standard Benchmarks for KV Cache Evaluation}
+\label{tab:benchmarks}
+\begin{tabular}{@{}p{1.8cm}p{3.2cm}p{2cm}@{}}
+\toprule
+\textbf{Benchmark} & \textbf{What It Tests} & \textbf{Length} \\
+\midrule
+LongBench & 21 datasets: QA, summarization, few-shot, code & 4K--16K+ \\
+NIAH & Single fact retrieval from long context & 4K--128K+ \\
+RULER & Multi-key retrieval, variable tracking & 4K--128K \\
+GSM8K & Many-shot in-context reasoning & 8K--32K \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+These benchmarks measure the \textit{accuracy} impact of cache compression after the fact. What they do not measure is \textit{why} a particular eviction strategy succeeds or fails: which tokens were evicted, which layers lost information, and how cache pressure affected decode latency.
+
+\subsection{Contributions}
+
+We present PInsight, a profiling-guided framework that fills this observability gap. Our contributions are:
+
+\begin{enumerate}
+\item \textbf{A profiling methodology for KV cache observability.} PInsight instruments the decode loop to capture per-token KV cache growth, per-layer attention distributions, and per-step decode latency, providing simultaneous visibility at the application, framework, and hardware levels.
+
+\item \textbf{Empirical characterization of KV cache behavior.} On Qwen2.5-7B and Qwen2.5-14B running on A100-40GB GPUs, we establish: (a) the first four tokens absorb 40.8\% of cumulative attention; (b) only 0.5\% of tokens are heavy hitters; (c) KV cache reads reach 10\% of bandwidth at ${\sim}$32K tokens; (d) decode latency grows 9\% over 128 tokens.
+
+\item \textbf{Eviction simulation grounded in real attention data.} We simulate H2O-style eviction at multiple budgets using captured attention weights, showing that a 50\% budget retains 82\% of attention mass, providing workload-specific guidance.
+\end{enumerate}
+
+% ============================================================
+% 2. RELATED WORK
+% ============================================================
+\section{Related Work}
+
+Research on KV cache optimization spans five broad categories: token-level eviction, semantic-preserving compression, cache quantization, system-level memory management, and architectural redesign. We survey each in turn, focusing on the eviction and chunking approaches most relevant to our work.
+
+\subsection{Token-Level Eviction}
+
+H2O~\cite{h2o} introduced the concept of ``heavy hitter'' tokens---the small fraction of cached tokens that receive disproportionately high cumulative attention scores. H2O maintains a dynamic policy that retains the top-$K$ heavy hitters alongside a sliding window of the most recent $W$ tokens, evicting all others. The authors demonstrated up to $29\times$ throughput improvement with minimal quality loss on language modeling benchmarks, establishing that the vast majority of cached tokens can be safely discarded.
+
+SnapKV~\cite{snapkv} refined this approach by observing that attention patterns are \textit{stable} across generation steps. Rather than continuously recomputing importance during decode, SnapKV uses an ``observation window'' of the last $P$ prompt tokens to predict which positions each attention head will focus on during generation. This per-head selection captures head-specific patterns that H2O's global scoring misses, achieving superior performance on LongBench with 68--92\% cache reduction.
+
+StreamingLLM~\cite{streamingllm} identified the ``attention sink'' phenomenon: the first few tokens in any sequence receive disproportionate attention regardless of their semantic content, due to the softmax normalization constraint. StreamingLLM demonstrated that retaining a small fixed set of initial ``sink'' tokens plus a sliding window enables stable generation over infinite-length streams without fine-tuning.
+
+\subsection{Semantic-Preserving Compression}
+
+ChunkKV~\cite{chunkkv} addressed a fundamental limitation of per-token eviction: the fragmentation of semantic context. By grouping tokens into contiguous chunks and evaluating importance at the chunk level, ChunkKV preserves linguistic coherence. The method additionally exploits layer-wise index reuse, observing that adjacent transformer layers select nearly identical important chunks, reducing computational overhead. On LongBench and NIAH, ChunkKV outperforms H2O and SnapKV by up to 8.7\% at equivalent compression ratios. The method is integrated into NVIDIA's KVPress framework.
+
+KVCrush converts token KV vectors into compact binary representations, clusters tokens by head behavior, and selects the most representative token from each cluster, achieving $4\times$ compression with $<1\%$ accuracy drop on LongBench and $<0.5\%$ latency overhead.
+
+CurDKV frames KV compression as a CUR matrix decomposition problem, using leverage scores that consider both attention weights and value vector magnitudes to identify tokens that best preserve the final attention output. This value-guided approach maintains accuracy at 70--90\% compression ratios where attention-only methods degrade.
+
+\subsection{Cache Quantization}
+
+KIVI~\cite{kivi} introduced asymmetric quantization for KV caches, observing that keys and values have fundamentally different distributions: keys exhibit outlier \textit{channels} (quantized per-channel) while values exhibit outlier \textit{tokens} (quantized per-token). This asymmetric approach achieves 2-bit precision with $2.6\times$ memory reduction and near-baseline quality.
+
+MiniKV~\cite{minikv} combines 2-bit quantization with token eviction through a layer-discriminative policy, allocating different (tokens-to-keep, bit-width) budgets per layer. The key insight is that \textit{more tokens at lower precision beats fewer tokens at higher precision}, achieving 86\% KV cache compression with 98.5\% accuracy recovery.
+
+\subsection{System-Level Memory Management}
+
+vLLM~\cite{vllm} introduced PagedAttention, which breaks KV cache into fixed-size blocks allocated on demand (analogous to OS virtual memory), achieving near-zero memory waste and $2$--$4\times$ throughput improvement. ShadowKV~\cite{shadowkv} offloads value vectors to CPU memory while keeping compressed keys on GPU, reconstructing only the sparse KV pairs needed during decode. LMCache~\cite{lmcache} and Mooncake~\cite{mooncake} implement multi-tier cache sharing across GPU, CPU, and disk, enabling cache reuse across users and requests.
+
+\subsection{Profiling and Observability Gap}
+
+Despite the breadth of optimization work, no existing tool provides per-token, per-layer KV cache profiling. Production frameworks expose only aggregate metrics (e.g., vLLM's \texttt{kv\_cache\_usage\_percent}). Low-level profilers (Nsight Systems, PyTorch Kineto) capture raw CUDA kernel traces but cannot map them to individual decode steps or cache events. PInsight fills this gap by providing the per-token granularity needed to make informed, workload-specific optimization decisions.
+
+% ============================================================
+% 3. METHODOLOGY
+% ============================================================
+\section{Methodology}
+
+PInsight is a multi-layer profiling suite comprising three integrated components: a \textit{pipeline stage profiler} for application-level timing, a \textit{KV cache analyzer} for attention-based cache characterization, and a \textit{kernel trace correlator} for hardware-level bandwidth attribution. This section describes each component and the experimental protocol.
+
+\subsection{Pipeline Stage Profiler}
+
+The pipeline stage profiler decomposes LLM inference into five measurable stages, each instrumented with CUDA event timers and NVTX range markers:
+
+\begin{enumerate}
+\item \textbf{Tokenization} (CPU): BPE encoding of the input text.
+\item \textbf{Host-to-Device Transfer}: Tensor copy from CPU to GPU memory, timed via CUDA events.
+\item \textbf{Prefill}: Full self-attention over the prompt tokens (compute-bound). This stage produces the initial KV cache.
+\item \textbf{Decode Loop}: Autoregressive generation of output tokens (memory-bandwidth-bound). Each step performs one forward pass, reads the full KV cache, appends a new KV pair, and samples the next token.
+\item \textbf{Detokenization} (CPU): Conversion of generated token IDs to output text.
+\end{enumerate}
+
+We use bare HuggingFace Transformers rather than optimized serving frameworks (e.g., vLLM) to maintain full control over each stage. NVTX markers label each decode step, enabling correlation with kernel-level traces when running under Nsight Systems via the \texttt{--with-nsys} flag.
+
+\subsection{KV Cache Analyzer}
+
+The KV cache analyzer extends the decode loop to capture three data streams at every generation step:
+
+\subsubsection{Per-Step Cache Measurement}
+After each decode step, we measure the actual KV cache memory by iterating over the model's \texttt{past\_key\_values}:
+\begin{equation}
+\text{KV}_{\text{bytes}} = \sum_{l=1}^{L} \left( |\mathbf{K}_l| + |\mathbf{V}_l| \right) \cdot b_{\text{dtype}}
+\end{equation}
+where $L$ is the number of layers, $|\mathbf{K}_l|$ and $|\mathbf{V}_l|$ are the number of elements in the key and value tensors at layer $l$, and $b_{\text{dtype}}$ is the bytes per element (2 for BF16). We also compute the theoretical size:
+\begin{equation}
+\text{KV}_{\text{theory}} = 2 \cdot L \cdot h_{\text{kv}} \cdot d \cdot s \cdot b_{\text{dtype}}
+\end{equation}
+where $h_{\text{kv}}$ is the number of KV heads, $d$ is the head dimension, and $s$ is the current sequence length.
+
+\subsubsection{Attention Weight Extraction}
+We run the model with \texttt{output\_attentions=True} and \texttt{attn\_implementation="eager"} (rather than FlashAttention, which does not return attention weights). At each decode step, for each layer $l$ and head $h$, the attention weights $\alpha_{l,h} \in \mathbb{R}^{1 \times s}$ represent how much the current query token attends to each of the $s$ cached positions. We accumulate two importance metrics:
+
+\textit{Cumulative importance} (H2O-style):
+\begin{equation}
+I_{\text{cum}}(i) = \sum_{t=1}^{T} \sum_{l=1}^{L} \sum_{h=1}^{H} \alpha_{l,h,t}(i)
+\end{equation}
+where $\alpha_{l,h,t}(i)$ is the attention weight from decode step $t$ to cached position $i$.
+
+\textit{Per-head importance} (SnapKV-style): We maintain a matrix $\mathbf{P} \in \mathbb{R}^{L \times H \times s}$ that accumulates per-head attention distributions, enabling head-specific eviction decisions.
+
+\subsubsection{Attention Entropy}
+For each layer, we compute the average attention entropy across heads:
+\begin{equation}
+\mathcal{H}_l = -\frac{1}{H} \sum_{h=1}^{H} \sum_{i=1}^{s} \bar{\alpha}_{l,h}(i) \log_2 \bar{\alpha}_{l,h}(i)
+\end{equation}
+where $\bar{\alpha}$ is the time-averaged attention distribution. Low entropy indicates a selective layer (focused on few tokens); high entropy indicates a diffuse layer. This metric informs layer-discriminative budget allocation.
+
+\subsection{Bandwidth Crossover Analysis}
+
+We compute the ratio of KV cache reads to model weight reads as a function of sequence length:
+\begin{equation}
+r(s) = \frac{\text{KV}_{\text{theory}}(s)}{W_{\text{model}}}
+\end{equation}
+where $W_{\text{model}}$ is the total model weight size in bytes. The \textit{crossover point} is defined as the sequence length $s^*$ where $r(s^*) = 0.10$ (i.e., KV reads reach 10\% of weight reads). Below $s^*$, inference is weight-read dominated and cache optimization has minimal impact. Above $s^*$, cache optimization yields measurable throughput gains.
+
+\subsection{Eviction Simulation}
+
+Using the captured attention data, we simulate eviction without re-running inference. For a given cache budget $\beta \in (0, 1]$, we retain $K = \lfloor \beta \cdot s \rfloor$ tokens using two policies:
+
+\textbf{H2O-style (token-level):} Always retain the first 4 tokens (attention sinks) plus the top-$(K-4)$ tokens by cumulative importance $I_{\text{cum}}$.
+
+\textbf{ChunkKV-style (chunk-level):} Partition the sequence into chunks of size $C$. Compute chunk importance as the sum of constituent token importances. Retain the top-$\lfloor K/C \rfloor$ chunks.
+
+For each policy and budget, we compute the \textit{attention coverage}:
+\begin{equation}
+\text{Coverage}(\mathcal{S}) = \frac{\sum_{i \in \mathcal{S}} I_{\text{cum}}(i)}{\sum_{i=1}^{s} I_{\text{cum}}(i)}
+\end{equation}
+where $\mathcal{S}$ is the set of retained token positions. Higher coverage indicates that the eviction policy preserves the tokens the model actually attends to.
+
+\subsection{Kernel Trace Correlation}
+
+When invoked with \texttt{--with-nsys}, PInsight re-executes under Nsight Systems with CUDA, NVTX, and cuBLAS tracing enabled. The resulting trace correlates three kernel categories with pipeline stages:
+
+\begin{itemize}
+\item \texttt{ampere\_bf16\_s16816gemm}: Weight $\times$ activation GEMMs (model weight reads).
+\item \texttt{flash\_fwd\_splitkv\_kernel}: Attention computation (KV cache reads).
+\item \texttt{reshape\_and\_cache\_flash\_kernel}: KV cache write operations.
+\end{itemize}
+
+NVTX markers enable per-decode-step attribution of kernel time, quantifying how much of each step is spent reading weights vs.\ reading KV cache.
+
+\subsection{Experimental Setup}
+
+\begin{table}[h]
+\centering
+\caption{Experimental Configuration}
+\label{tab:setup}
+\begin{tabular}{@{}ll@{}}
+\toprule
+\textbf{Component} & \textbf{Details} \\
+\midrule
+GPU & NVIDIA A100-PCIE-40GB ($\times$4) \\
+Models & Qwen2.5-7B-Instruct (7.62B params) \\
+ & Qwen2.5-14B-Instruct (14.77B params) \\
+Precision & BFloat16 \\
+Attention & Eager (for weight capture) \\
+Framework & HuggingFace Transformers \\
+Profilers & Nsight Systems, PyTorch Kineto \\
+Max tokens & 128 (profiling run) \\
+CUDA & 12.x \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+All experiments use a single GPU with no tensor or pipeline parallelism. We use eager attention rather than FlashAttention~\cite{flashattn} to capture attention weights; this introduces additional latency that we account for when reporting throughput numbers. Each profiling run includes one warmup generation to stabilize CUDA kernels before measurement.
+
+\subsection{Profiler Overhead Characterization}
+
+To establish trustworthy baselines, we first quantified the overhead introduced by each profiling tool on identical workloads (Qwen2.5-7B, 10 requests, 128 max tokens):
+
+\begin{table}[h]
+\centering
+\caption{Profiler Overhead Comparison}
+\label{tab:overhead}
+\begin{tabular}{@{}lccc@{}}
+\toprule
+\textbf{Metric} & \textbf{Baseline} & \textbf{Nsys} & \textbf{Kineto} \\
+\midrule
+Throughput (tok/s) & 71.1 & 51.7 & 43.4 \\
+Overhead & --- & 26.8\% & 38.9\% \\
+Latency (s/req) & 1.80 & 2.46 & 2.95 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Nsight Systems introduces 31\% less throughput overhead than Kineto because it intercepts at the CUDA driver level (CUPTI) rather than hooking into the PyTorch dispatcher, and runs as an external process that avoids Python's GIL contention. For bandwidth-sensitive decode analysis, Nsys is the preferred tool.
+
+% ============================================================
+
+\bibliographystyle{IEEEtran}
+
+\begin{thebibliography}{16}
+
+\bibitem{roofline}
+S.~Williams, A.~Waterman, and D.~Patterson, ``Roofline: An insightful visual performance model for multicore architectures,'' \textit{Communications of the ACM}, vol.~52, no.~4, pp.~65--76, 2009.
+
+\bibitem{h2o}
+Z.~Zhang \textit{et~al.}, ``H2O: Heavy-hitter oracle for efficient generative inference of large language models,'' in \textit{NeurIPS}, 2023.
+
+\bibitem{snapkv}
+Y.~Li \textit{et~al.}, ``SnapKV: LLM knows what you are looking for before generation,'' \textit{arXiv:2404.14469}, 2024.
+
+\bibitem{kivi}
+Z.~Liu \textit{et~al.}, ``KIVI: A tuning-free asymmetric 2bit quantization for KV cache,'' in \textit{ICML}, 2024.
+
+\bibitem{minikv}
+K.~Zhong \textit{et~al.}, ``MiniKV: Pushing the limits of LLM inference via 2-bit layer-discriminative KV cache,'' \textit{arXiv:2411.18077}, 2024.
+
+\bibitem{vllm}
+W.~Kwon \textit{et~al.}, ``Efficient memory management for large language model serving with PagedAttention,'' in \textit{SOSP}, 2023.
+
+\bibitem{gqa}
+J.~Ainslie \textit{et~al.}, ``GQA: Training generalized multi-query transformer models from multi-head checkpoints,'' \textit{arXiv:2305.13245}, 2023.
+
+\bibitem{streamingllm}
+G.~Xiao \textit{et~al.}, ``Efficient streaming language models with attention sinks,'' \textit{arXiv:2309.17453}, 2023.
+
+\bibitem{flashattn}
+T.~Dao \textit{et~al.}, ``FlashAttention: Fast and memory-efficient exact attention with IO-awareness,'' in \textit{NeurIPS}, 2022.
+
+\bibitem{shadowkv}
+Y.~Sun \textit{et~al.}, ``ShadowKV: KV cache in shadows for high-throughput long-context LLM inference,'' \textit{arXiv:2410.21465}, 2024.
+
+\bibitem{longbench}
+Y.~Bai \textit{et~al.}, ``LongBench: A bilingual, multitask benchmark for long context understanding,'' in \textit{ACL}, 2024.
+
+\bibitem{ruler}
+C.-Y.~Hsieh \textit{et~al.}, ``RULER: What's the real context size of your long-context language models?'' \textit{arXiv:2404.06654}, 2024.
+
+\bibitem{niah}
+G.~Kamradt, ``Needle in a Haystack: Pressure testing LLMs,'' GitHub, 2023.
+
+\bibitem{chunkkv}
+Y.~Xu \textit{et~al.}, ``ChunkKV: Semantic-preserving KV cache compression for efficient long-context LLM inference,'' in \textit{NeurIPS}, 2025.
+
+\bibitem{lmcache}
+Y.~Zhu \textit{et~al.}, ``LMCache: Sharing across users, instances, and models with an efficient KV cache layer,'' 2025.
+
+\bibitem{mooncake}
+R.~Qin \textit{et~al.}, ``Mooncake: A KVCache-centric disaggregated architecture for LLM serving,'' \textit{arXiv:2407.00079}, 2024.
+
+\end{thebibliography}
+
+\end{document}

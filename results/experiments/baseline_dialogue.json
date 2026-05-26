@@ -1,0 +1,55 @@
+{
+  "model": "Qwen/Qwen2.5-7B-Instruct",
+  "workload_type": "dialogue",
+  "server_url": "http://localhost:8000",
+  "timestamp": "2026-05-26T11:13:11.772049",
+  "num_requests": 3,
+  "avg_ttft_ms": 42.80895326032116,
+  "p50_ttft_ms": 50.62151746231031,
+  "p99_ttft_ms": 56.09287571531466,
+  "avg_tps": 58.38284399327315,
+  "total_tokens": 274,
+  "peak_kv_cache_usage": 20.660696509909688,
+  "avg_kv_cache_usage": 20.660696509909688,
+  "avg_prefix_hit_rate": 0.005372769550019085,
+  "peak_running_requests": 1,
+  "request_metrics": [
+    {
+      "prompt_tokens": 118,
+      "completion_tokens": 50,
+      "ttft_ms": 50.62151746231031,
+      "total_time_ms": 821.8433238709906,
+      "tokens_per_second": 64.8321917047874,
+      "prompt_preview": "System: You are a helpful coding assistant.\n\nUser: What is a KV cache in transfo"
+    },
+    {
+      "prompt_tokens": 183,
+      "completion_tokens": 124,
+      "ttft_ms": 56.09287571531466,
+      "total_time_ms": 1651.5532393124604,
+      "tokens_per_second": 77.72051429747086,
+      "prompt_preview": "System: You are a research advisor.\n\nUser: I'm working on LLM inference optimiza"
+    },
+    {
+      "prompt_tokens": 161,
+      "completion_tokens": 100,
+      "ttft_ms": 21.712466603338513,
+      "total_time_ms": 3089.589932535313,
+      "tokens_per_second": 32.59582597756118,
+      "prompt_preview": "System: You are a technical support agent.\n\nUser: My vLLM server is running out "
+    }
+  ],
+  "server_snapshots": [
+    {
+      "timestamp": 1779808391.2714255,
+      "kv_cache_usage_pct": 20.660696509909688,
+      "num_requests_running": 1,
+      "num_requests_waiting": 0,
+      "num_requests_swapped": 0,
+      "gpu_cache_blocks_used": 329,
+      "gpu_cache_blocks_total": 1000,
+      "cpu_cache_blocks_used": 0,
+      "prefix_cache_hit_rate": 0.005372769550019085
+    }
+  ]
+}

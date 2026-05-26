@@ -1,0 +1,11 @@
+[
+  {
+    "prompt": "Solve the following optimization problem step by step.\n\nA GPU has 80GB of HBM with 3.35 TB/s bandwidth. A 7B parameter model uses BF16 weights (15.24 GB). The KV cache uses 57 KB per token per layer, and the model has 28 layers with 4 KV heads.\n\nStep 1: Calculate the maximum batch size if we want to serve requests with 8192 token contexts.\nStep 2: Calculate the decode throughput (tokens/second) at this batch size.\nStep 3: If we apply 50% KV cache eviction, how does this change the maximum batch size?\nStep 4: What is the throughput improvement from eviction?\n\nLet's think through this carefully."
+  },
+  {
+    "prompt": "Consider the following trade-off analysis.\n\nWe have three KV cache compression strategies:\n- Strategy A: H2O eviction at 50% budget (retains 82% attention mass)\n- Strategy B: ChunkKV at 50% budget with chunk_size=16 (retains 78% attention mass but preserves coherence)\n- Strategy C: KIVI 2-bit quantization (retains 100% tokens at 4x compression)\n\nFor each strategy, calculate:\n1. Memory savings\n2. Expected accuracy impact on LongBench\n3. Expected throughput improvement\n4. Which workloads each strategy is best suited for\n\nTherefore, step by step:\nFirst, let's establish the baseline memory usage...\nSecond, we need to consider the accuracy-memory trade-off curve...\nThird, the throughput improvement depends on whether we're memory-bound..."
+  },
+  {
+    "prompt": "A data center runs 100 concurrent LLM inference sessions. Each session generates an average of 2000 tokens with a context window of 4096 tokens. The cluster has 8 H100 GPUs.\n\nStep 1: Calculate total KV cache memory needed.\nStep 2: Determine if this fits in GPU memory.\nStep 3: If not, propose an optimization strategy.\nStep 4: Calculate the expected throughput with and without optimization.\nStep 5: Determine the cost savings.\n\nLet's reason through this step by step."
+  }
+]

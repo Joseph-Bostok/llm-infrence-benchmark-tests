@@ -1,0 +1,55 @@
+{
+  "model": "Qwen/Qwen2.5-7B-Instruct",
+  "workload_type": "code",
+  "server_url": "http://localhost:8000",
+  "timestamp": "2026-05-26T11:13:12.777951",
+  "num_requests": 3,
+  "avg_ttft_ms": 93.97074515747883,
+  "p50_ttft_ms": 61.619275453710955,
+  "p99_ttft_ms": 169.77128518899985,
+  "avg_tps": 47.862872258256935,
+  "total_tokens": 240,
+  "peak_kv_cache_usage": 56.33266266542639,
+  "avg_kv_cache_usage": 56.33266266542639,
+  "avg_prefix_hit_rate": 0.17123929973058538,
+  "peak_running_requests": 2,
+  "request_metrics": [
+    {
+      "prompt_tokens": 315,
+      "completion_tokens": 83,
+      "ttft_ms": 169.77128518899985,
+      "total_time_ms": 2517.5259802470036,
+      "tokens_per_second": 35.352926851648526,
+      "prompt_preview": "```python\nimport torch\nimport torch.nn as nn\nfrom typing import Optional, Tuple\n"
+    },
+    {
+      "prompt_tokens": 159,
+      "completion_tokens": 105,
+      "ttft_ms": 61.619275453710955,
+      "total_time_ms": 1414.175102826986,
+      "tokens_per_second": 77.6308067105184,
+      "prompt_preview": "```python\ndef compute_attention_importance(\n    attention_weights: torch.Tensor,"
+    },
+    {
+      "prompt_tokens": 115,
+      "completion_tokens": 52,
+      "ttft_ms": 50.52167482972569,
+      "total_time_ms": 1749.5969380408285,
+      "tokens_per_second": 30.60488321260388,
+      "prompt_preview": "I have a vLLM server running with this configuration:\n```python\nfrom vllm import"
+    }
+  ],
+  "server_snapshots": [
+    {
+      "timestamp": 1779808392.2772849,
+      "kv_cache_usage_pct": 56.33266266542639,
+      "num_requests_running": 2,
+      "num_requests_waiting": 0,
+      "num_requests_swapped": 0,
+      "gpu_cache_blocks_used": 109,
+      "gpu_cache_blocks_total": 1000,
+      "cpu_cache_blocks_used": 0,
+      "prefix_cache_hit_rate": 0.17123929973058538
+    }
+  ]
+}

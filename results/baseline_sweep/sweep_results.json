@@ -1,0 +1,86 @@
+[
+  {
+    "config": {
+      "gpu_memory_utilization": 0.9,
+      "block_size": 16,
+      "max_model_len": 8192,
+      "enable_prefix_caching": false,
+      "max_num_batched_tokens": 8192,
+      "kv_cache_dtype": "auto",
+      "swap_space": 4
+    },
+    "label": "mem0.9_bs16_len8192_nopc_bt8192_auto",
+    "workload": "dialogue",
+    "avg_tps": 72.63110143684908,
+    "avg_ttft_ms": 261.3208868230383,
+    "p99_ttft_ms": 731.3853399828076,
+    "peak_kv_usage": 0.0,
+    "total_tokens": 384,
+    "num_requests": 3,
+    "server_started": true,
+    "error": ""
+  },
+  {
+    "config": {
+      "gpu_memory_utilization": 0.9,
+      "block_size": 16,
+      "max_model_len": 8192,
+      "enable_prefix_caching": false,
+      "max_num_batched_tokens": 8192,
+      "kv_cache_dtype": "auto",
+      "swap_space": 4
+    },
+    "label": "mem0.9_bs16_len8192_nopc_bt8192_auto",
+    "workload": "rag",
+    "avg_tps": 78.07119099204903,
+    "avg_ttft_ms": 79.6574242413044,
+    "p99_ttft_ms": 183.31134784966707,
+    "peak_kv_usage": 0.0,
+    "total_tokens": 382,
+    "num_requests": 3,
+    "server_started": true,
+    "error": ""
+  },
+  {
+    "config": {
+      "gpu_memory_utilization": 0.9,
+      "block_size": 16,
+      "max_model_len": 8192,
+      "enable_prefix_caching": false,
+      "max_num_batched_tokens": 8192,
+      "kv_cache_dtype": "auto",
+      "swap_space": 4
+    },
+    "label": "mem0.9_bs16_len8192_nopc_bt8192_auto",
+    "workload": "code",
+    "avg_tps": 78.95413282050187,
+    "avg_ttft_ms": 69.9126912901799,
+    "p99_ttft_ms": 154.4821886345744,
+    "peak_kv_usage": 0.0,
+    "total_tokens": 384,
+    "num_requests": 3,
+    "server_started": true,
+    "error": ""
+  },
+  {
+    "config": {
+      "gpu_memory_utilization": 0.9,
+      "block_size": 16,
+      "max_model_len": 8192,
+      "enable_prefix_caching": false,
+      "max_num_batched_tokens": 8192,
+      "kv_cache_dtype": "auto",
+      "swap_space": 4
+    },
+    "label": "mem0.9_bs16_len8192_nopc_bt8192_auto",
+    "workload": "reasoning",
+    "avg_tps": 77.14479760180991,
+    "avg_ttft_ms": 108.85096589724223,
+    "p99_ttft_ms": 158.60997047275305,
+    "peak_kv_usage": 0.0,
+    "total_tokens": 384,
+    "num_requests": 3,
+    "server_started": true,
+    "error": ""
+  }
+]

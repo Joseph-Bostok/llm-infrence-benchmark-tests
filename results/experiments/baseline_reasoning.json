@@ -1,0 +1,55 @@
+{
+  "model": "Qwen/Qwen2.5-7B-Instruct",
+  "workload_type": "reasoning",
+  "server_url": "http://localhost:8000",
+  "timestamp": "2026-05-26T11:13:13.280770",
+  "num_requests": 3,
+  "avg_ttft_ms": 104.14337477550065,
+  "p50_ttft_ms": 68.39394600389453,
+  "p99_ttft_ms": 192.40149524710867,
+  "avg_tps": 64.17259794435029,
+  "total_tokens": 342,
+  "peak_kv_cache_usage": 43.90290789083177,
+  "avg_kv_cache_usage": 43.90290789083177,
+  "avg_prefix_hit_rate": 0.2621386005802312,
+  "peak_running_requests": 2,
+  "request_metrics": [
+    {
+      "prompt_tokens": 150,
+      "completion_tokens": 111,
+      "ttft_ms": 51.63468307549875,
+      "total_time_ms": 1649.3615949601153,
+      "tokens_per_second": 69.4736999009854,
+      "prompt_preview": "Solve the following optimization problem step by step.\n\nA GPU has 80GB of HBM wi"
+    },
+    {
+      "prompt_tokens": 185,
+      "completion_tokens": 105,
+      "ttft_ms": 192.40149524710867,
+      "total_time_ms": 1885.998302269212,
+      "tokens_per_second": 61.998227420270304,
+      "prompt_preview": "Consider the following trade-off analysis.\n\nWe have three KV cache compression s"
+    },
+    {
+      "prompt_tokens": 117,
+      "completion_tokens": 126,
+      "ttft_ms": 68.39394600389453,
+      "total_time_ms": 2132.4157577944525,
+      "tokens_per_second": 61.04586651179517,
+      "prompt_preview": "A data center runs 100 concurrent LLM inference sessions. Each session generates"
+    }
+  ],
+  "server_snapshots": [
+    {
+      "timestamp": 1779808392.780068,
+      "kv_cache_usage_pct": 43.90290789083177,
+      "num_requests_running": 2,
+      "num_requests_waiting": 2,
+      "num_requests_swapped": 0,
+      "gpu_cache_blocks_used": 285,
+      "gpu_cache_blocks_total": 1000,
+      "cpu_cache_blocks_used": 0,
+      "prefix_cache_hit_rate": 0.2621386005802312
+    }
+  ]
+}

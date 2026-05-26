@@ -1,0 +1,55 @@
+{
+  "model": "Qwen/Qwen2.5-7B-Instruct",
+  "workload_type": "rag",
+  "server_url": "http://localhost:8000",
+  "timestamp": "2026-05-26T11:13:14.287541",
+  "num_requests": 3,
+  "avg_ttft_ms": 102.09454391795836,
+  "p50_ttft_ms": 104.78506813333762,
+  "p99_ttft_ms": 117.93997539053777,
+  "avg_tps": 44.75242728911887,
+  "total_tokens": 281,
+  "peak_kv_cache_usage": 21.53826503465026,
+  "avg_kv_cache_usage": 21.53826503465026,
+  "avg_prefix_hit_rate": 0.29102573817383354,
+  "peak_running_requests": 3,
+  "request_metrics": [
+    {
+      "prompt_tokens": 294,
+      "completion_tokens": 102,
+      "ttft_ms": 104.78506813333762,
+      "total_time_ms": 2977.9943120559433,
+      "tokens_per_second": 35.50037304653316,
+      "prompt_preview": "[Document 1] PagedAttention is a memory management technique introduced by vLLM "
+    },
+    {
+      "prompt_tokens": 244,
+      "completion_tokens": 54,
+      "ttft_ms": 117.93997539053777,
+      "total_time_ms": 1675.883571715879,
+      "tokens_per_second": 34.661075103981695,
+      "prompt_preview": "Context: The following are excerpts from recent research papers on KV cache opti"
+    },
+    {
+      "prompt_tokens": 210,
+      "completion_tokens": 125,
+      "ttft_ms": 83.55858822999971,
+      "total_time_ms": 2033.763348062231,
+      "tokens_per_second": 64.09583371684175,
+      "prompt_preview": "[Document 1] The attention sink phenomenon, discovered by StreamingLLM, shows th"
+    }
+  ],
+  "server_snapshots": [
+    {
+      "timestamp": 1779808393.7868946,
+      "kv_cache_usage_pct": 21.53826503465026,
+      "num_requests_running": 3,
+      "num_requests_waiting": 0,
+      "num_requests_swapped": 0,
+      "gpu_cache_blocks_used": 446,
+      "gpu_cache_blocks_total": 1000,
+      "cpu_cache_blocks_used": 0,
+      "prefix_cache_hit_rate": 0.29102573817383354
+    }
+  ]
+}

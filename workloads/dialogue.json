@@ -1,0 +1,11 @@
+[
+  {
+    "prompt": "System: You are a helpful coding assistant.\n\nUser: What is a KV cache in transformers?\n\nAssistant: A KV cache stores the key and value tensors from previous tokens during autoregressive generation, avoiding redundant computation.\n\nUser: Why does it become a bottleneck?\n\nAssistant: Because it grows linearly with sequence length. Every decode step must read the entire cache, consuming GPU memory bandwidth.\n\nUser: How can we reduce the KV cache size without losing accuracy?"
+  },
+  {
+    "prompt": "System: You are a research advisor.\n\nUser: I'm working on LLM inference optimization.\n\nAssistant: That's a great area. What specific aspect?\n\nUser: KV cache compression. I've read about H2O and SnapKV.\n\nAssistant: Both are token eviction methods. H2O uses cumulative attention scores, SnapKV uses per-head observation windows.\n\nUser: Which one should I use for a chatbot application?\n\nAssistant: For chatbots, StreamingLLM's approach with attention sinks plus a sliding window works well.\n\nUser: What about for RAG workloads?\n\nAssistant: RAG is different \u2014 you need to preserve the retrieved document context. ChunkKV's chunk-level eviction is better there.\n\nUser: Can we automatically choose the right strategy based on the workload?"
+  },
+  {
+    "prompt": "System: You are a technical support agent.\n\nUser: My vLLM server is running out of GPU memory with long conversations.\n\nAssistant: This is likely the KV cache growing too large. What's your max_model_len setting?\n\nUser: 32768 tokens.\n\nAssistant: At 32K tokens, the KV cache for a 7B model consumes about 1.9GB. Try reducing gpu_memory_utilization or enabling prefix caching.\n\nUser: I enabled prefix caching but it didn't help much.\n\nAssistant: Prefix caching helps when requests share common prefixes. For unique conversations, you may need to reduce max_model_len or use KV cache compression.\n\nUser: What compression options does vLLM support?"
+  }
+]

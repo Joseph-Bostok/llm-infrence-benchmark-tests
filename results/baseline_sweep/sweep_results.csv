@@ -1,0 +1,5 @@
+gpu_mem,block_size,max_len,prefix_cache,batched_tokens,workload,avg_tps,avg_ttft_ms,p99_ttft_ms,peak_kv_pct,status
+0.9,16,8192,False,8192,dialogue,72.6,261.3,731.4,0.0,ok
+0.9,16,8192,False,8192,rag,78.1,79.7,183.3,0.0,ok
+0.9,16,8192,False,8192,code,79.0,69.9,154.5,0.0,ok
+0.9,16,8192,False,8192,reasoning,77.1,108.9,158.6,0.0,ok
