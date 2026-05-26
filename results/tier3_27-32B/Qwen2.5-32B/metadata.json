@@ -1,0 +1,11 @@
+{
+    "model_tag": "qwen2.5:32b",
+    "display_name": "Qwen2.5-32B",
+    "param_count": "32B",
+    "architecture": "Dense-Transformer",
+    "tier": "tier3_27-32B",
+    "requests": 25,
+    "timestamp": "20260217_130024",
+    "elapsed_seconds": 43,
+    "ollama_host": "http://localhost:11434"
+}

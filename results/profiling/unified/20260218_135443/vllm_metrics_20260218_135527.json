@@ -1,0 +1,53 @@
+{
+  "backend": "vllm",
+  "model": "Qwen/Qwen2.5-7B-Instruct",
+  "profiler": "python-timing",
+  "config": {
+    "tensor_parallel": 1,
+    "max_tokens": 256,
+    "requests": 5,
+    "warmup": 1,
+    "dtype": "bfloat16",
+    "eager_mode": true
+  },
+  "timing": {
+    "model_load_s": 11.18
+  },
+  "requests": [
+    {
+      "index": 1,
+      "prompt": "What are the main differences between TCP and UDP protocols?...",
+      "tokens": 256,
+      "time_s": 3.7119,
+      "tokens_per_s": 68.97
+    },
+    {
+      "index": 2,
+      "prompt": "Describe the process of photosynthesis in simple terms....",
+      "tokens": 233,
+      "time_s": 3.3651,
+      "tokens_per_s": 69.24
+    },
+    {
+      "index": 3,
+      "prompt": "Write a brief overview of the French Revolution....",
+      "tokens": 256,
+      "time_s": 3.6636,
+      "tokens_per_s": 69.88
+    },
+    {
+      "index": 4,
+      "prompt": "Explain how a neural network learns from data....",
+      "tokens": 256,
+      "time_s": 3.6379,
+      "tokens_per_s": 70.37
+    }
+  ],
+  "aggregate": {
+    "mean_tok_s": 69.61,
+    "min_tok_s": 68.97,
+    "max_tok_s": 70.37,
+    "mean_time_s": 3.595,
+    "total_tokens": 1001
+  }
+}

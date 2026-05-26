@@ -1,0 +1,11 @@
+{
+    "model_tag": "phi4:14b",
+    "display_name": "Phi4-14B",
+    "param_count": "14B",
+    "architecture": "Dense-Transformer",
+    "tier": "tier2_13-14B",
+    "requests": 25,
+    "timestamp": "20260217_125038",
+    "elapsed_seconds": 24,
+    "ollama_host": "http://localhost:11434"
+}

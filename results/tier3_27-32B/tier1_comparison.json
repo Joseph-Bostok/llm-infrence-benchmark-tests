@@ -1,0 +1,267 @@
+{
+  "tier": "tier1_7-8B",
+  "num_models": 3,
+  "models": [
+    {
+      "display_name": "DeepSeek-R1-32B",
+      "param_count": "32B",
+      "architecture": "Dense-Transformer-CoT",
+      "model_tag": "deepseek-r1:32b",
+      "num_requests": 5,
+      "total_tokens": 1563,
+      "ttft_cold_ms": 16277.06,
+      "ttft": {
+        "mean": 26380.35,
+        "median": 30301.93,
+        "std": 12531.34,
+        "min": 8285.97,
+        "max": 36631.57,
+        "p50": 32283.31,
+        "p90": 36631.57,
+        "p99": 36631.57,
+        "count": 4
+      },
+      "tpot": {
+        "mean": 37.34,
+        "median": 37.35,
+        "std": 0.31,
+        "min": 36.86,
+        "max": 37.66,
+        "p50": 37.35,
+        "p90": 37.66,
+        "p99": 37.66,
+        "count": 5
+      },
+      "itl": {
+        "mean": 37.34,
+        "median": 37.35,
+        "std": 0.31,
+        "min": 36.86,
+        "max": 37.66,
+        "p50": 37.35,
+        "p90": 37.66,
+        "p99": 37.66,
+        "count": 5
+      },
+      "itl_all": {
+        "mean": 37.46,
+        "median": 37.44,
+        "std": 0.45,
+        "min": 35.76,
+        "max": 41.66,
+        "p50": 37.44,
+        "p90": 38.02,
+        "p99": 38.68,
+        "count": 1558
+      },
+      "throughput": {
+        "mean": 26.78,
+        "median": 26.77,
+        "std": 0.23,
+        "min": 26.55,
+        "max": 27.13,
+        "p50": 26.77,
+        "p90": 27.13,
+        "p99": 27.13,
+        "count": 5
+      },
+      "output_tokens": {
+        "mean": 312.6,
+        "median": 378.0,
+        "std": 186.49,
+        "min": 92.0,
+        "max": 543.0,
+        "p50": 378.0,
+        "p90": 543.0,
+        "p99": 543.0,
+        "count": 5
+      },
+      "total_time": {
+        "mean": 36078.0,
+        "median": 42444.75,
+        "std": 18486.05,
+        "min": 13894.81,
+        "max": 57096.93,
+        "p50": 42444.75,
+        "p90": 57096.93,
+        "p99": 57096.93,
+        "count": 5
+      },
+      "elapsed_seconds": 181
+    },
+    {
+      "display_name": "Gemma2-27B",
+      "param_count": "27B",
+      "architecture": "Dense-Transformer",
+      "model_tag": "gemma2:27b",
+      "num_requests": 5,
+      "total_tokens": 1479,
+      "ttft_cold_ms": 284.75,
+      "ttft": {
+        "mean": 279.65,
+        "median": 277.21,
+        "std": 17.22,
+        "min": 261.97,
+        "max": 302.2,
+        "p50": 282.55,
+        "p90": 302.2,
+        "p99": 302.2,
+        "count": 4
+      },
+      "tpot": {
+        "mean": 19.27,
+        "median": 19.2,
+        "std": 0.35,
+        "min": 19.03,
+        "max": 19.89,
+        "p50": 19.2,
+        "p90": 19.89,
+        "p99": 19.89,
+        "count": 5
+      },
+      "itl": {
+        "mean": 19.27,
+        "median": 19.2,
+        "std": 0.35,
+        "min": 19.03,
+        "max": 19.89,
+        "p50": 19.2,
+        "p90": 19.89,
+        "p99": 19.89,
+        "count": 5
+      },
+      "itl_all": {
+        "mean": 19.12,
+        "median": 18.79,
+        "std": 0.96,
+        "min": 17.92,
+        "max": 28.73,
+        "p50": 18.79,
+        "p90": 20.6,
+        "p99": 21.76,
+        "count": 1474
+      },
+      "throughput": {
+        "mean": 51.9,
+        "median": 52.09,
+        "std": 0.94,
+        "min": 50.29,
+        "max": 52.56,
+        "p50": 52.09,
+        "p90": 52.56,
+        "p99": 52.56,
+        "count": 5
+      },
+      "output_tokens": {
+        "mean": 295.8,
+        "median": 368.0,
+        "std": 220.24,
+        "min": 58.0,
+        "max": 550.0,
+        "p50": 368.0,
+        "p90": 550.0,
+        "p99": 550.0,
+        "count": 5
+      },
+      "total_time": {
+        "mean": 5939.61,
+        "median": 7343.94,
+        "std": 4188.32,
+        "min": 1437.78,
+        "max": 10772.71,
+        "p50": 7343.94,
+        "p90": 10772.71,
+        "p99": 10772.71,
+        "count": 5
+      },
+      "elapsed_seconds": 30
+    },
+    {
+      "display_name": "Qwen2.5-32B",
+      "param_count": "32B",
+      "architecture": "Dense-Transformer",
+      "model_tag": "qwen2.5:32b",
+      "num_requests": 5,
+      "total_tokens": 1613,
+      "ttft_cold_ms": 296.22,
+      "ttft": {
+        "mean": 279.8,
+        "median": 280.27,
+        "std": 3.23,
+        "min": 275.44,
+        "max": 283.22,
+        "p50": 280.54,
+        "p90": 283.22,
+        "p99": 283.22,
+        "count": 4
+      },
+      "tpot": {
+        "mean": 25.67,
+        "median": 25.67,
+        "std": 0.17,
+        "min": 25.49,
+        "max": 25.93,
+        "p50": 25.67,
+        "p90": 25.93,
+        "p99": 25.93,
+        "count": 5
+      },
+      "itl": {
+        "mean": 25.67,
+        "median": 25.67,
+        "std": 0.17,
+        "min": 25.49,
+        "max": 25.93,
+        "p50": 25.67,
+        "p90": 25.93,
+        "p99": 25.93,
+        "count": 5
+      },
+      "itl_all": {
+        "mean": 25.65,
+        "median": 25.35,
+        "std": 1.27,
+        "min": 24.14,
+        "max": 44.75,
+        "p50": 25.35,
+        "p90": 26.93,
+        "p99": 28.52,
+        "count": 1608
+      },
+      "throughput": {
+        "mean": 38.95,
+        "median": 38.96,
+        "std": 0.25,
+        "min": 38.57,
+        "max": 39.24,
+        "p50": 38.96,
+        "p90": 39.24,
+        "p99": 39.24,
+        "count": 5
+      },
+      "output_tokens": {
+        "mean": 322.6,
+        "median": 308.0,
+        "std": 234.56,
+        "min": 95.0,
+        "max": 630.0,
+        "p50": 308.0,
+        "p90": 630.0,
+        "p99": 630.0,
+        "count": 5
+      },
+      "total_time": {
+        "mean": 8564.17,
+        "median": 8188.97,
+        "std": 6000.5,
+        "min": 2766.08,
+        "max": 16408.34,
+        "p50": 8188.97,
+        "p90": 16408.34,
+        "p99": 16408.34,
+        "count": 5
+      },
+      "elapsed_seconds": 43
+    }
+  ]
+}

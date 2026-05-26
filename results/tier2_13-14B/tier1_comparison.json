@@ -1,0 +1,267 @@
+{
+  "tier": "tier1_7-8B",
+  "num_models": 3,
+  "models": [
+    {
+      "display_name": "DeepSeek-R1-14B",
+      "param_count": "14B",
+      "architecture": "Dense-Transformer-CoT",
+      "model_tag": "deepseek-r1:14b",
+      "num_requests": 5,
+      "total_tokens": 1306,
+      "ttft_cold_ms": 4220.59,
+      "ttft": {
+        "mean": 13792.16,
+        "median": 14245.23,
+        "std": 2462.52,
+        "min": 10637.3,
+        "max": 16040.88,
+        "p50": 15422.44,
+        "p90": 16040.88,
+        "p99": 16040.88,
+        "count": 4
+      },
+      "tpot": {
+        "mean": 12.86,
+        "median": 12.87,
+        "std": 0.13,
+        "min": 12.69,
+        "max": 13.02,
+        "p50": 12.87,
+        "p90": 13.02,
+        "p99": 13.02,
+        "count": 5
+      },
+      "itl": {
+        "mean": 12.86,
+        "median": 12.87,
+        "std": 0.13,
+        "min": 12.69,
+        "max": 13.02,
+        "p50": 12.87,
+        "p90": 13.02,
+        "p99": 13.02,
+        "count": 5
+      },
+      "itl_all": {
+        "mean": 12.86,
+        "median": 12.69,
+        "std": 0.43,
+        "min": 11.74,
+        "max": 15.92,
+        "p50": 12.69,
+        "p90": 13.4,
+        "p99": 14.27,
+        "count": 1301
+      },
+      "throughput": {
+        "mean": 77.79,
+        "median": 77.72,
+        "std": 0.76,
+        "min": 76.81,
+        "max": 78.82,
+        "p50": 77.72,
+        "p90": 78.82,
+        "p99": 78.82,
+        "count": 5
+      },
+      "output_tokens": {
+        "mean": 261.2,
+        "median": 268.0,
+        "std": 174.4,
+        "min": 66.0,
+        "max": 479.0,
+        "p50": 268.0,
+        "p90": 479.0,
+        "p99": 479.0,
+        "count": 5
+      },
+      "total_time": {
+        "mean": 15246.17,
+        "median": 15508.2,
+        "std": 6380.19,
+        "min": 5063.83,
+        "max": 21600.81,
+        "p50": 15508.2,
+        "p90": 21600.81,
+        "p99": 21600.81,
+        "count": 5
+      },
+      "elapsed_seconds": 77
+    },
+    {
+      "display_name": "Phi4-14B",
+      "param_count": "14B",
+      "architecture": "Dense-Transformer",
+      "model_tag": "phi4:14b",
+      "num_requests": 5,
+      "total_tokens": 1984,
+      "ttft_cold_ms": 193.29,
+      "ttft": {
+        "mean": 181.5,
+        "median": 178.08,
+        "std": 11.46,
+        "min": 172.22,
+        "max": 197.6,
+        "p50": 181.64,
+        "p90": 197.6,
+        "p99": 197.6,
+        "count": 4
+      },
+      "tpot": {
+        "mean": 11.83,
+        "median": 11.75,
+        "std": 0.25,
+        "min": 11.67,
+        "max": 12.27,
+        "p50": 11.75,
+        "p90": 12.27,
+        "p99": 12.27,
+        "count": 5
+      },
+      "itl": {
+        "mean": 11.83,
+        "median": 11.75,
+        "std": 0.25,
+        "min": 11.67,
+        "max": 12.27,
+        "p50": 11.75,
+        "p90": 12.27,
+        "p99": 12.27,
+        "count": 5
+      },
+      "itl_all": {
+        "mean": 11.75,
+        "median": 11.65,
+        "std": 0.58,
+        "min": 10.35,
+        "max": 19.11,
+        "p50": 11.65,
+        "p90": 11.99,
+        "p99": 13.5,
+        "count": 1979
+      },
+      "throughput": {
+        "mean": 84.58,
+        "median": 85.11,
+        "std": 1.73,
+        "min": 81.53,
+        "max": 85.68,
+        "p50": 85.11,
+        "p90": 85.68,
+        "p99": 85.68,
+        "count": 5
+      },
+      "output_tokens": {
+        "mean": 396.8,
+        "median": 419.0,
+        "std": 245.77,
+        "min": 118.0,
+        "max": 670.0,
+        "p50": 419.0,
+        "p90": 670.0,
+        "p99": 670.0,
+        "count": 5
+      },
+      "total_time": {
+        "mean": 4851.02,
+        "median": 5111.0,
+        "std": 2851.83,
+        "min": 1641.64,
+        "max": 8007.97,
+        "p50": 5111.0,
+        "p90": 8007.97,
+        "p99": 8007.97,
+        "count": 5
+      },
+      "elapsed_seconds": 24
+    },
+    {
+      "display_name": "Qwen2.5-14B",
+      "param_count": "14B",
+      "architecture": "Dense-Transformer",
+      "model_tag": "qwen2.5:14b",
+      "num_requests": 5,
+      "total_tokens": 1761,
+      "ttft_cold_ms": 246.67,
+      "ttft": {
+        "mean": 241.55,
+        "median": 245.53,
+        "std": 32.44,
+        "min": 205.67,
+        "max": 269.48,
+        "p50": 268.54,
+        "p90": 269.48,
+        "p99": 269.48,
+        "count": 4
+      },
+      "tpot": {
+        "mean": 12.84,
+        "median": 12.76,
+        "std": 0.27,
+        "min": 12.64,
+        "max": 13.31,
+        "p50": 12.76,
+        "p90": 13.31,
+        "p99": 13.31,
+        "count": 5
+      },
+      "itl": {
+        "mean": 12.84,
+        "median": 12.76,
+        "std": 0.27,
+        "min": 12.64,
+        "max": 13.31,
+        "p50": 12.76,
+        "p90": 13.31,
+        "p99": 13.31,
+        "count": 5
+      },
+      "itl_all": {
+        "mean": 12.76,
+        "median": 12.64,
+        "std": 0.62,
+        "min": 11.41,
+        "max": 23.11,
+        "p50": 12.64,
+        "p90": 12.94,
+        "p99": 14.67,
+        "count": 1756
+      },
+      "throughput": {
+        "mean": 77.92,
+        "median": 78.4,
+        "std": 1.6,
+        "min": 75.11,
+        "max": 79.09,
+        "p50": 78.4,
+        "p90": 79.09,
+        "p99": 79.09,
+        "count": 5
+      },
+      "output_tokens": {
+        "mean": 352.2,
+        "median": 368.0,
+        "std": 241.82,
+        "min": 75.0,
+        "max": 605.0,
+        "p50": 368.0,
+        "p90": 605.0,
+        "p99": 605.0,
+        "count": 5
+      },
+      "total_time": {
+        "mean": 4743.61,
+        "median": 4908.27,
+        "std": 3089.09,
+        "min": 1249.31,
+        "max": 7959.19,
+        "p50": 4908.27,
+        "p90": 7959.19,
+        "p99": 7959.19,
+        "count": 5
+      },
+      "elapsed_seconds": 24
+    }
+  ]
+}

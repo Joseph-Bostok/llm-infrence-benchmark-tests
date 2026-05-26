@@ -1,0 +1,34 @@
+
+============================================================
+Request 1/1
+Prompt: What is 2+2?
+============================================================
+Token 1: 'Yes' | Latency: 1135.71ms
+Token 2: ',' | Latency: 10.72ms
+Token 3: ' you' | Latency: 11.28ms
+Token 4: ' got' | Latency: 11.96ms
+Token 5: ' it' | Latency: 12.04ms
+Token 6: ' right' | Latency: 12.18ms
+Token 7: '!' | Latency: 12.54ms
+Token 8: ' The' | Latency: 12.08ms
+Token 9: ' sum' | Latency: 12.38ms
+Token 10: ' of' | Latency: 12.08ms
+Token 11: ' two' | Latency: 12.32ms
+Token 12: ' numbers' | Latency: 12.18ms
+Token 13: ' (' | Latency: 12.14ms
+Token 14: '2' | Latency: 12.25ms
+Token 15: ' +' | Latency: 12.09ms
+Token 16: ' ' | Latency: 12.22ms
+Token 17: '2' | Latency: 12.23ms
+Token 18: ')' | Latency: 11.93ms
+Token 19: ' is' | Latency: 12.12ms
+Token 20: ' ' | Latency: 12.10ms
+Token 21: '4' | Latency: 12.29ms
+Token 22: '.' | Latency: 12.01ms
+
+--- Summary ---
+Total tokens: 22
+TTFT: 1135.71ms
+TPOT: 63.69ms
+ITL Mean: 12.05ms
+Throughput: 15.70 tok/s

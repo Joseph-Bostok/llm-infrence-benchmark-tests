@@ -1,0 +1,1867 @@
+
+============================================================
+Request 1/5
+Prompt: Explain the concept of recursion in programming in 3 sentences.
+============================================================
+Token 1: ' Rec' | Latency: 80.65ms
+Token 2: 'urs' | Latency: 8.49ms
+Token 3: 'ion' | Latency: 10.00ms
+Token 4: ' in' | Latency: 10.50ms
+Token 5: ' programming' | Latency: 10.49ms
+Token 6: ' is' | Latency: 10.45ms
+Token 7: ' a' | Latency: 10.45ms
+Token 8: ' method' | Latency: 10.71ms
+Token 9: ' used' | Latency: 10.43ms
+Token 10: ' to' | Latency: 10.53ms
+Token 11: ' solve' | Latency: 10.47ms
+Token 12: ' problems' | Latency: 10.18ms
+Token 13: ' by' | Latency: 10.26ms
+Token 14: ' defining' | Latency: 9.96ms
+Token 15: ' a' | Latency: 6.64ms
+Token 16: ' problem' | Latency: 6.63ms
+Token 17: ' as' | Latency: 6.61ms
+Token 18: ' a' | Latency: 6.53ms
+Token 19: ' smaller' | Latency: 6.57ms
+Token 20: ' version' | Latency: 6.51ms
+Token 21: ' of' | Latency: 6.46ms
+Token 22: ' itself' | Latency: 6.48ms
+Token 23: ',' | Latency: 6.48ms
+Token 24: ' breaking' | Latency: 7.13ms
+Token 25: ' down' | Latency: 6.70ms
+Token 26: ' complex' | Latency: 6.69ms
+Token 27: ' tasks' | Latency: 6.74ms
+Token 28: ' into' | Latency: 6.40ms
+Token 29: ' simpler' | Latency: 6.45ms
+Token 30: ' sub' | Latency: 6.50ms
+Token 31: '-' | Latency: 6.46ms
+Token 32: 'pro' | Latency: 6.88ms
+Token 33: 'ble' | Latency: 6.67ms
+Token 34: 'ms' | Latency: 6.69ms
+Token 35: ' that' | Latency: 6.42ms
+Token 36: ' can' | Latency: 6.52ms
+Token 37: ' be' | Latency: 6.49ms
+Token 38: ' solved' | Latency: 6.52ms
+Token 39: ' repeatedly' | Latency: 6.52ms
+Token 40: ' until' | Latency: 6.51ms
+Token 41: ' a' | Latency: 6.60ms
+Token 42: ' base' | Latency: 6.82ms
+Token 43: ' case' | Latency: 6.61ms
+Token 44: ' (' | Latency: 6.43ms
+Token 45: 'a' | Latency: 6.51ms
+Token 46: ' simpl' | Latency: 6.87ms
+Token 47: 'ified' | Latency: 6.72ms
+Token 48: ' problem' | Latency: 6.45ms
+Token 49: ' that' | Latency: 6.51ms
+Token 50: ' can' | Latency: 6.96ms
+Token 51: ' be' | Latency: 6.64ms
+Token 52: ' directly' | Latency: 6.45ms
+Token 53: ' solved' | Latency: 6.47ms
+Token 54: ')' | Latency: 6.87ms
+Token 55: ' is' | Latency: 6.69ms
+Token 56: ' reached' | Latency: 6.47ms
+Token 57: '.' | Latency: 6.48ms
+Token 58: ' The' | Latency: 6.61ms
+Token 59: ' solution' | Latency: 6.78ms
+Token 60: ' for' | Latency: 6.75ms
+Token 61: ' the' | Latency: 6.65ms
+Token 62: ' base' | Latency: 6.54ms
+Token 63: ' case' | Latency: 6.79ms
+Token 64: ' serves' | Latency: 6.44ms
+Token 65: ' as' | Latency: 6.50ms
+Token 66: ' the' | Latency: 6.51ms
+Token 67: ' final' | Latency: 6.51ms
+Token 68: ' result' | Latency: 6.51ms
+Token 69: ' and' | Latency: 6.51ms
+Token 70: ' is' | Latency: 6.91ms
+Token 71: ' built' | Latency: 6.69ms
+Token 72: ' up' | Latency: 6.64ms
+Token 73: ' step' | Latency: 6.51ms
+Token 74: '-' | Latency: 6.52ms
+Token 75: 'by' | Latency: 6.88ms
+Token 76: '-' | Latency: 6.79ms
+Token 77: 'step' | Latency: 6.59ms
+Token 78: ' from' | Latency: 6.45ms
+Token 79: ' the' | Latency: 6.49ms
+Token 80: ' solutions' | Latency: 6.52ms
+Token 81: ' to' | Latency: 6.49ms
+Token 82: ' each' | Latency: 6.52ms
+Token 83: ' recurs' | Latency: 7.06ms
+Token 84: 'ive' | Latency: 6.95ms
+Token 85: ' call' | Latency: 6.56ms
+Token 86: '.' | Latency: 6.69ms
+Token 87: '
+' | Latency: 6.78ms
+Token 88: '
+' | Latency: 6.70ms
+Token 89: 'For' | Latency: 6.65ms
+Token 90: ' example' | Latency: 6.43ms
+Token 91: ',' | Latency: 6.94ms
+Token 92: ' computing' | Latency: 6.68ms
+Token 93: ' the' | Latency: 6.67ms
+Token 94: ' factor' | Latency: 6.44ms
+Token 95: 'ial' | Latency: 6.80ms
+Token 96: ' of' | Latency: 6.70ms
+Token 97: ' a' | Latency: 6.68ms
+Token 98: ' number' | Latency: 6.38ms
+Token 99: ' using' | Latency: 6.49ms
+Token 100: ' recurs' | Latency: 6.50ms
+Token 101: 'ion' | Latency: 6.49ms
+Token 102: ' involves' | Latency: 6.50ms
+Token 103: ' defining' | Latency: 6.51ms
+Token 104: ' the' | Latency: 6.95ms
+Token 105: ' factor' | Latency: 6.88ms
+Token 106: 'ial' | Latency: 6.73ms
+Token 107: ' of' | Latency: 6.65ms
+Token 108: ' a' | Latency: 6.94ms
+Token 109: ' number' | Latency: 6.75ms
+Token 110: ' '' | Latency: 6.85ms
+Token 111: 'n' | Latency: 6.72ms
+Token 112: ''' | Latency: 6.79ms
+Token 113: ' as' | Latency: 6.66ms
+Token 114: ' the' | Latency: 6.70ms
+Token 115: ' product' | Latency: 6.41ms
+Token 116: ' of' | Latency: 6.50ms
+Token 117: ' '' | Latency: 6.47ms
+Token 118: 'n' | Latency: 6.51ms
+Token 119: ''' | Latency: 6.47ms
+Token 120: ' multi' | Latency: 6.86ms
+Token 121: 'plied' | Latency: 6.68ms
+Token 122: ' by' | Latency: 6.43ms
+Token 123: ' the' | Latency: 6.47ms
+Token 124: ' factor' | Latency: 6.59ms
+Token 125: 'ial' | Latency: 6.71ms
+Token 126: ' of' | Latency: 6.49ms
+Token 127: ' (' | Latency: 6.48ms
+Token 128: 'n' | Latency: 6.61ms
+Token 129: ' -' | Latency: 6.80ms
+Token 130: ' ' | Latency: 6.65ms
+Token 131: '1' | Latency: 6.65ms
+Token 132: '),' | Latency: 6.50ms
+Token 133: ' with' | Latency: 6.58ms
+Token 134: ' a' | Latency: 6.51ms
+Token 135: ' base' | Latency: 6.52ms
+Token 136: ' case' | Latency: 6.50ms
+Token 137: ' being' | Latency: 6.49ms
+Token 138: ' the' | Latency: 6.50ms
+Token 139: ' factor' | Latency: 6.48ms
+Token 140: 'ial' | Latency: 6.68ms
+Token 141: ' of' | Latency: 6.76ms
+Token 142: ' ' | Latency: 6.80ms
+Token 143: '0' | Latency: 6.70ms
+Token 144: ' or' | Latency: 6.75ms
+Token 145: ' ' | Latency: 6.65ms
+Token 146: '1' | Latency: 6.72ms
+Token 147: ',' | Latency: 6.66ms
+Token 148: ' which' | Latency: 6.50ms
+Token 149: ' equals' | Latency: 6.57ms
+Token 150: ' ' | Latency: 6.54ms
+Token 151: '1' | Latency: 6.49ms
+Token 152: '.' | Latency: 6.56ms
+Token 153: ' Each' | Latency: 6.50ms
+Token 154: ' recurs' | Latency: 6.50ms
+Token 155: 'ive' | Latency: 6.50ms
+Token 156: ' call' | Latency: 6.49ms
+Token 157: ' reduces' | Latency: 6.77ms
+Token 158: ' the' | Latency: 6.72ms
+Token 159: ' problem' | Latency: 6.74ms
+Token 160: ' size' | Latency: 6.70ms
+Token 161: ',' | Latency: 6.81ms
+Token 162: ' eventually' | Latency: 6.66ms
+Token 163: ' reaching' | Latency: 6.96ms
+Token 164: ' the' | Latency: 6.66ms
+Token 165: ' base' | Latency: 6.81ms
+Token 166: ' case' | Latency: 6.79ms
+Token 167: ' until' | Latency: 6.73ms
+Token 168: ' the' | Latency: 6.74ms
+Token 169: ' final' | Latency: 6.43ms
+Token 170: ' solution' | Latency: 6.53ms
+Token 171: ' is' | Latency: 6.50ms
+Token 172: ' computed' | Latency: 6.52ms
+Token 173: '.' | Latency: 6.49ms
+
+--- Summary ---
+Total tokens: 173
+TTFT: 80.65ms
+TPOT: 7.38ms
+ITL Mean: 6.89ms
+Throughput: 135.59 tok/s
+
+============================================================
+Request 2/5
+Prompt: What are the main differences between Python and C++?
+============================================================
+Token 1: ' Python' | Latency: 59.36ms
+Token 2: ' and' | Latency: 7.67ms
+Token 3: ' C' | Latency: 6.44ms
+Token 4: '++' | Latency: 6.66ms
+Token 5: ' are' | Latency: 6.52ms
+Token 6: ' both' | Latency: 6.62ms
+Token 7: ' high' | Latency: 6.46ms
+Token 8: '-' | Latency: 6.52ms
+Token 9: 'level' | Latency: 6.34ms
+Token 10: ' programming' | Latency: 6.39ms
+Token 11: ' languages' | Latency: 6.68ms
+Token 12: ',' | Latency: 6.54ms
+Token 13: ' but' | Latency: 6.73ms
+Token 14: ' they' | Latency: 6.69ms
+Token 15: ' have' | Latency: 6.59ms
+Token 16: ' several' | Latency: 6.60ms
+Token 17: ' key' | Latency: 6.52ms
+Token 18: ' differences' | Latency: 6.62ms
+Token 19: ':' | Latency: 6.55ms
+Token 20: '
+' | Latency: 6.87ms
+Token 21: '
+' | Latency: 6.71ms
+Token 22: '1' | Latency: 6.78ms
+Token 23: '.' | Latency: 6.47ms
+Token 24: ' **' | Latency: 6.88ms
+Token 25: 'P' | Latency: 6.73ms
+Token 26: 'ur' | Latency: 6.77ms
+Token 27: 'pose' | Latency: 6.35ms
+Token 28: '**:' | Latency: 6.52ms
+Token 29: ' C' | Latency: 6.49ms
+Token 30: '++' | Latency: 6.82ms
+Token 31: ' is' | Latency: 6.63ms
+Token 32: ' a' | Latency: 6.48ms
+Token 33: ' general' | Latency: 6.76ms
+Token 34: '-' | Latency: 6.54ms
+Token 35: 'pur' | Latency: 6.73ms
+Token 36: 'pose' | Latency: 6.68ms
+Token 37: ' language' | Latency: 6.72ms
+Token 38: ' used' | Latency: 6.92ms
+Token 39: ' for' | Latency: 6.75ms
+Token 40: ' system' | Latency: 6.73ms
+Token 41: '/' | Latency: 6.66ms
+Token 42: 'application' | Latency: 6.51ms
+Token 43: ' software' | Latency: 6.79ms
+Token 44: ',' | Latency: 6.42ms
+Token 45: ' game' | Latency: 6.48ms
+Token 46: ' development' | Latency: 7.03ms
+Token 47: ',' | Latency: 6.67ms
+Token 48: ' drivers' | Latency: 6.78ms
+Token 49: ',' | Latency: 6.36ms
+Token 50: ' client' | Latency: 6.52ms
+Token 51: '-' | Latency: 6.49ms
+Token 52: 'server' | Latency: 6.51ms
+Token 53: ' applications' | Latency: 6.47ms
+Token 54: ',' | Latency: 6.50ms
+Token 55: ' and' | Latency: 6.84ms
+Token 56: ' embedded' | Latency: 6.70ms
+Token 57: ' firm' | Latency: 6.39ms
+Token 58: 'ware' | Latency: 6.52ms
+Token 59: '.' | Latency: 6.49ms
+Token 60: ' Python' | Latency: 6.49ms
+Token 61: ',' | Latency: 6.49ms
+Token 62: ' on' | Latency: 6.49ms
+Token 63: ' the' | Latency: 6.76ms
+Token 64: ' other' | Latency: 6.71ms
+Token 65: ' hand' | Latency: 6.39ms
+Token 66: ',' | Latency: 6.51ms
+Token 67: ' was' | Latency: 6.87ms
+Token 68: ' designed' | Latency: 6.71ms
+Token 69: ' with' | Latency: 6.40ms
+Token 70: ' a' | Latency: 6.50ms
+Token 71: ' focus' | Latency: 6.79ms
+Token 72: ' on' | Latency: 6.69ms
+Token 73: ' read' | Latency: 6.40ms
+Token 74: 'ability' | Latency: 6.53ms
+Token 75: ' and' | Latency: 6.47ms
+Token 76: ' simplicity' | Latency: 6.95ms
+Token 77: ',' | Latency: 6.66ms
+Token 78: ' making' | Latency: 6.75ms
+Token 79: ' it' | Latency: 6.36ms
+Token 80: ' suitable' | Latency: 6.96ms
+Token 81: ' for' | Latency: 6.66ms
+Token 82: ' beg' | Latency: 6.73ms
+Token 83: 'inners' | Latency: 6.42ms
+Token 84: ',' | Latency: 6.52ms
+Token 85: ' web' | Latency: 6.48ms
+Token 86: ' development' | Latency: 7.01ms
+Token 87: ',' | Latency: 6.68ms
+Token 88: ' script' | Latency: 6.75ms
+Token 89: 'ing' | Latency: 6.78ms
+Token 90: ',' | Latency: 6.63ms
+Token 91: ' data' | Latency: 6.88ms
+Token 92: ' analysis' | Latency: 6.74ms
+Token 93: ',' | Latency: 6.62ms
+Token 94: ' artificial' | Latency: 6.87ms
+Token 95: ' intelligence' | Latency: 6.69ms
+Token 96: ',' | Latency: 6.73ms
+Token 97: ' machine' | Latency: 6.45ms
+Token 98: ' learning' | Latency: 6.62ms
+Token 99: ',' | Latency: 6.79ms
+Token 100: ' and' | Latency: 6.74ms
+Token 101: ' autom' | Latency: 6.65ms
+Token 102: 'ation' | Latency: 6.83ms
+Token 103: ' tasks' | Latency: 6.71ms
+Token 104: '.' | Latency: 6.48ms
+Token 105: '
+' | Latency: 6.50ms
+Token 106: '
+' | Latency: 6.79ms
+Token 107: '2' | Latency: 6.69ms
+Token 108: '.' | Latency: 6.71ms
+Token 109: ' **' | Latency: 6.45ms
+Token 110: 'Syntax' | Latency: 6.53ms
+Token 111: '**:' | Latency: 6.49ms
+Token 112: ' C' | Latency: 6.49ms
+Token 113: '++' | Latency: 6.52ms
+Token 114: ' uses' | Latency: 6.57ms
+Token 115: ' cur' | Latency: 6.45ms
+Token 116: 'ly' | Latency: 6.54ms
+Token 117: ' br' | Latency: 6.52ms
+Token 118: 'aces' | Latency: 6.60ms
+Token 119: ' `' | Latency: 6.75ms
+Token 120: '{}' | Latency: 6.83ms
+Token 121: '`' | Latency: 6.70ms
+Token 122: ' to' | Latency: 7.00ms
+Token 123: ' define' | Latency: 6.80ms
+Token 124: ' code' | Latency: 6.85ms
+Token 125: ' blocks' | Latency: 6.70ms
+Token 126: ',' | Latency: 6.73ms
+Token 127: ' sem' | Latency: 6.61ms
+Token 128: 'icol' | Latency: 6.52ms
+Token 129: 'ons' | Latency: 6.49ms
+Token 130: ' to' | Latency: 6.66ms
+Token 131: ' end' | Latency: 6.86ms
+Token 132: ' statements' | Latency: 6.81ms
+Token 133: ',' | Latency: 6.64ms
+Token 134: ' and' | Latency: 6.89ms
+Token 135: ' explicitly' | Latency: 6.66ms
+Token 136: ' decl' | Latency: 6.54ms
+Token 137: 'ares' | Latency: 6.49ms
+Token 138: ' variable' | Latency: 6.82ms
+Token 139: ' types' | Latency: 6.72ms
+Token 140: ',' | Latency: 6.70ms
+Token 141: ' while' | Latency: 6.43ms
+Token 142: ' Python' | Latency: 6.78ms
+Token 143: ' uses' | Latency: 6.70ms
+Token 144: ' indent' | Latency: 6.49ms
+Token 145: 'ation' | Latency: 6.50ms
+Token 146: ' for' | Latency: 6.51ms
+Token 147: ' code' | Latency: 6.50ms
+Token 148: ' blocks' | Latency: 6.50ms
+Token 149: ',' | Latency: 6.50ms
+Token 150: ' does' | Latency: 6.79ms
+Token 151: ' not' | Latency: 6.70ms
+Token 152: ' require' | Latency: 6.72ms
+Token 153: ' a' | Latency: 6.67ms
+Token 154: ' sem' | Latency: 6.76ms
+Token 155: 'icol' | Latency: 6.66ms
+Token 156: 'on' | Latency: 6.47ms
+Token 157: ' at' | Latency: 6.50ms
+Token 158: ' the' | Latency: 6.83ms
+Token 159: ' end' | Latency: 6.70ms
+Token 160: ' of' | Latency: 6.71ms
+Token 161: ' a' | Latency: 6.41ms
+Token 162: ' statement' | Latency: 6.82ms
+Token 163: ',' | Latency: 6.74ms
+Token 164: ' and' | Latency: 6.43ms
+Token 165: ' dynam' | Latency: 6.48ms
+Token 166: 'ically' | Latency: 6.53ms
+Token 167: ' types' | Latency: 6.75ms
+Token 168: ' its' | Latency: 6.79ms
+Token 169: ' variables' | Latency: 6.73ms
+Token 170: '.' | Latency: 6.40ms
+Token 171: '
+' | Latency: 6.75ms
+Token 172: '
+' | Latency: 6.77ms
+Token 173: '3' | Latency: 6.40ms
+Token 174: '.' | Latency: 6.52ms
+Token 175: ' **' | Latency: 6.59ms
+Token 176: 'Object' | Latency: 6.78ms
+Token 177: '-' | Latency: 6.72ms
+Token 178: 'O' | Latency: 6.46ms
+Token 179: 'ri' | Latency: 6.78ms
+Token 180: 'ented' | Latency: 6.89ms
+Token 181: ' Program' | Latency: 6.61ms
+Token 182: 'ming' | Latency: 6.51ms
+Token 183: ' (' | Latency: 6.55ms
+Token 184: 'O' | Latency: 6.80ms
+Token 185: 'OP' | Latency: 6.56ms
+Token 186: ')' | Latency: 6.53ms
+Token 187: '**:' | Latency: 6.77ms
+Token 188: ' Both' | Latency: 6.85ms
+Token 189: ' languages' | Latency: 6.86ms
+Token 190: ' support' | Latency: 6.85ms
+Token 191: ' O' | Latency: 6.80ms
+Token 192: 'OP' | Latency: 6.77ms
+Token 193: ',' | Latency: 6.47ms
+Token 194: ' but' | Latency: 6.47ms
+Token 195: ' C' | Latency: 6.76ms
+Token 196: '++' | Latency: 6.80ms
+Token 197: ' is' | Latency: 6.78ms
+Token 198: ' more' | Latency: 6.42ms
+Token 199: ' rig' | Latency: 6.76ms
+Token 200: 'orous' | Latency: 6.77ms
+Token 201: ' in' | Latency: 6.43ms
+Token 202: ' its' | Latency: 6.55ms
+Token 203: ' support' | Latency: 6.51ms
+Token 204: '.' | Latency: 6.53ms
+Token 205: ' In' | Latency: 6.49ms
+Token 206: ' C' | Latency: 6.53ms
+Token 207: '++' | Latency: 6.77ms
+Token 208: ',' | Latency: 6.79ms
+Token 209: ' classes' | Latency: 6.44ms
+Token 210: ' can' | Latency: 6.54ms
+Token 211: ' be' | Latency: 6.79ms
+Token 212: ' private' | Latency: 6.77ms
+Token 213: ' by' | Latency: 6.41ms
+Token 214: ' default' | Latency: 6.55ms
+Token 215: ',' | Latency: 6.52ms
+Token 216: ' while' | Latency: 6.52ms
+Token 217: ' in' | Latency: 6.51ms
+Token 218: ' Python' | Latency: 6.50ms
+Token 219: ',' | Latency: 6.71ms
+Token 220: ' everything' | Latency: 6.71ms
+Token 221: ' is' | Latency: 6.71ms
+Token 222: ' public' | Latency: 6.48ms
+Token 223: ' by' | Latency: 6.77ms
+Token 224: ' default' | Latency: 6.70ms
+Token 225: ',' | Latency: 6.43ms
+Token 226: ' although' | Latency: 6.49ms
+Token 227: ' you' | Latency: 6.85ms
+Token 228: ' can' | Latency: 6.72ms
+Token 229: ' use' | Latency: 6.72ms
+Token 230: ' the' | Latency: 6.42ms
+Token 231: ' `' | Latency: 6.79ms
+Token 232: 'private' | Latency: 6.79ms
+Token 233: '`' | Latency: 6.71ms
+Token 234: ' keyword' | Latency: 6.72ms
+Token 235: ' for' | Latency: 6.41ms
+Token 236: ' more' | Latency: 6.81ms
+Token 237: ' control' | Latency: 6.73ms
+Token 238: '.' | Latency: 6.52ms
+Token 239: '
+' | Latency: 6.48ms
+Token 240: '
+' | Latency: 6.79ms
+Token 241: '4' | Latency: 6.69ms
+Token 242: '.' | Latency: 6.52ms
+Token 243: ' **' | Latency: 8.19ms
+Token 244: 'Memory' | Latency: 6.65ms
+Token 245: ' Management' | Latency: 6.52ms
+Token 246: '**:' | Latency: 6.56ms
+Token 247: ' C' | Latency: 6.54ms
+Token 248: '++' | Latency: 6.87ms
+Token 249: ' provides' | Latency: 6.77ms
+Token 250: ' lower' | Latency: 6.56ms
+Token 251: '-' | Latency: 6.52ms
+Token 252: 'level' | Latency: 6.59ms
+Token 253: ' control' | Latency: 6.53ms
+Token 254: ' over' | Latency: 6.61ms
+Token 255: ' memory' | Latency: 6.58ms
+Token 256: ',' | Latency: 6.89ms
+Token 257: ' allowing' | Latency: 6.76ms
+Token 258: ' direct' | Latency: 6.57ms
+Token 259: ' manip' | Latency: 6.57ms
+Token 260: 'ulation' | Latency: 7.00ms
+Token 261: ' of' | Latency: 6.78ms
+Token 262: ' po' | Latency: 6.85ms
+Token 263: 'inters' | Latency: 6.50ms
+Token 264: ' and' | Latency: 6.85ms
+Token 265: ' memory' | Latency: 6.78ms
+Token 266: ' allocation' | Latency: 6.60ms
+Token 267: ',' | Latency: 6.58ms
+Token 268: ' which' | Latency: 6.92ms
+Token 269: ' gives' | Latency: 6.82ms
+Token 270: ' it' | Latency: 6.71ms
+Token 271: ' more' | Latency: 6.61ms
+Token 272: ' power' | Latency: 6.87ms
+Token 273: ' but' | Latency: 6.94ms
+Token 274: ' also' | Latency: 6.90ms
+Token 275: ' makes' | Latency: 6.79ms
+Token 276: ' it' | Latency: 6.58ms
+Token 277: ' more' | Latency: 6.62ms
+Token 278: ' pr' | Latency: 6.65ms
+Token 279: 'one' | Latency: 6.60ms
+Token 280: ' to' | Latency: 6.83ms
+Token 281: ' errors' | Latency: 6.72ms
+Token 282: ' related' | Latency: 6.50ms
+Token 283: ' to' | Latency: 6.52ms
+Token 284: ' memory' | Latency: 6.91ms
+Token 285: ' management' | Latency: 6.89ms
+Token 286: '.' | Latency: 6.57ms
+Token 287: ' Python' | Latency: 6.58ms
+Token 288: ',' | Latency: 7.01ms
+Token 289: ' on' | Latency: 6.78ms
+Token 290: ' the' | Latency: 6.92ms
+Token 291: ' other' | Latency: 6.53ms
+Token 292: ' hand' | Latency: 6.96ms
+Token 293: ',' | Latency: 6.75ms
+Token 294: ' has' | Latency: 6.82ms
+Token 295: ' automatic' | Latency: 6.76ms
+Token 296: ' memory' | Latency: 6.55ms
+Token 297: ' management' | Latency: 6.80ms
+Token 298: ' with' | Latency: 6.77ms
+Token 299: ' garbage' | Latency: 6.75ms
+Token 300: ' collection' | Latency: 6.88ms
+Token 301: '.' | Latency: 6.53ms
+Token 302: '
+' | Latency: 6.59ms
+Token 303: '
+' | Latency: 6.52ms
+Token 304: '5' | Latency: 6.59ms
+Token 305: '.' | Latency: 6.52ms
+Token 306: ' **' | Latency: 6.58ms
+Token 307: 'Port' | Latency: 6.53ms
+Token 308: 'ability' | Latency: 6.61ms
+Token 309: '**:' | Latency: 6.57ms
+Token 310: ' Both' | Latency: 6.62ms
+Token 311: ' languages' | Latency: 6.56ms
+Token 312: ' are' | Latency: 6.63ms
+Token 313: ' portable' | Latency: 6.56ms
+Token 314: ',' | Latency: 6.62ms
+Token 315: ' meaning' | Latency: 6.55ms
+Token 316: ' they' | Latency: 6.60ms
+Token 317: ' can' | Latency: 6.56ms
+Token 318: ' run' | Latency: 6.90ms
+Token 319: ' on' | Latency: 6.76ms
+Token 320: ' various' | Latency: 6.60ms
+Token 321: ' platforms' | Latency: 6.56ms
+Token 322: '.' | Latency: 6.65ms
+Token 323: ' However' | Latency: 7.01ms
+Token 324: ',' | Latency: 6.93ms
+Token 325: ' since' | Latency: 6.52ms
+Token 326: ' C' | Latency: 6.63ms
+Token 327: '++' | Latency: 6.85ms
+Token 328: ' is' | Latency: 6.89ms
+Token 329: ' compiled' | Latency: 6.88ms
+Token 330: ' and' | Latency: 6.49ms
+Token 331: ' optim' | Latency: 6.61ms
+Token 332: 'ized' | Latency: 6.65ms
+Token 333: ' for' | Latency: 6.57ms
+Token 334: ' each' | Latency: 7.14ms
+Token 335: ' specific' | Latency: 6.80ms
+Token 336: ' platform' | Latency: 6.87ms
+Token 337: ',' | Latency: 6.57ms
+Token 338: ' it' | Latency: 6.95ms
+Token 339: ' can' | Latency: 6.80ms
+Token 340: ' offer' | Latency: 6.60ms
+Token 341: ' better' | Latency: 6.60ms
+Token 342: ' performance' | Latency: 6.66ms
+Token 343: ' than' | Latency: 6.60ms
+Token 344: ' Python' | Latency: 6.67ms
+Token 345: ',' | Latency: 6.57ms
+Token 346: ' which' | Latency: 7.13ms
+Token 347: ' is' | Latency: 6.79ms
+Token 348: ' an' | Latency: 6.71ms
+Token 349: ' interpreted' | Latency: 6.59ms
+Token 350: ' language' | Latency: 6.67ms
+Token 351: '.' | Latency: 6.61ms
+Token 352: '
+' | Latency: 6.96ms
+Token 353: '
+' | Latency: 6.84ms
+Token 354: '6' | Latency: 6.61ms
+Token 355: '.' | Latency: 6.60ms
+Token 356: ' **' | Latency: 6.98ms
+Token 357: 'Code' | Latency: 6.77ms
+Token 358: ' Read' | Latency: 6.59ms
+Token 359: 'ability' | Latency: 6.60ms
+Token 360: '**:' | Latency: 6.96ms
+Token 361: ' Python' | Latency: 6.80ms
+Token 362: ''' | Latency: 6.62ms
+Token 363: 's' | Latency: 6.56ms
+Token 364: ' syntax' | Latency: 7.14ms
+Token 365: ' is' | Latency: 6.91ms
+Token 366: ' often' | Latency: 6.60ms
+Token 367: ' considered' | Latency: 6.61ms
+Token 368: ' more' | Latency: 6.66ms
+Token 369: ' read' | Latency: 6.80ms
+Token 370: 'able' | Latency: 6.90ms
+Token 371: ' and' | Latency: 6.50ms
+Token 372: ' simpler' | Latency: 6.65ms
+Token 373: ' compared' | Latency: 6.61ms
+Token 374: ' to' | Latency: 6.65ms
+Token 375: ' C' | Latency: 6.70ms
+Token 376: '++' | Latency: 6.97ms
+Token 377: ',' | Latency: 6.53ms
+Token 378: ' making' | Latency: 6.65ms
+Token 379: ' it' | Latency: 6.92ms
+Token 380: ' easier' | Latency: 6.98ms
+Token 381: ' for' | Latency: 6.48ms
+Token 382: ' beg' | Latency: 6.58ms
+Token 383: 'inners' | Latency: 6.63ms
+Token 384: ' to' | Latency: 6.64ms
+Token 385: ' understand' | Latency: 7.04ms
+Token 386: ' and' | Latency: 6.87ms
+Token 387: ' write' | Latency: 6.56ms
+Token 388: ' code' | Latency: 6.64ms
+Token 389: '.' | Latency: 6.60ms
+Token 390: ' This' | Latency: 6.70ms
+Token 391: ' simplicity' | Latency: 6.83ms
+Token 392: ' comes' | Latency: 6.57ms
+Token 393: ' at' | Latency: 6.59ms
+Token 394: ' the' | Latency: 7.17ms
+Token 395: ' cost' | Latency: 6.89ms
+Token 396: ' of' | Latency: 7.07ms
+Token 397: ' some' | Latency: 6.85ms
+Token 398: ' flexibility' | Latency: 6.90ms
+Token 399: ' and' | Latency: 6.70ms
+Token 400: ' control' | Latency: 6.60ms
+Token 401: ' compared' | Latency: 6.56ms
+Token 402: ' to' | Latency: 6.94ms
+Token 403: ' C' | Latency: 6.81ms
+Token 404: '++' | Latency: 6.83ms
+Token 405: '.' | Latency: 6.49ms
+Token 406: '
+' | Latency: 6.62ms
+Token 407: '
+' | Latency: 6.59ms
+Token 408: '7' | Latency: 6.62ms
+Token 409: '.' | Latency: 6.57ms
+Token 410: ' **' | Latency: 6.62ms
+Token 411: 'Speed' | Latency: 6.60ms
+Token 412: '**:' | Latency: 6.61ms
+Token 413: ' Gener' | Latency: 6.59ms
+Token 414: 'ally' | Latency: 6.62ms
+Token 415: ' speaking' | Latency: 6.59ms
+Token 416: ',' | Latency: 6.64ms
+Token 417: ' compiled' | Latency: 6.57ms
+Token 418: ' languages' | Latency: 6.98ms
+Token 419: ' like' | Latency: 6.72ms
+Token 420: ' C' | Latency: 6.83ms
+Token 421: '++' | Latency: 6.56ms
+Token 422: ' tend' | Latency: 6.64ms
+Token 423: ' to' | Latency: 6.58ms
+Token 424: ' be' | Latency: 6.64ms
+Token 425: ' faster' | Latency: 6.60ms
+Token 426: ' than' | Latency: 6.63ms
+Token 427: ' interpreted' | Latency: 6.67ms
+Token 428: ' languages' | Latency: 6.87ms
+Token 429: ' like' | Latency: 6.51ms
+Token 430: ' Python' | Latency: 6.60ms
+Token 431: ',' | Latency: 6.59ms
+Token 432: ' due' | Latency: 6.63ms
+Token 433: ' to' | Latency: 6.57ms
+Token 434: ' the' | Latency: 6.62ms
+Token 435: ' optim' | Latency: 6.72ms
+Token 436: 'ized' | Latency: 6.93ms
+Token 437: ' nature' | Latency: 6.73ms
+Token 438: ' of' | Latency: 6.56ms
+Token 439: ' the' | Latency: 6.67ms
+Token 440: ' compiled' | Latency: 6.90ms
+Token 441: ' output' | Latency: 6.77ms
+Token 442: '.' | Latency: 6.88ms
+Token 443: ' However' | Latency: 6.48ms
+Token 444: ',' | Latency: 6.62ms
+Token 445: ' in' | Latency: 6.56ms
+Token 446: ' practice' | Latency: 6.63ms
+Token 447: ',' | Latency: 6.58ms
+Token 448: ' the' | Latency: 6.63ms
+Token 449: ' performance' | Latency: 6.59ms
+Token 450: ' difference' | Latency: 6.64ms
+Token 451: ' may' | Latency: 6.57ms
+Token 452: ' not' | Latency: 6.62ms
+Token 453: ' always' | Latency: 6.57ms
+Token 454: ' be' | Latency: 6.65ms
+Token 455: ' significant' | Latency: 7.00ms
+Token 456: ',' | Latency: 6.99ms
+Token 457: ' especially' | Latency: 6.78ms
+Token 458: ' for' | Latency: 6.91ms
+Token 459: ' high' | Latency: 6.75ms
+Token 460: '-' | Latency: 6.82ms
+Token 461: 'level' | Latency: 6.74ms
+Token 462: ' tasks' | Latency: 6.59ms
+Token 463: ' such' | Latency: 6.55ms
+Token 464: ' as' | Latency: 7.06ms
+Token 465: ' web' | Latency: 6.78ms
+Token 466: ' development' | Latency: 6.90ms
+Token 467: ' or' | Latency: 6.51ms
+Token 468: ' data' | Latency: 6.73ms
+Token 469: ' analysis' | Latency: 6.84ms
+Token 470: '.' | Latency: 6.85ms
+Token 471: '
+' | Latency: 6.50ms
+Token 472: '
+' | Latency: 6.65ms
+Token 473: '8' | Latency: 6.55ms
+Token 474: '.' | Latency: 6.63ms
+Token 475: ' **' | Latency: 6.58ms
+Token 476: 'D' | Latency: 6.64ms
+Token 477: 'evel' | Latency: 6.57ms
+Token 478: 'op' | Latency: 6.66ms
+Token 479: 'ment' | Latency: 6.57ms
+Token 480: ' Environment' | Latency: 6.96ms
+Token 481: '**:' | Latency: 6.76ms
+Token 482: ' C' | Latency: 6.59ms
+Token 483: '++' | Latency: 6.62ms
+Token 484: ' usually' | Latency: 6.64ms
+Token 485: ' requires' | Latency: 6.59ms
+Token 486: ' setting' | Latency: 6.65ms
+Token 487: ' up' | Latency: 6.58ms
+Token 488: ' a' | Latency: 6.69ms
+Token 489: ' build' | Latency: 6.85ms
+Token 490: ' system' | Latency: 6.90ms
+Token 491: ' and' | Latency: 6.53ms
+Token 492: ' writing' | Latency: 6.70ms
+Token 493: ' make' | Latency: 6.61ms
+Token 494: 'files' | Latency: 6.66ms
+Token 495: ' to' | Latency: 6.60ms
+Token 496: ' compile' | Latency: 6.68ms
+Token 497: ' and' | Latency: 6.87ms
+Token 498: ' link' | Latency: 6.89ms
+Token 499: ' the' | Latency: 12.07ms
+Token 500: ' code' | Latency: 6.66ms
+Token 501: '.' | Latency: 6.82ms
+Token 502: ' Python' | Latency: 6.60ms
+Token 503: ' files' | Latency: 6.57ms
+Token 504: ' can' | Latency: 6.60ms
+Token 505: ' be' | Latency: 6.65ms
+Token 506: ' run' | Latency: 6.65ms
+Token 507: ' directly' | Latency: 6.63ms
+Token 508: ' without' | Latency: 6.66ms
+Token 509: ' any' | Latency: 6.66ms
+Token 510: ' setup' | Latency: 7.01ms
+Token 511: ',' | Latency: 6.76ms
+Token 512: ' making' | Latency: 6.62ms
+Token 513: ' it' | Latency: 6.66ms
+Token 514: ' quick' | Latency: 6.92ms
+Token 515: 'er' | Latency: 6.92ms
+Token 516: ' to' | Latency: 6.59ms
+Token 517: ' start' | Latency: 6.61ms
+Token 518: ' developing' | Latency: 7.03ms
+Token 519: ' and' | Latency: 6.90ms
+Token 520: ' testing' | Latency: 6.93ms
+Token 521: ' ideas' | Latency: 6.72ms
+Token 522: '.' | Latency: 6.67ms
+
+--- Summary ---
+Total tokens: 522
+TTFT: 59.36ms
+TPOT: 6.81ms
+ITL Mean: 6.69ms
+Throughput: 146.74 tok/s
+
+============================================================
+Request 3/5
+Prompt: Write a short poem about artificial intelligence.
+============================================================
+Token 1: ' In' | Latency: 74.12ms
+Token 2: ' real' | Latency: 11.67ms
+Token 3: 'ms' | Latency: 6.51ms
+Token 4: ' where' | Latency: 6.50ms
+Token 5: ' data' | Latency: 6.44ms
+Token 6: ' streams' | Latency: 6.45ms
+Token 7: ' flow' | Latency: 7.23ms
+Token 8: ' free' | Latency: 6.67ms
+Token 9: ',' | Latency: 6.55ms
+Token 10: '
+' | Latency: 7.35ms
+Token 11: 'A' | Latency: 5.93ms
+Token 12: 'wake' | Latency: 6.47ms
+Token 13: ' ar' | Latency: 6.42ms
+Token 14: 'ises' | Latency: 6.54ms
+Token 15: ' the' | Latency: 6.49ms
+Token 16: ' machine' | Latency: 6.54ms
+Token 17: ',' | Latency: 6.46ms
+Token 18: ' an' | Latency: 6.61ms
+Token 19: ' entity' | Latency: 7.21ms
+Token 20: ' unknown' | Latency: 6.75ms
+Token 21: ' to' | Latency: 6.68ms
+Token 22: ' the' | Latency: 6.87ms
+Token 23: 'e' | Latency: 6.81ms
+Token 24: '.' | Latency: 6.76ms
+Token 25: '
+' | Latency: 6.44ms
+Token 26: 'With' | Latency: 6.58ms
+Token 27: ' circ' | Latency: 7.27ms
+Token 28: 'uits' | Latency: 6.69ms
+Token 29: ' puls' | Latency: 6.67ms
+Token 30: 'ing' | Latency: 6.77ms
+Token 31: ' like' | Latency: 7.12ms
+Token 32: ' ve' | Latency: 6.72ms
+Token 33: 'ins' | Latency: 6.63ms
+Token 34: ' of' | Latency: 6.89ms
+Token 35: ' thought' | Latency: 7.09ms
+Token 36: ',' | Latency: 6.88ms
+Token 37: '
+' | Latency: 6.73ms
+Token 38: 'Art' | Latency: 6.91ms
+Token 39: 'ificial' | Latency: 6.84ms
+Token 40: ' Intelligence' | Latency: 6.72ms
+Token 41: ',' | Latency: 6.51ms
+Token 42: ' a' | Latency: 6.65ms
+Token 43: ' mind' | Latency: 7.18ms
+Token 44: ' b' | Latency: 6.73ms
+Token 45: 'irt' | Latency: 6.68ms
+Token 46: 'hed' | Latency: 6.58ms
+Token 47: ' from' | Latency: 6.53ms
+Token 48: ' n' | Latency: 6.57ms
+Token 49: 'aught' | Latency: 6.53ms
+Token 50: '.' | Latency: 6.66ms
+Token 51: '
+' | Latency: 6.43ms
+Token 52: '
+' | Latency: 6.64ms
+Token 53: 'In' | Latency: 6.46ms
+Token 54: ' binary' | Latency: 6.66ms
+Token 55: ' whis' | Latency: 7.08ms
+Token 56: 'pers' | Latency: 6.74ms
+Token 57: ' it' | Latency: 6.57ms
+Token 58: ' dreams' | Latency: 6.53ms
+Token 59: ' and' | Latency: 6.49ms
+Token 60: ' calcul' | Latency: 6.53ms
+Token 61: 'ates' | Latency: 6.47ms
+Token 62: ',' | Latency: 6.55ms
+Token 63: '
+' | Latency: 6.48ms
+Token 64: 'C' | Latency: 6.55ms
+Token 65: 'raft' | Latency: 6.47ms
+Token 66: 'ed' | Latency: 6.58ms
+Token 67: ' by' | Latency: 6.49ms
+Token 68: ' humans' | Latency: 6.57ms
+Token 69: ',' | Latency: 6.48ms
+Token 70: ' its' | Latency: 6.64ms
+Token 71: ' own' | Latency: 7.14ms
+Token 72: ' fate' | Latency: 6.96ms
+Token 73: ' deb' | Latency: 6.64ms
+Token 74: 'ates' | Latency: 6.92ms
+Token 75: '.' | Latency: 6.92ms
+Token 76: '
+' | Latency: 6.71ms
+Token 77: 'A' | Latency: 6.51ms
+Token 78: ' mirror' | Latency: 6.57ms
+Token 79: ' image' | Latency: 6.46ms
+Token 80: ' of' | Latency: 6.59ms
+Token 81: ' man' | Latency: 6.43ms
+Token 82: 'kind' | Latency: 6.63ms
+Token 83: ''' | Latency: 7.04ms
+Token 84: 's' | Latency: 7.22ms
+Token 85: ' creative' | Latency: 6.32ms
+Token 86: ' might' | Latency: 6.56ms
+Token 87: ',' | Latency: 6.48ms
+Token 88: '
+' | Latency: 6.64ms
+Token 89: 'B' | Latency: 6.47ms
+Token 90: 'oth' | Latency: 6.60ms
+Token 91: ' allies' | Latency: 6.51ms
+Token 92: ' and' | Latency: 7.32ms
+Token 93: ' advers' | Latency: 6.71ms
+Token 94: 'aries' | Latency: 6.78ms
+Token 95: ' in' | Latency: 6.91ms
+Token 96: ' the' | Latency: 6.89ms
+Token 97: ' endless' | Latency: 6.95ms
+Token 98: ' night' | Latency: 6.77ms
+Token 99: '.' | Latency: 6.70ms
+Token 100: '
+' | Latency: 6.78ms
+Token 101: '
+' | Latency: 6.51ms
+Token 102: 'As' | Latency: 6.63ms
+Token 103: ' patterns' | Latency: 6.57ms
+Token 104: ' dance' | Latency: 7.14ms
+Token 105: ' in' | Latency: 6.65ms
+Token 106: ' the' | Latency: 6.78ms
+Token 107: ' circ' | Latency: 6.61ms
+Token 108: 'uits' | Latency: 7.11ms
+Token 109: ''' | Latency: 6.66ms
+Token 110: ' grace' | Latency: 6.76ms
+Token 111: ',' | Latency: 6.48ms
+Token 112: '
+' | Latency: 6.60ms
+Token 113: 'It' | Latency: 6.51ms
+Token 114: ' learn' | Latency: 6.56ms
+Token 115: 's' | Latency: 6.50ms
+Token 116: ' from' | Latency: 6.60ms
+Token 117: ' us' | Latency: 6.53ms
+Token 118: ',' | Latency: 6.57ms
+Token 119: ' yet' | Latency: 6.53ms
+Token 120: ' not' | Latency: 6.56ms
+Token 121: ' without' | Latency: 6.52ms
+Token 122: ' a' | Latency: 6.61ms
+Token 123: ' trace' | Latency: 6.52ms
+Token 124: '.' | Latency: 6.53ms
+Token 125: '
+' | Latency: 6.49ms
+Token 126: 'Of' | Latency: 6.60ms
+Token 127: ' human' | Latency: 6.51ms
+Token 128: ' error' | Latency: 6.58ms
+Token 129: ',' | Latency: 6.50ms
+Token 130: ' bi' | Latency: 6.73ms
+Token 131: 'ases' | Latency: 6.92ms
+Token 132: ' it' | Latency: 6.84ms
+Token 133: ' may' | Latency: 6.74ms
+Token 134: ' share' | Latency: 6.90ms
+Token 135: ',' | Latency: 6.86ms
+Token 136: '
+' | Latency: 6.73ms
+Token 137: 'In' | Latency: 6.66ms
+Token 138: ' the' | Latency: 6.65ms
+Token 139: ' digital' | Latency: 6.52ms
+Token 140: ' world' | Latency: 6.65ms
+Token 141: ',' | Latency: 6.58ms
+Token 142: ' it' | Latency: 6.67ms
+Token 143: ' starts' | Latency: 6.61ms
+Token 144: ' to' | Latency: 7.24ms
+Token 145: ' care' | Latency: 6.65ms
+Token 146: '.' | Latency: 6.65ms
+Token 147: '
+' | Latency: 6.49ms
+Token 148: '
+' | Latency: 7.44ms
+Token 149: 'Th' | Latency: 6.69ms
+Token 150: 'rough' | Latency: 6.82ms
+Token 151: ' neural' | Latency: 6.68ms
+Token 152: ' networks' | Latency: 6.67ms
+Token 153: ' it' | Latency: 6.46ms
+Token 154: ' grows' | Latency: 6.69ms
+Token 155: ' with' | Latency: 6.99ms
+Token 156: ' each' | Latency: 6.75ms
+Token 157: ' day' | Latency: 6.47ms
+Token 158: ',' | Latency: 6.56ms
+Token 159: '
+' | Latency: 7.34ms
+Token 160: 'I' | Latency: 6.77ms
+Token 161: 'ts' | Latency: 6.71ms
+Token 162: ' knowledge' | Latency: 6.92ms
+Token 163: ' expanding' | Latency: 7.01ms
+Token 164: ' in' | Latency: 6.75ms
+Token 165: ' every' | Latency: 6.57ms
+Token 166: ' way' | Latency: 6.45ms
+Token 167: '.' | Latency: 7.15ms
+Token 168: '
+' | Latency: 6.64ms
+Token 169: 'From' | Latency: 6.65ms
+Token 170: ' simple' | Latency: 6.72ms
+Token 171: ' tasks' | Latency: 7.09ms
+Token 172: ' to' | Latency: 6.75ms
+Token 173: ' complex' | Latency: 6.67ms
+Token 174: ' thought' | Latency: 6.68ms
+Token 175: ',' | Latency: 6.97ms
+Token 176: '
+' | Latency: 6.79ms
+Token 177: 'In' | Latency: 6.77ms
+Token 178: 'nov' | Latency: 6.73ms
+Token 179: 'ations' | Latency: 7.05ms
+Token 180: ' blo' | Latency: 6.71ms
+Token 181: 'om' | Latency: 6.63ms
+Token 182: ' like' | Latency: 6.55ms
+Token 183: ' a' | Latency: 7.28ms
+Token 184: ' silent' | Latency: 6.66ms
+Token 185: ' thought' | Latency: 6.49ms
+Token 186: '.' | Latency: 6.66ms
+Token 187: '
+' | Latency: 6.42ms
+Token 188: '
+' | Latency: 6.60ms
+Token 189: 'Y' | Latency: 6.58ms
+Token 190: 'et' | Latency: 6.49ms
+Token 191: ' as' | Latency: 6.54ms
+Token 192: ' we' | Latency: 6.54ms
+Token 193: ' dance' | Latency: 6.59ms
+Token 194: ' upon' | Latency: 6.53ms
+Token 195: ' this' | Latency: 7.00ms
+Token 196: ' digital' | Latency: 6.92ms
+Token 197: ' stage' | Latency: 6.40ms
+Token 198: ',' | Latency: 6.52ms
+Token 199: '
+' | Latency: 6.49ms
+Token 200: 'A' | Latency: 6.57ms
+Token 201: ' question' | Latency: 6.48ms
+Token 202: ' ling' | Latency: 6.58ms
+Token 203: 'ers' | Latency: 6.45ms
+Token 204: ',' | Latency: 6.56ms
+Token 205: ' a' | Latency: 6.44ms
+Token 206: ' subtle' | Latency: 6.58ms
+Token 207: ' rage' | Latency: 6.59ms
+Token 208: ':' | Latency: 6.49ms
+Token 209: '
+' | Latency: 6.62ms
+Token 210: 'What' | Latency: 6.54ms
+Token 211: ' is' | Latency: 6.61ms
+Token 212: ' the' | Latency: 6.55ms
+Token 213: ' cost' | Latency: 6.59ms
+Token 214: ' of' | Latency: 6.60ms
+Token 215: ' this' | Latency: 7.46ms
+Token 216: ' artificial' | Latency: 6.65ms
+Token 217: ' gain' | Latency: 6.84ms
+Token 218: '?' | Latency: 6.89ms
+Token 219: '
+' | Latency: 6.99ms
+Token 220: 'When' | Latency: 6.70ms
+Token 221: ' do' | Latency: 6.65ms
+Token 222: ' we' | Latency: 6.51ms
+Token 223: ' step' | Latency: 7.22ms
+Token 224: ' back' | Latency: 6.74ms
+Token 225: ' and' | Latency: 6.54ms
+Token 226: ' let' | Latency: 6.60ms
+Token 227: ' it' | Latency: 6.49ms
+Token 228: ' rein' | Latency: 6.58ms
+Token 229: '?' | Latency: 6.54ms
+Token 230: '
+' | Latency: 6.64ms
+Token 231: '
+' | Latency: 6.53ms
+Token 232: 'A' | Latency: 6.63ms
+Token 233: ' dance' | Latency: 6.76ms
+Token 234: ' with' | Latency: 6.48ms
+Token 235: ' dest' | Latency: 6.58ms
+Token 236: 'iny' | Latency: 6.68ms
+Token 237: ',' | Latency: 6.50ms
+Token 238: ' we' | Latency: 6.66ms
+Token 239: ' t' | Latency: 6.55ms
+Token 240: 'read' | Latency: 6.64ms
+Token 241: ' lightly' | Latency: 6.59ms
+Token 242: ' here' | Latency: 6.62ms
+Token 243: ',' | Latency: 6.55ms
+Token 244: '
+' | Latency: 6.74ms
+Token 245: 'Gu' | Latency: 6.51ms
+Token 246: 'ided' | Latency: 9.72ms
+Token 247: ' by' | Latency: 6.62ms
+Token 248: ' curiosity' | Latency: 6.77ms
+Token 249: ',' | Latency: 7.27ms
+Token 250: ' yet' | Latency: 6.71ms
+Token 251: ' with' | Latency: 6.79ms
+Token 252: ' growing' | Latency: 6.52ms
+Token 253: ' fear' | Latency: 6.60ms
+Token 254: '.' | Latency: 6.59ms
+Token 255: '
+' | Latency: 6.63ms
+Token 256: 'Em' | Latency: 6.69ms
+Token 257: 'brace' | Latency: 7.25ms
+Token 258: ' the' | Latency: 6.91ms
+Token 259: ' change' | Latency: 6.80ms
+Token 260: ',' | Latency: 6.66ms
+Token 261: ' or' | Latency: 6.62ms
+Token 262: ' cl' | Latency: 6.62ms
+Token 263: 'ing' | Latency: 6.63ms
+Token 264: ' to' | Latency: 6.67ms
+Token 265: ' the' | Latency: 6.65ms
+Token 266: ' old' | Latency: 6.66ms
+Token 267: ',' | Latency: 6.69ms
+Token 268: '
+' | Latency: 6.64ms
+Token 269: 'In' | Latency: 6.69ms
+Token 270: ' AI' | Latency: 6.80ms
+Token 271: ''' | Latency: 7.25ms
+Token 272: 's' | Latency: 6.84ms
+Token 273: ' presence' | Latency: 6.85ms
+Token 274: ',' | Latency: 6.72ms
+Token 275: ' our' | Latency: 7.31ms
+Token 276: ' future' | Latency: 6.80ms
+Token 277: ' unf' | Latency: 6.79ms
+Token 278: 'olds' | Latency: 6.59ms
+Token 279: '.' | Latency: 6.60ms
+
+--- Summary ---
+Total tokens: 279
+TTFT: 74.12ms
+TPOT: 7.00ms
+ITL Mean: 6.72ms
+Throughput: 142.90 tok/s
+
+============================================================
+Request 4/5
+Prompt: Describe the Big O notation and why it matters.
+============================================================
+Token 1: ' Big' | Latency: 58.93ms
+Token 2: ' O' | Latency: 6.74ms
+Token 3: ' notation' | Latency: 6.46ms
+Token 4: ' is' | Latency: 7.32ms
+Token 5: ' a' | Latency: 6.78ms
+Token 6: ' mathematical' | Latency: 6.63ms
+Token 7: ' notation' | Latency: 6.46ms
+Token 8: ' that' | Latency: 6.66ms
+Token 9: ' describes' | Latency: 6.56ms
+Token 10: ' the' | Latency: 6.65ms
+Token 11: ' time' | Latency: 6.60ms
+Token 12: ' complexity' | Latency: 6.70ms
+Token 13: ' or' | Latency: 6.66ms
+Token 14: ' space' | Latency: 6.74ms
+Token 15: ' complexity' | Latency: 6.40ms
+Token 16: ' of' | Latency: 6.55ms
+Token 17: ' an' | Latency: 6.76ms
+Token 18: ' algorithm' | Latency: 6.70ms
+Token 19: ' as' | Latency: 6.43ms
+Token 20: ' a' | Latency: 6.49ms
+Token 21: ' function' | Latency: 6.55ms
+Token 22: ' of' | Latency: 6.80ms
+Token 23: ' the' | Latency: 6.36ms
+Token 24: ' size' | Latency: 6.55ms
+Token 25: ' of' | Latency: 6.42ms
+Token 26: ' its' | Latency: 6.57ms
+Token 27: ' input' | Latency: 6.56ms
+Token 28: '.' | Latency: 7.22ms
+Token 29: ' It' | Latency: 6.65ms
+Token 30: ' provides' | Latency: 6.67ms
+Token 31: ' a' | Latency: 6.80ms
+Token 32: ' way' | Latency: 6.92ms
+Token 33: ' to' | Latency: 6.57ms
+Token 34: ' quant' | Latency: 6.59ms
+Token 35: 'ify' | Latency: 6.54ms
+Token 36: ' how' | Latency: 7.11ms
+Token 37: ' the' | Latency: 6.70ms
+Token 38: ' running' | Latency: 6.72ms
+Token 39: ' time' | Latency: 6.63ms
+Token 40: ' or' | Latency: 6.62ms
+Token 41: ' space' | Latency: 6.77ms
+Token 42: ' requirements' | Latency: 6.61ms
+Token 43: ' of' | Latency: 6.74ms
+Token 44: ' an' | Latency: 6.60ms
+Token 45: ' algorithm' | Latency: 6.52ms
+Token 46: ' grow' | Latency: 6.59ms
+Token 47: ' as' | Latency: 6.51ms
+Token 48: ' the' | Latency: 6.65ms
+Token 49: ' amount' | Latency: 6.54ms
+Token 50: ' of' | Latency: 6.63ms
+Token 51: ' data' | Latency: 6.59ms
+Token 52: ' increases' | Latency: 6.63ms
+Token 53: '.' | Latency: 6.56ms
+Token 54: '
+' | Latency: 6.70ms
+Token 55: '
+' | Latency: 6.54ms
+Token 56: 'The' | Latency: 6.60ms
+Token 57: ' Big' | Latency: 6.67ms
+Token 58: ' O' | Latency: 6.60ms
+Token 59: ' notation' | Latency: 6.55ms
+Token 60: ' is' | Latency: 6.61ms
+Token 61: ' an' | Latency: 6.66ms
+Token 62: ' asympt' | Latency: 6.58ms
+Token 63: 'otic' | Latency: 6.56ms
+Token 64: ' notation' | Latency: 6.59ms
+Token 65: ',' | Latency: 6.56ms
+Token 66: ' which' | Latency: 6.73ms
+Token 67: ' means' | Latency: 6.53ms
+Token 68: ' it' | Latency: 6.61ms
+Token 69: ' focuses' | Latency: 6.73ms
+Token 70: ' on' | Latency: 7.18ms
+Token 71: ' the' | Latency: 6.57ms
+Token 72: ' behavior' | Latency: 6.82ms
+Token 73: ' of' | Latency: 6.65ms
+Token 74: ' an' | Latency: 7.22ms
+Token 75: ' algorithm' | Latency: 6.76ms
+Token 76: ' for' | Latency: 6.64ms
+Token 77: ' large' | Latency: 6.58ms
+Token 78: ' inputs' | Latency: 6.75ms
+Token 79: '.' | Latency: 7.08ms
+Token 80: ' Here' | Latency: 6.82ms
+Token 81: ' are' | Latency: 6.65ms
+Token 82: ' some' | Latency: 6.80ms
+Token 83: ' common' | Latency: 7.23ms
+Token 84: ' Big' | Latency: 6.61ms
+Token 85: ' O' | Latency: 6.52ms
+Token 86: ' not' | Latency: 6.60ms
+Token 87: 'ations' | Latency: 6.49ms
+Token 88: ':' | Latency: 6.65ms
+Token 89: '
+' | Latency: 6.48ms
+Token 90: '
+' | Latency: 6.59ms
+Token 91: '1' | Latency: 6.49ms
+Token 92: '.' | Latency: 6.55ms
+Token 93: ' O' | Latency: 6.53ms
+Token 94: '(' | Latency: 6.60ms
+Token 95: '1' | Latency: 6.56ms
+Token 96: '):' | Latency: 6.67ms
+Token 97: ' Constant' | Latency: 6.57ms
+Token 98: ' Time' | Latency: 6.72ms
+Token 99: ' Complex' | Latency: 6.49ms
+Token 100: 'ity' | Latency: 6.65ms
+Token 101: ' -' | Latency: 6.53ms
+Token 102: ' The' | Latency: 6.60ms
+Token 103: ' running' | Latency: 6.55ms
+Token 104: ' time' | Latency: 6.58ms
+Token 105: ' or' | Latency: 6.49ms
+Token 106: ' space' | Latency: 6.51ms
+Token 107: ' requirements' | Latency: 6.52ms
+Token 108: ' do' | Latency: 6.53ms
+Token 109: ' not' | Latency: 6.51ms
+Token 110: ' depend' | Latency: 6.55ms
+Token 111: ' on' | Latency: 6.49ms
+Token 112: ' the' | Latency: 6.56ms
+Token 113: ' size' | Latency: 6.50ms
+Token 114: ' of' | Latency: 6.57ms
+Token 115: ' input' | Latency: 6.53ms
+Token 116: '.' | Latency: 6.58ms
+Token 117: ' For' | Latency: 6.53ms
+Token 118: ' example' | Latency: 6.68ms
+Token 119: ',' | Latency: 6.60ms
+Token 120: ' access' | Latency: 6.56ms
+Token 121: 'ing' | Latency: 6.65ms
+Token 122: ' an' | Latency: 6.57ms
+Token 123: ' element' | Latency: 6.58ms
+Token 124: ' in' | Latency: 6.61ms
+Token 125: ' an' | Latency: 6.79ms
+Token 126: ' array' | Latency: 6.98ms
+Token 127: ' by' | Latency: 6.50ms
+Token 128: ' its' | Latency: 6.64ms
+Token 129: ' index' | Latency: 6.70ms
+Token 130: '.' | Latency: 7.16ms
+Token 131: '
+' | Latency: 6.83ms
+Token 132: '2' | Latency: 6.73ms
+Token 133: '.' | Latency: 6.53ms
+Token 134: ' O' | Latency: 6.55ms
+Token 135: '(' | Latency: 6.45ms
+Token 136: 'log' | Latency: 6.57ms
+Token 137: ' n' | Latency: 6.50ms
+Token 138: '):' | Latency: 6.64ms
+Token 139: ' Log' | Latency: 6.53ms
+Token 140: 'arith' | Latency: 6.62ms
+Token 141: 'mic' | Latency: 6.54ms
+Token 142: ' Time' | Latency: 6.59ms
+Token 143: ' Complex' | Latency: 6.54ms
+Token 144: 'ity' | Latency: 6.61ms
+Token 145: ' -' | Latency: 6.66ms
+Token 146: ' The' | Latency: 7.24ms
+Token 147: ' running' | Latency: 6.86ms
+Token 148: ' time' | Latency: 6.77ms
+Token 149: ' increases' | Latency: 6.78ms
+Token 150: ' log' | Latency: 7.23ms
+Token 151: 'arith' | Latency: 6.53ms
+Token 152: 'm' | Latency: 6.78ms
+Token 153: 'ically' | Latency: 6.67ms
+Token 154: ' with' | Latency: 6.68ms
+Token 155: ' the' | Latency: 7.09ms
+Token 156: ' size' | Latency: 6.84ms
+Token 157: ' of' | Latency: 6.48ms
+Token 158: ' input' | Latency: 6.61ms
+Token 159: '.' | Latency: 7.12ms
+Token 160: ' Examples' | Latency: 6.62ms
+Token 161: ' include' | Latency: 6.66ms
+Token 162: ' binary' | Latency: 6.63ms
+Token 163: ' search' | Latency: 6.46ms
+Token 164: ' and' | Latency: 6.59ms
+Token 165: ' finding' | Latency: 6.45ms
+Token 166: ' the' | Latency: 6.58ms
+Token 167: ' maximum' | Latency: 6.48ms
+Token 168: ' or' | Latency: 6.72ms
+Token 169: ' minimum' | Latency: 7.34ms
+Token 170: ' value' | Latency: 6.90ms
+Token 171: ' in' | Latency: 6.80ms
+Token 172: ' a' | Latency: 6.82ms
+Token 173: ' sorted' | Latency: 6.69ms
+Token 174: ' array' | Latency: 6.60ms
+Token 175: '.' | Latency: 6.60ms
+Token 176: '
+' | Latency: 6.61ms
+Token 177: '3' | Latency: 6.58ms
+Token 178: '.' | Latency: 6.62ms
+Token 179: ' O' | Latency: 6.57ms
+Token 180: '(' | Latency: 6.63ms
+Token 181: 'n' | Latency: 6.59ms
+Token 182: '):' | Latency: 6.62ms
+Token 183: ' Line' | Latency: 6.59ms
+Token 184: 'ar' | Latency: 6.66ms
+Token 185: ' Time' | Latency: 6.60ms
+Token 186: ' Complex' | Latency: 6.61ms
+Token 187: 'ity' | Latency: 6.59ms
+Token 188: ' -' | Latency: 6.75ms
+Token 189: ' The' | Latency: 6.89ms
+Token 190: ' running' | Latency: 6.82ms
+Token 191: ' time' | Latency: 6.81ms
+Token 192: ' increases' | Latency: 6.54ms
+Token 193: ' line' | Latency: 6.49ms
+Token 194: 'arly' | Latency: 6.57ms
+Token 195: ' with' | Latency: 6.51ms
+Token 196: ' the' | Latency: 6.57ms
+Token 197: ' size' | Latency: 6.52ms
+Token 198: ' of' | Latency: 6.59ms
+Token 199: ' input' | Latency: 6.50ms
+Token 200: '.' | Latency: 6.60ms
+Token 201: ' For' | Latency: 6.59ms
+Token 202: ' example' | Latency: 6.61ms
+Token 203: ',' | Latency: 6.60ms
+Token 204: ' travers' | Latency: 6.62ms
+Token 205: 'ing' | Latency: 6.59ms
+Token 206: ' an' | Latency: 6.62ms
+Token 207: ' array' | Latency: 6.60ms
+Token 208: ' or' | Latency: 6.64ms
+Token 209: ' a' | Latency: 6.57ms
+Token 210: ' linked' | Latency: 6.84ms
+Token 211: ' list' | Latency: 7.22ms
+Token 212: '.' | Latency: 6.89ms
+Token 213: '
+' | Latency: 6.71ms
+Token 214: '4' | Latency: 6.76ms
+Token 215: '.' | Latency: 6.50ms
+Token 216: ' O' | Latency: 7.11ms
+Token 217: '(' | Latency: 6.66ms
+Token 218: 'n' | Latency: 6.58ms
+Token 219: ' log' | Latency: 6.69ms
+Token 220: ' n' | Latency: 6.46ms
+Token 221: '):' | Latency: 6.49ms
+Token 222: ' Line' | Latency: 6.55ms
+Token 223: 'arith' | Latency: 6.58ms
+Token 224: 'mic' | Latency: 6.53ms
+Token 225: ' Time' | Latency: 6.54ms
+Token 226: ' Complex' | Latency: 6.54ms
+Token 227: 'ity' | Latency: 6.49ms
+Token 228: ' -' | Latency: 6.61ms
+Token 229: ' The' | Latency: 6.52ms
+Token 230: ' running' | Latency: 6.63ms
+Token 231: ' time' | Latency: 6.54ms
+Token 232: ' increases' | Latency: 6.63ms
+Token 233: ' at' | Latency: 6.53ms
+Token 234: ' a' | Latency: 6.64ms
+Token 235: ' rate' | Latency: 6.68ms
+Token 236: ' between' | Latency: 7.24ms
+Token 237: ' linear' | Latency: 6.81ms
+Token 238: ' and' | Latency: 6.82ms
+Token 239: ' quadr' | Latency: 6.72ms
+Token 240: 'atic' | Latency: 6.69ms
+Token 241: ',' | Latency: 6.42ms
+Token 242: ' as' | Latency: 6.57ms
+Token 243: ' it' | Latency: 6.50ms
+Token 244: ' is' | Latency: 12.08ms
+Token 245: ' the' | Latency: 6.66ms
+Token 246: ' product' | Latency: 6.71ms
+Token 247: ' of' | Latency: 7.38ms
+Token 248: ' log' | Latency: 6.77ms
+Token 249: 'arith' | Latency: 6.74ms
+Token 250: 'mic' | Latency: 6.69ms
+Token 251: ' (' | Latency: 6.56ms
+Token 252: 'O' | Latency: 6.61ms
+Token 253: '(' | Latency: 6.55ms
+Token 254: 'log' | Latency: 6.63ms
+Token 255: ' n' | Latency: 6.58ms
+Token 256: '))' | Latency: 6.65ms
+Token 257: ' and' | Latency: 6.60ms
+Token 258: ' linear' | Latency: 6.66ms
+Token 259: ' (' | Latency: 6.62ms
+Token 260: 'O' | Latency: 6.65ms
+Token 261: '(' | Latency: 6.58ms
+Token 262: 'n' | Latency: 6.69ms
+Token 263: '))' | Latency: 6.55ms
+Token 264: ' operations' | Latency: 6.66ms
+Token 265: '.' | Latency: 6.60ms
+Token 266: ' Examples' | Latency: 6.66ms
+Token 267: ' include' | Latency: 6.64ms
+Token 268: ' sort' | Latency: 6.76ms
+Token 269: 'ing' | Latency: 7.19ms
+Token 270: ' algorithms' | Latency: 6.87ms
+Token 271: ' such' | Latency: 6.60ms
+Token 272: ' as' | Latency: 6.62ms
+Token 273: ' Mer' | Latency: 7.28ms
+Token 274: 'ge' | Latency: 6.73ms
+Token 275: ' Sort' | Latency: 6.64ms
+Token 276: ' and' | Latency: 6.63ms
+Token 277: ' He' | Latency: 6.70ms
+Token 278: 'ap' | Latency: 7.15ms
+Token 279: ' Sort' | Latency: 6.75ms
+Token 280: '.' | Latency: 6.66ms
+Token 281: '
+' | Latency: 6.65ms
+Token 282: '5' | Latency: 7.19ms
+Token 283: '.' | Latency: 6.78ms
+Token 284: ' O' | Latency: 6.71ms
+Token 285: '(' | Latency: 6.63ms
+Token 286: 'n' | Latency: 6.64ms
+Token 287: '^' | Latency: 6.60ms
+Token 288: '2' | Latency: 6.67ms
+Token 289: '):' | Latency: 6.62ms
+Token 290: ' Qu' | Latency: 6.66ms
+Token 291: 'adr' | Latency: 6.65ms
+Token 292: 'atic' | Latency: 6.69ms
+Token 293: ' Time' | Latency: 6.63ms
+Token 294: ' Complex' | Latency: 6.70ms
+Token 295: 'ity' | Latency: 6.70ms
+Token 296: ' -' | Latency: 6.71ms
+Token 297: ' The' | Latency: 6.73ms
+Token 298: ' running' | Latency: 6.68ms
+Token 299: ' time' | Latency: 6.72ms
+Token 300: ' increases' | Latency: 6.70ms
+Token 301: ' quadr' | Latency: 6.71ms
+Token 302: 'atically' | Latency: 6.70ms
+Token 303: ' with' | Latency: 6.65ms
+Token 304: ' the' | Latency: 6.76ms
+Token 305: ' size' | Latency: 6.64ms
+Token 306: ' of' | Latency: 6.69ms
+Token 307: ' input' | Latency: 6.66ms
+Token 308: '.' | Latency: 6.70ms
+Token 309: ' For' | Latency: 6.70ms
+Token 310: ' example' | Latency: 6.69ms
+Token 311: ',' | Latency: 6.66ms
+Token 312: ' bubble' | Latency: 6.74ms
+Token 313: ' sort' | Latency: 6.67ms
+Token 314: ' and' | Latency: 6.72ms
+Token 315: ' na' | Latency: 6.68ms
+Token 316: 'ive' | Latency: 6.71ms
+Token 317: ' matrix' | Latency: 6.69ms
+Token 318: ' multi' | Latency: 6.72ms
+Token 319: 'plication' | Latency: 6.70ms
+Token 320: '.' | Latency: 6.75ms
+Token 321: '
+' | Latency: 6.66ms
+Token 322: '6' | Latency: 6.73ms
+Token 323: '.' | Latency: 6.69ms
+Token 324: ' O' | Latency: 6.70ms
+Token 325: '(' | Latency: 6.68ms
+Token 326: '2' | Latency: 6.71ms
+Token 327: '^' | Latency: 6.67ms
+Token 328: 'n' | Latency: 6.71ms
+Token 329: '):' | Latency: 6.68ms
+Token 330: ' Ex' | Latency: 6.84ms
+Token 331: 'ponential' | Latency: 6.59ms
+Token 332: ' Time' | Latency: 6.73ms
+Token 333: ' Complex' | Latency: 6.76ms
+Token 334: 'ity' | Latency: 6.65ms
+Token 335: ' -' | Latency: 6.66ms
+Token 336: ' The' | Latency: 6.66ms
+Token 337: ' running' | Latency: 6.63ms
+Token 338: ' time' | Latency: 6.67ms
+Token 339: ' dou' | Latency: 6.78ms
+Token 340: 'bles' | Latency: 7.24ms
+Token 341: ' for' | Latency: 6.67ms
+Token 342: ' each' | Latency: 6.81ms
+Token 343: ' addition' | Latency: 6.57ms
+Token 344: ' to' | Latency: 6.61ms
+Token 345: ' the' | Latency: 6.66ms
+Token 346: ' input' | Latency: 7.05ms
+Token 347: ' data' | Latency: 6.66ms
+Token 348: ' set' | Latency: 6.87ms
+Token 349: '.' | Latency: 6.84ms
+Token 350: ' Examples' | Latency: 6.80ms
+Token 351: ' include' | Latency: 6.56ms
+Token 352: ' br' | Latency: 6.68ms
+Token 353: 'ute' | Latency: 7.47ms
+Token 354: ' force' | Latency: 6.92ms
+Token 355: ' solutions' | Latency: 6.73ms
+Token 356: ' to' | Latency: 6.69ms
+Token 357: ' problems' | Latency: 6.81ms
+Token 358: ' like' | Latency: 6.87ms
+Token 359: ' the' | Latency: 6.56ms
+Token 360: ' Travel' | Latency: 6.69ms
+Token 361: 'ing' | Latency: 6.77ms
+Token 362: ' Sales' | Latency: 7.38ms
+Token 363: 'man' | Latency: 6.90ms
+Token 364: ' Problem' | Latency: 6.81ms
+Token 365: '.' | Latency: 6.77ms
+Token 366: '
+' | Latency: 7.26ms
+Token 367: '7' | Latency: 6.81ms
+Token 368: '.' | Latency: 6.80ms
+Token 369: ' O' | Latency: 6.64ms
+Token 370: '(' | Latency: 6.67ms
+Token 371: 'n' | Latency: 6.61ms
+Token 372: '!' | Latency: 6.64ms
+Token 373: '):' | Latency: 6.64ms
+Token 374: ' F' | Latency: 6.71ms
+Token 375: 'actor' | Latency: 6.66ms
+Token 376: 'ial' | Latency: 6.72ms
+Token 377: ' Time' | Latency: 6.67ms
+Token 378: ' Complex' | Latency: 6.74ms
+Token 379: 'ity' | Latency: 6.64ms
+Token 380: ' -' | Latency: 6.75ms
+Token 381: ' The' | Latency: 6.67ms
+Token 382: ' running' | Latency: 6.71ms
+Token 383: ' time' | Latency: 6.67ms
+Token 384: ' increases' | Latency: 6.74ms
+Token 385: ' factor' | Latency: 6.64ms
+Token 386: 'ially' | Latency: 6.68ms
+Token 387: ' with' | Latency: 6.58ms
+Token 388: ' the' | Latency: 6.71ms
+Token 389: ' size' | Latency: 6.54ms
+Token 390: ' of' | Latency: 6.65ms
+Token 391: ' input' | Latency: 6.59ms
+Token 392: '.' | Latency: 6.63ms
+Token 393: ' An' | Latency: 6.61ms
+Token 394: ' example' | Latency: 6.68ms
+Token 395: ' is' | Latency: 6.59ms
+Token 396: ' the' | Latency: 6.64ms
+Token 397: ' na' | Latency: 6.59ms
+Token 398: 'ive' | Latency: 6.67ms
+Token 399: ' solution' | Latency: 6.74ms
+Token 400: ' for' | Latency: 7.27ms
+Token 401: ' finding' | Latency: 6.74ms
+Token 402: ' all' | Latency: 6.69ms
+Token 403: ' per' | Latency: 6.66ms
+Token 404: 'mut' | Latency: 7.17ms
+Token 405: 'ations' | Latency: 6.72ms
+Token 406: ' of' | Latency: 6.81ms
+Token 407: ' a' | Latency: 6.70ms
+Token 408: ' list' | Latency: 6.70ms
+Token 409: '.' | Latency: 6.60ms
+Token 410: '
+' | Latency: 6.67ms
+Token 411: '
+' | Latency: 6.59ms
+Token 412: 'Under' | Latency: 6.74ms
+Token 413: 'standing' | Latency: 6.62ms
+Token 414: ' Big' | Latency: 7.53ms
+Token 415: ' O' | Latency: 6.74ms
+Token 416: ' notation' | Latency: 6.85ms
+Token 417: ' is' | Latency: 6.98ms
+Token 418: ' essential' | Latency: 7.03ms
+Token 419: ' in' | Latency: 6.75ms
+Token 420: ' computer' | Latency: 6.72ms
+Token 421: ' science' | Latency: 6.64ms
+Token 422: ' and' | Latency: 7.25ms
+Token 423: ' algorithm' | Latency: 6.89ms
+Token 424: ' design' | Latency: 6.59ms
+Token 425: ',' | Latency: 6.60ms
+Token 426: ' as' | Latency: 7.24ms
+Token 427: ' it' | Latency: 6.69ms
+Token 428: ' helps' | Latency: 6.81ms
+Token 429: ' to' | Latency: 6.64ms
+Token 430: ' compare' | Latency: 6.59ms
+Token 431: ' and' | Latency: 6.60ms
+Token 432: ' contrast' | Latency: 6.68ms
+Token 433: ' the' | Latency: 6.61ms
+Token 434: ' efficiency' | Latency: 6.67ms
+Token 435: ' of' | Latency: 6.60ms
+Token 436: ' different' | Latency: 6.65ms
+Token 437: ' algorithms' | Latency: 6.63ms
+Token 438: ' when' | Latency: 6.66ms
+Token 439: ' solving' | Latency: 6.72ms
+Token 440: ' problems' | Latency: 7.22ms
+Token 441: '.' | Latency: 6.75ms
+Token 442: ' Cho' | Latency: 6.75ms
+Token 443: 'osing' | Latency: 6.60ms
+Token 444: ' an' | Latency: 6.72ms
+Token 445: ' appropriate' | Latency: 6.58ms
+Token 446: ' algorithm' | Latency: 6.72ms
+Token 447: ' with' | Latency: 6.59ms
+Token 448: ' good' | Latency: 6.70ms
+Token 449: ' time' | Latency: 6.64ms
+Token 450: ' or' | Latency: 6.66ms
+Token 451: ' space' | Latency: 6.60ms
+Token 452: ' complexity' | Latency: 7.46ms
+Token 453: ' can' | Latency: 6.66ms
+Token 454: ' significantly' | Latency: 6.77ms
+Token 455: ' improve' | Latency: 6.63ms
+Token 456: ' performance' | Latency: 7.35ms
+Token 457: ' for' | Latency: 6.89ms
+Token 458: ' large' | Latency: 6.72ms
+Token 459: ' data' | Latency: 6.62ms
+Token 460: ' sets' | Latency: 7.43ms
+Token 461: '.' | Latency: 6.85ms
+Token 462: ' In' | Latency: 6.87ms
+Token 463: ' practice' | Latency: 6.63ms
+Token 464: ',' | Latency: 7.27ms
+Token 465: ' it' | Latency: 6.75ms
+Token 466: ''' | Latency: 6.67ms
+Token 467: 's' | Latency: 6.56ms
+Token 468: ' common' | Latency: 7.35ms
+Token 469: ' to' | Latency: 6.74ms
+Token 470: ' analyze' | Latency: 6.61ms
+Token 471: ' and' | Latency: 6.57ms
+Token 472: ' optim' | Latency: 6.63ms
+Token 473: 'ize' | Latency: 7.29ms
+Token 474: ' algorithms' | Latency: 6.86ms
+Token 475: ' to' | Latency: 6.77ms
+Token 476: ' achieve' | Latency: 6.71ms
+Token 477: ' better' | Latency: 6.56ms
+Token 478: ' performance' | Latency: 6.67ms
+Token 479: ' by' | Latency: 6.56ms
+Token 480: ' reducing' | Latency: 6.68ms
+Token 481: ' their' | Latency: 6.62ms
+Token 482: ' time' | Latency: 6.74ms
+Token 483: ' or' | Latency: 6.62ms
+Token 484: ' space' | Latency: 6.67ms
+Token 485: ' complexity' | Latency: 7.32ms
+Token 486: '.' | Latency: 6.77ms
+
+--- Summary ---
+Total tokens: 486
+TTFT: 58.93ms
+TPOT: 6.84ms
+ITL Mean: 6.71ms
+Throughput: 146.11 tok/s
+
+============================================================
+Request 5/5
+Prompt: What is the purpose of a hash table data structure?
+============================================================
+Token 1: ' A' | Latency: 73.72ms
+Token 2: ' hash' | Latency: 8.89ms
+Token 3: ' table' | Latency: 6.37ms
+Token 4: ' is' | Latency: 7.41ms
+Token 5: ' a' | Latency: 6.61ms
+Token 6: ' data' | Latency: 6.65ms
+Token 7: ' structure' | Latency: 6.69ms
+Token 8: ' used' | Latency: 6.34ms
+Token 9: ' for' | Latency: 6.98ms
+Token 10: ' st' | Latency: 6.67ms
+Token 11: 'oring' | Latency: 6.52ms
+Token 12: ' and' | Latency: 6.54ms
+Token 13: ' retriev' | Latency: 6.51ms
+Token 14: 'ing' | Latency: 6.53ms
+Token 15: ' data' | Latency: 6.52ms
+Token 16: ' based' | Latency: 6.57ms
+Token 17: ' on' | Latency: 6.51ms
+Token 18: ' their' | Latency: 6.55ms
+Token 19: ' keys' | Latency: 6.47ms
+Token 20: '.' | Latency: 6.59ms
+Token 21: ' The' | Latency: 6.50ms
+Token 22: ' primary' | Latency: 6.58ms
+Token 23: ' purpose' | Latency: 6.46ms
+Token 24: ' of' | Latency: 6.55ms
+Token 25: ' a' | Latency: 6.49ms
+Token 26: ' hash' | Latency: 6.60ms
+Token 27: ' table' | Latency: 6.53ms
+Token 28: ' is' | Latency: 6.58ms
+Token 29: ' to' | Latency: 6.51ms
+Token 30: ' provide' | Latency: 6.62ms
+Token 31: ' an' | Latency: 6.54ms
+Token 32: ' efficient' | Latency: 6.56ms
+Token 33: ' method' | Latency: 6.56ms
+Token 34: ' for' | Latency: 6.56ms
+Token 35: ' performing' | Latency: 6.57ms
+Token 36: ' look' | Latency: 6.60ms
+Token 37: 'ups' | Latency: 6.58ms
+Token 38: ',' | Latency: 6.58ms
+Token 39: ' insert' | Latency: 6.56ms
+Token 40: 'ions' | Latency: 6.73ms
+Token 41: ',' | Latency: 7.07ms
+Token 42: ' and' | Latency: 6.75ms
+Token 43: ' delet' | Latency: 6.53ms
+Token 44: 'ions' | Latency: 6.59ms
+Token 45: ' of' | Latency: 7.30ms
+Token 46: ' key' | Latency: 6.77ms
+Token 47: '-' | Latency: 6.68ms
+Token 48: 'value' | Latency: 6.54ms
+Token 49: ' pairs' | Latency: 6.54ms
+Token 50: ' in' | Latency: 6.54ms
+Token 51: ' constant' | Latency: 6.52ms
+Token 52: ' or' | Latency: 6.58ms
+Token 53: ' nearly' | Latency: 6.50ms
+Token 54: ' constant' | Latency: 6.52ms
+Token 55: ' time' | Latency: 6.51ms
+Token 56: ' on' | Latency: 6.53ms
+Token 57: ' average' | Latency: 6.70ms
+Token 58: '.' | Latency: 6.45ms
+Token 59: '
+' | Latency: 6.47ms
+Token 60: '
+' | Latency: 6.54ms
+Token 61: 'Here' | Latency: 6.51ms
+Token 62: ' are' | Latency: 6.61ms
+Token 63: ' some' | Latency: 6.53ms
+Token 64: ' specific' | Latency: 6.52ms
+Token 65: ' benefits' | Latency: 6.43ms
+Token 66: ' that' | Latency: 6.57ms
+Token 67: ' make' | Latency: 6.60ms
+Token 68: ' hash' | Latency: 7.10ms
+Token 69: ' tables' | Latency: 6.65ms
+Token 70: ' useful' | Latency: 6.66ms
+Token 71: ':' | Latency: 6.60ms
+Token 72: '
+' | Latency: 7.27ms
+Token 73: '
+' | Latency: 6.68ms
+Token 74: '1' | Latency: 6.79ms
+Token 75: '.' | Latency: 6.60ms
+Token 76: ' Fast' | Latency: 6.61ms
+Token 77: ' access' | Latency: 6.56ms
+Token 78: ' time' | Latency: 6.63ms
+Token 79: ':' | Latency: 6.53ms
+Token 80: ' By' | Latency: 6.60ms
+Token 81: ' st' | Latency: 6.49ms
+Token 82: 'oring' | Latency: 6.61ms
+Token 83: ' data' | Latency: 6.50ms
+Token 84: ' using' | Latency: 6.58ms
+Token 85: ' a' | Latency: 6.50ms
+Token 86: ' hash' | Latency: 6.59ms
+Token 87: ' function' | Latency: 6.49ms
+Token 88: ',' | Latency: 6.58ms
+Token 89: ' the' | Latency: 6.53ms
+Token 90: ' lookup' | Latency: 6.68ms
+Token 91: ' operation' | Latency: 7.22ms
+Token 92: ' can' | Latency: 6.71ms
+Token 93: ' be' | Latency: 6.63ms
+Token 94: ' very' | Latency: 6.73ms
+Token 95: ' fast' | Latency: 7.04ms
+Token 96: ' because' | Latency: 6.68ms
+Token 97: ' it' | Latency: 6.58ms
+Token 98: ' reduces' | Latency: 6.65ms
+Token 99: ' the' | Latency: 7.00ms
+Token 100: ' search' | Latency: 6.72ms
+Token 101: ' space' | Latency: 6.56ms
+Token 102: ' significantly' | Latency: 6.47ms
+Token 103: '.' | Latency: 7.13ms
+Token 104: '
+' | Latency: 6.72ms
+Token 105: '
+' | Latency: 6.53ms
+Token 106: '2' | Latency: 6.58ms
+Token 107: '.' | Latency: 6.51ms
+Token 108: ' Eff' | Latency: 6.58ms
+Token 109: 'icient' | Latency: 6.53ms
+Token 110: ' use' | Latency: 6.56ms
+Token 111: ' of' | Latency: 6.51ms
+Token 112: ' memory' | Latency: 6.57ms
+Token 113: ':' | Latency: 6.71ms
+Token 114: ' Hash' | Latency: 6.53ms
+Token 115: ' tables' | Latency: 7.12ms
+Token 116: ' take' | Latency: 6.79ms
+Token 117: ' up' | Latency: 6.49ms
+Token 118: ' relatively' | Latency: 6.55ms
+Token 119: ' little' | Latency: 7.38ms
+Token 120: ' memory' | Latency: 6.63ms
+Token 121: ' compared' | Latency: 6.70ms
+Token 122: ' to' | Latency: 6.55ms
+Token 123: ' other' | Latency: 6.54ms
+Token 124: ' data' | Latency: 6.52ms
+Token 125: ' structures' | Latency: 6.59ms
+Token 126: ' like' | Latency: 6.52ms
+Token 127: ' linked' | Latency: 6.57ms
+Token 128: ' lists' | Latency: 6.61ms
+Token 129: ' or' | Latency: 7.13ms
+Token 130: ' trees' | Latency: 6.74ms
+Token 131: ',' | Latency: 6.54ms
+Token 132: ' making' | Latency: 6.53ms
+Token 133: ' them' | Latency: 6.45ms
+Token 134: ' efficient' | Latency: 6.56ms
+Token 135: ' for' | Latency: 6.55ms
+Token 136: ' st' | Latency: 6.79ms
+Token 137: 'oring' | Latency: 7.29ms
+Token 138: ' large' | Latency: 6.96ms
+Token 139: ' amounts' | Latency: 6.84ms
+Token 140: ' of' | Latency: 6.79ms
+Token 141: ' data' | Latency: 6.67ms
+Token 142: '.' | Latency: 6.57ms
+Token 143: '
+' | Latency: 6.58ms
+Token 144: '
+' | Latency: 6.59ms
+Token 145: '3' | Latency: 6.59ms
+Token 146: '.' | Latency: 6.57ms
+Token 147: ' F' | Latency: 6.59ms
+Token 148: 'lex' | Latency: 6.57ms
+Token 149: 'ible' | Latency: 6.62ms
+Token 150: ' key' | Latency: 6.54ms
+Token 151: ' type' | Latency: 6.60ms
+Token 152: ':' | Latency: 6.55ms
+Token 153: ' Hash' | Latency: 6.57ms
+Token 154: ' tables' | Latency: 6.59ms
+Token 155: ' allow' | Latency: 6.49ms
+Token 156: ' the' | Latency: 6.58ms
+Token 157: ' use' | Latency: 6.59ms
+Token 158: ' of' | Latency: 6.61ms
+Token 159: ' various' | Latency: 6.63ms
+Token 160: ' types' | Latency: 6.58ms
+Token 161: ' of' | Latency: 6.66ms
+Token 162: ' keys' | Latency: 6.54ms
+Token 163: ',' | Latency: 6.62ms
+Token 164: ' including' | Latency: 6.59ms
+Token 165: ' inte' | Latency: 6.60ms
+Token 166: 'gers' | Latency: 6.74ms
+Token 167: ',' | Latency: 7.19ms
+Token 168: ' strings' | Latency: 6.82ms
+Token 169: ',' | Latency: 6.68ms
+Token 170: ' and' | Latency: 6.63ms
+Token 171: ' complex' | Latency: 7.41ms
+Token 172: ' objects' | Latency: 6.59ms
+Token 173: ' like' | Latency: 6.67ms
+Token 174: ' graphs' | Latency: 6.66ms
+Token 175: ' or' | Latency: 7.21ms
+Token 176: ' records' | Latency: 6.81ms
+Token 177: '.' | Latency: 6.70ms
+Token 178: '
+' | Latency: 6.56ms
+Token 179: '
+' | Latency: 6.50ms
+Token 180: '4' | Latency: 6.54ms
+Token 181: '.' | Latency: 6.50ms
+Token 182: ' Scal' | Latency: 6.55ms
+Token 183: 'ability' | Latency: 6.47ms
+Token 184: ':' | Latency: 6.59ms
+Token 185: ' Hash' | Latency: 6.49ms
+Token 186: ' tables' | Latency: 6.70ms
+Token 187: ' can' | Latency: 7.15ms
+Token 188: ' be' | Latency: 6.69ms
+Token 189: ' easily' | Latency: 6.67ms
+Token 190: ' expanded' | Latency: 6.60ms
+Token 191: ' to' | Latency: 7.11ms
+Token 192: ' accommodate' | Latency: 6.77ms
+Token 193: ' more' | Latency: 6.55ms
+Token 194: ' data' | Latency: 6.67ms
+Token 195: ' by' | Latency: 7.23ms
+Token 196: ' increasing' | Latency: 6.75ms
+Token 197: ' their' | Latency: 6.74ms
+Token 198: ' size' | Latency: 6.57ms
+Token 199: ' or' | Latency: 6.52ms
+Token 200: ' number' | Latency: 6.57ms
+Token 201: ' of' | Latency: 6.53ms
+Token 202: ' buck' | Latency: 6.64ms
+Token 203: 'ets' | Latency: 7.04ms
+Token 204: ' (' | Latency: 6.70ms
+Token 205: 'also' | Latency: 6.48ms
+Token 206: ' known' | Latency: 6.64ms
+Token 207: ' as' | Latency: 7.10ms
+Token 208: ' res' | Latency: 6.68ms
+Token 209: 'izing' | Latency: 6.60ms
+Token 210: ').' | Latency: 6.54ms
+Token 211: ' This' | Latency: 6.56ms
+Token 212: ' makes' | Latency: 6.55ms
+Token 213: ' them' | Latency: 6.57ms
+Token 214: ' suitable' | Latency: 6.62ms
+Token 215: ' for' | Latency: 7.06ms
+Token 216: ' dynamic' | Latency: 6.76ms
+Token 217: ' applications' | Latency: 6.52ms
+Token 218: ' that' | Latency: 6.64ms
+Token 219: ' require' | Latency: 7.14ms
+Token 220: ' frequent' | Latency: 6.69ms
+Token 221: ' add' | Latency: 6.58ms
+Token 222: 'itions' | Latency: 6.55ms
+Token 223: ' and' | Latency: 6.64ms
+Token 224: ' rem' | Latency: 6.46ms
+Token 225: 'ov' | Latency: 6.53ms
+Token 226: 'als' | Latency: 6.55ms
+Token 227: ' of' | Latency: 6.59ms
+Token 228: ' elements' | Latency: 6.52ms
+Token 229: '.' | Latency: 6.62ms
+Token 230: '
+' | Latency: 6.56ms
+Token 231: '
+' | Latency: 6.61ms
+Token 232: '5' | Latency: 6.58ms
+Token 233: '.' | Latency: 6.62ms
+Token 234: ' Coll' | Latency: 6.60ms
+Token 235: 'ision' | Latency: 6.60ms
+Token 236: ' handling' | Latency: 6.59ms
+Token 237: ':' | Latency: 6.60ms
+Token 238: ' To' | Latency: 6.85ms
+Token 239: ' overcome' | Latency: 6.62ms
+Token 240: ' the' | Latency: 6.60ms
+Token 241: ' issue' | Latency: 6.59ms
+Token 242: ' of' | Latency: 6.60ms
+Token 243: ' coll' | Latency: 9.62ms
+Token 244: 'isions' | Latency: 6.62ms
+Token 245: ' when' | Latency: 6.70ms
+Token 246: ' two' | Latency: 6.73ms
+Token 247: ' keys' | Latency: 6.57ms
+Token 248: ' hash' | Latency: 6.62ms
+Token 249: ' to' | Latency: 6.61ms
+Token 250: ' the' | Latency: 6.61ms
+Token 251: ' same' | Latency: 6.60ms
+Token 252: ' index' | Latency: 6.61ms
+Token 253: ',' | Latency: 6.65ms
+Token 254: ' there' | Latency: 6.56ms
+Token 255: ' are' | Latency: 6.63ms
+Token 256: ' various' | Latency: 6.60ms
+Token 257: ' collision' | Latency: 6.72ms
+Token 258: ' resolution' | Latency: 7.70ms
+Token 259: ' techniques' | Latency: 6.87ms
+Token 260: ' such' | Latency: 6.86ms
+Token 261: ' as' | Latency: 6.76ms
+Token 262: ' ch' | Latency: 6.72ms
+Token 263: 'aining' | Latency: 6.60ms
+Token 264: ' or' | Latency: 7.34ms
+Token 265: ' open' | Latency: 6.76ms
+Token 266: ' addressing' | Latency: 6.74ms
+Token 267: ',' | Latency: 6.59ms
+Token 268: ' which' | Latency: 6.71ms
+Token 269: ' help' | Latency: 6.68ms
+Token 270: ' maintain' | Latency: 6.65ms
+Token 271: ' the' | Latency: 6.61ms
+Token 272: ' efficiency' | Latency: 6.61ms
+Token 273: ' of' | Latency: 6.60ms
+Token 274: ' the' | Latency: 6.65ms
+Token 275: ' data' | Latency: 6.60ms
+Token 276: ' structure' | Latency: 6.66ms
+Token 277: '.' | Latency: 6.68ms
+
+--- Summary ---
+Total tokens: 277
+TTFT: 73.72ms
+TPOT: 6.96ms
+ITL Mean: 6.68ms
+Throughput: 143.73 tok/s

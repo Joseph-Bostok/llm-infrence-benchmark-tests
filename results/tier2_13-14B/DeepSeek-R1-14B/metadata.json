@@ -1,0 +1,11 @@
+{
+    "model_tag": "deepseek-r1:14b",
+    "display_name": "DeepSeek-R1-14B",
+    "param_count": "14B",
+    "architecture": "Dense-Transformer-CoT",
+    "tier": "tier2_13-14B",
+    "requests": 25,
+    "timestamp": "20260217_125038",
+    "elapsed_seconds": 77,
+    "ollama_host": "http://localhost:11434"
+}
