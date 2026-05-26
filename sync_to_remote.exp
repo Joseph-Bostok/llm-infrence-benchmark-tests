@@ -1,0 +1,14 @@
+#!/usr/bin/expect -f
+set timeout 300
+spawn rsync -avz --exclude=venv --exclude=etalon --exclude=results --exclude=.git --exclude=.DS_Store --exclude=*.exp --exclude=*.log ./ cci-aries:~/llm-inference-benchmark-tests/
+expect {
+    "Are you sure you want to continue connecting" {
+        send "yes\r"
+        exp_continue
+    }
+    "password:" {
+        send "Jkl890112345!@#$\r"
+        exp_continue
+    }
+    eof
+}

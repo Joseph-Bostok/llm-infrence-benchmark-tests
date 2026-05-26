@@ -6,15 +6,25 @@ Systematically sweeps vLLM system-level parameters to establish
 the baseline performance envelope. This is Phase 1 of the
 parameter space exploration.
 
-Sweeps:
+Parameter sweep values are sourced from parameter_space.py — the single
+source of truth for all tunable parameters. Use --show-space to see the
+full catalog before running a sweep.
+
+Sweeps (SYSTEM / native tier from parameter_space.py):
   - gpu_memory_utilization: 0.80, 0.85, 0.90, 0.95
   - block_size: 8, 16, 32
   - max_model_len: 4096, 8192, 16384, 32768
-  - prefix_caching: True, False
+  - enable_prefix_caching: True, False
   - max_num_batched_tokens: 2048, 4096, 8192, 16384
   - kv_cache_dtype: auto, fp8
 
 Usage:
+    # Show full parameter space catalog before sweeping:
+    python3 baseline_sweep.py --show-space
+
+    # Show native vLLM params only:
+    python3 baseline_sweep.py --show-space --native-only
+
     # Full sweep (takes ~2-4 hours depending on GPU):
     python3 baseline_sweep.py --model Qwen/Qwen2.5-7B-Instruct
 
@@ -44,6 +54,9 @@ from typing import Dict, List, Optional
 
 # Import PInsight components
 from vllm_kv_profiler import VLLMProfiler, load_prompts
+from parameter_space import (
+    PARAMETER_SPACE, Tier, print_table, print_algorithms, get_by_tier
+)
 
 RESULTS_DIR = Path(__file__).parent / "results" / "baseline_sweep"
 WORKLOAD_DIR = Path(__file__).parent / "workloads"
@@ -297,11 +310,28 @@ def main():
     parser.add_argument("--workloads", type=str, nargs="+",
                         default=["dialogue", "rag", "code", "reasoning"])
     parser.add_argument("--output", type=str, default=None)
+    # Parameter space inspection
+    parser.add_argument("--show-space", action="store_true",
+                        help="Print the full parameter space catalog and exit")
+    parser.add_argument("--native-only", action="store_true",
+                        help="With --show-space: show native vLLM params only")
+    parser.add_argument("--show-algorithms", action="store_true",
+                        help="Print all algorithms by category and exit")
     # Single config overrides
     parser.add_argument("--gpu-mem", type=float, default=None)
     parser.add_argument("--block-size", type=int, default=None)
     parser.add_argument("--max-len", type=int, default=None)
     args = parser.parse_args()
+
+    # ── Parameter space inspection mode ──────────────────────────────────────
+    if args.show_algorithms:
+        print_algorithms()
+        return
+
+    if args.show_space:
+        params = get_by_tier(Tier.NATIVE) if args.native_only else None
+        print_table(params, show_notes=True)
+        return
 
     RESULTS_DIR.mkdir(parents=True, exist_ok=True)
 
